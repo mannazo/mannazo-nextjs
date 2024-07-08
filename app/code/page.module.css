@@ -1,0 +1,13 @@
+/*모듈을 적용할 tsx파일과 이름을 동일하게 하고, .module.css 추가할 것*/
+/*꼭 *.module.css 파일을 이용해서 css를 적용할 필요는 없음! tailwindcss를 쓰거나 nextui를 써도 무방함!*/
+/*이렇게 만든 css를 사용하려면 import가 필요함.*/
+/*아래와 같은 방식으로 사용함.*/
+/*import classes from './page.module.css';*/
+/*<header className={classes.header}>ㅏ*/
+/*return 내용이 간결해지고, 적용 범위가 한정되는 장점이 있으나 쌩 css를 쓰기에 힘들 수 있음. 자기 선택.*/
+
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
