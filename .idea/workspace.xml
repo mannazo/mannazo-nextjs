@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: header 틀 추가, about페이지 추가">
+    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: Oauth next-auth 적용">
+      <change afterPath="$PROJECT_DIR$/app/about/how-it-works/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/about/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/about/safety/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/about/why/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hooks/AuthContext.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/main-header/header-profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/header-profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +43,22 @@
     &quot;assignee&quot;: &quot;joonhoekim&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mannazo/mannazo-nextjs",
-    "accountId": "e419a69d-21e3-487e-bcea-fabc1bfd6ed1"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mannazo/mannazo-nextjs&quot;,
+    &quot;accountId&quot;: &quot;e419a69d-21e3-487e-bcea-fabc1bfd6ed1&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;mannazo&quot;,
+    &quot;repository&quot;: &quot;mannazo-nextjs&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -53,24 +71,24 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "1-feat-Layout&&Header",
-    "last_opened_file_path": "C:/Users/jh/git/mannazo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "project.scopes",
-    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;1-feat-Layout&amp;&amp;Header&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jh/git/mannazo-nextjs/app/about/why&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
@@ -102,6 +120,9 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\why" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\safety" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\how-it-works" />
       <recent name="$PROJECT_DIR$/components/main-header" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -126,7 +147,7 @@
       <updated>1720429604428</updated>
       <workItem from="1720429605494" duration="19779000" />
       <workItem from="1720495151161" duration="257000" />
-      <workItem from="1720496586925" duration="1185000" />
+      <workItem from="1720496586925" duration="6286000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />
@@ -152,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720443458415</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: Oauth next-auth 적용">
+      <option name="closed" value="true" />
+      <created>1720500219018</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720500219018</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +214,7 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="chore: tsconfig, eslint 설정" />
     <MESSAGE value="feat: header 틀 추가, next-auth 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: header 틀 추가, next-auth 추가" />
+    <MESSAGE value="feat: Oauth next-auth 적용" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Oauth next-auth 적용" />
   </component>
 </project>
