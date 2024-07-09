@@ -1,20 +1,27 @@
 import NextAuth from 'next-auth'
 import type { NextAuthOptions } from 'next-auth'
-import GithubProvider from 'next-auth/providers/github'
-// 다른 provider들도 필요에 따라 import
+import KakaoProvider from 'next-auth/providers/kakao'
+import NaverProvider from 'next-auth/providers/naver'
+import GoogleProvider from 'next-auth/providers/google'
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
     }),
-    // 다른 provider 설정
+    NaverProvider({
+      clientId: process.env.NAVER_CLIENT_ID!,
+      clientSecret: process.env.NAVER_CLIENT_SECRET!,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   // 필요한 다른 NextAuth 옵션들
   // 예: callbacks, pages, session 등
 }
 
 const handler = NextAuth(authOptions)
-
 export { handler as GET, handler as POST }
