@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: Oauth next-auth 적용">
-      <change afterPath="$PROJECT_DIR$/app/api/auth/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/sign-up/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/auth/UserAuthHandler.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/sign-up/InterestsSelection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/constants/input-values.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/next-auth.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/aws/s3.tsx" afterDir="false" />
+    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 회원가입중인 계정을 위한 sign-up form 구현">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/header-profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/header-profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720500219018</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: 회원가입중인 계정을 위한 sign-up form 구현">
+      <option name="closed" value="true" />
+      <created>1720517674627</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1720517674627</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +215,7 @@
     <MESSAGE value="chore: tsconfig, eslint 설정" />
     <MESSAGE value="feat: header 틀 추가, next-auth 추가" />
     <MESSAGE value="feat: Oauth next-auth 적용" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Oauth next-auth 적용" />
+    <MESSAGE value="feat: 회원가입중인 계정을 위한 sign-up form 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 회원가입중인 계정을 위한 sign-up form 구현" />
   </component>
 </project>
