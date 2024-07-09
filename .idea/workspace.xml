@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: header 틀 추가, about페이지 추가">
-      <change afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/main-header/about-menu.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/main-header/header-profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/main-header/logo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/main-header/motion-header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/main-header/search-bar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/constants/paths.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/providers/session-provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/providers/session-provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/main-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/AuthContext.jsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,12 +35,12 @@
     &quot;assignee&quot;: &quot;joonhoekim&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/mannazo/mannazo-nextjs&quot;,
-    &quot;accountId&quot;: &quot;e4b1596c-856c-4a3c-8dce-01da52e59595&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mannazo/mannazo-nextjs",
+    "accountId": "e419a69d-21e3-487e-bcea-fabc1bfd6ed1"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -63,24 +53,24 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;1-feat-Layout&amp;&amp;Header&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ubuntu/git/mannazo-nextjs/components/main-header&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/ubuntu/.local/share/fnm/node-versions/v22.4.0/installation/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/ubuntu/git/mannazo-nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "1-feat-Layout&&Header",
+    "last_opened_file_path": "C:/Users/jh/git/mannazo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "project.scopes",
+    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
@@ -136,6 +126,7 @@
       <updated>1720429604428</updated>
       <workItem from="1720429605494" duration="19779000" />
       <workItem from="1720495151161" duration="257000" />
+      <workItem from="1720496586925" duration="1185000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />

@@ -10,7 +10,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      router.push('/dashboard') // 로그인 후 리다이렉트할 페이지
+      router.push('/') // 로그인 후 리다이렉트할 페이지
     }
   }, [status, router])
 
