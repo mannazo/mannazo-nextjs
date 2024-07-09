@@ -11,6 +11,7 @@ export default function HeaderProfile() {
   //프로필 메뉴를 동적으로 보여주기 위한 상태
   const [ profileMenu, setProfileMenu ] = useState(false);
 
+
   return (
     <div>
       {isLoggedIn ? (

@@ -18,6 +18,17 @@ export default function LoginPage() {
     return <div>Loading...</div>
   }
 
+
+  try {
+    if (session.user !== null && session.user !== undefined) {
+      console.log(session.user)
+    }
+  } catch (e) {
+    console.error(e)
+  }
+
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-4xl font-bold mb-4">Login</h1>
