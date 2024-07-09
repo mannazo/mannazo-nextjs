@@ -1,8 +1,8 @@
-import Logo from './logo'
-import AboutMenu from './about-menu'
-import SearchBar from './search-bar'
-import HeaderProfile from './header-profile'
-import MotionHeader from './motion-header'
+import Logo from './Logo'
+import AboutMenu from './About-Menu'
+import SearchBar from './Search-Bar'
+import HeaderProfile from './Header-Profile'
+import MotionHeader from './Motion-Header'
 
 export default function Header() {
   return (
