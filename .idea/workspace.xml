@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="refactor: 컨벤션에 어긋난 네이밍 정정 (컴포넌트에는 파스칼 컨베션 적용)">
-      <change afterPath="$PROJECT_DIR$/app/posts/desktop/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/posts/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/posts/desktop/Card.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/posts/mobile/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/about/AnimatedTitle.module.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/about/AnimatedTitle.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/about/TripButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/about/how-it-works/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/about/how-it-works/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/about/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/about/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/about/safety/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/about/safety/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/about/why/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/about/why/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/paths.ts" beforeDir="false" afterPath="$PROJECT_DIR$/constants/paths.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,20 +75,20 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "4-feat-post-card",
-    "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/app/posts",
+    "last_opened_file_path": "/Users/joonhoekim/git/mannazo-nextjs/app/posts/mobile",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.eslint": "/Users/joonhoekim/git/mannazo-nextjs/node_modules/eslint",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.stylelint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier",
+    "prettierjs.PrettierConfiguration.Package": "/Users/joonhoekim/git/mannazo-nextjs/node_modules/prettier",
     "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/Users/joonhoekim/git/mannazo-nextjs/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -116,13 +123,15 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/posts/mobile" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\desktop" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\tip" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\why" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\safety" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/components/about" />
+      <recent name="$PROJECT_DIR$/app/about" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\api\auth" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/providers" />
@@ -131,7 +140,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
       </set>
     </attachedChunks>
   </component>
@@ -146,6 +155,7 @@
       <workItem from="1720429605494" duration="19779000" />
       <workItem from="1720495151161" duration="257000" />
       <workItem from="1720496586925" duration="6286000" />
+      <workItem from="1720543425357" duration="2780000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />
@@ -210,8 +220,18 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="23a96f3f-7c02-48a0-8ef1-02392dc85a30" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="23a96f3f-7c02-48a0-8ef1-02392dc85a30">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -239,7 +259,7 @@
     <MESSAGE value="feat: Oauth next-auth 적용" />
     <MESSAGE value="feat: 회원가입중인 계정을 위한 sign-up form 구현" />
     <MESSAGE value="refactor: 컨벤션에 어긋난 네이밍 정정 (컴포넌트에는 파스칼 컨베션 적용)" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: 컨벤션에 어긋난 네이밍 정정 (컴포넌트에는 파스칼 컨베션 적용)" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

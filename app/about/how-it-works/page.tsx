@@ -1,13 +1,17 @@
-import Link from 'next/link';
-import * as PATHS from '@/constants/paths';
+import Link from 'next/link'
+import * as PATHS from '@/constants/paths'
+import TripButton from '@/components/about/TripButton'
+import AnimatedTitle from '@/components/about/AnimatedTitle'
 
 const StepCard = ({ number, title, description }) => (
-  <div className='transform rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 text-white shadow-2xl transition-all duration-300 hover:scale-105'>
-    <div className='absolute -left-4 -top-4 text-5xl font-bold opacity-20'>{number}</div>
-    <h3 className='relative z-10 mb-4 text-4xl font-extrabold'>{title}</h3>
-    <p className='text-xl leading-relaxed'>{description}</p>
+  <div className="transform rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 text-white shadow-2xl transition-all duration-300 hover:scale-105">
+    <div className="absolute -left-4 -top-4 text-5xl font-bold opacity-20">
+      {number}
+    </div>
+    <h3 className="relative z-10 mb-4 text-4xl font-extrabold">{title}</h3>
+    <p className="text-xl leading-relaxed">{description}</p>
   </div>
-);
+)
 
 export default function HowItWorksPage() {
   const steps = [
@@ -59,35 +63,34 @@ export default function HowItWorksPage() {
       description:
         '드디어 현지에서 만남이 이루어집니다! 현지인과 함께 숨겨진 명소를 방문하고, 현지 문화를 직접 체험해보세요.',
     },
-  ];
+  ]
 
   return (
-    <div className='min-h-screen bg-gray-900 text-white'>
-      <div className='container mx-auto px-4 py-20'>
-        <h1 className='mb-16 bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-center text-7xl font-black text-transparent'>
-          mannazu는 어떻게 작동할까요?
-        </h1>
+    <div className="min-h-screen bg-gray-900 text-white">
+      <div className="container mx-auto px-4 py-20">
+        <AnimatedTitle titleText="HOW IT WORKS?" />
 
-        <div className='grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
           {steps.map((step, index) => (
             <StepCard key={index} {...step} />
           ))}
         </div>
 
-        <div className='mt-20 text-center'>
-          <h2 className='mb-8 text-5xl font-bold'>여행의 새로운 차원을 경험하세요</h2>
-          <p className='mx-auto mb-12 max-w-4xl text-2xl leading-relaxed'>
-            mannazu와 함께라면, 더 이상 단순한 관광객이 아닌 진정한 글로벌 시민이 될 수 있습니다.
-            현지인과의 교류를 통해 깊이 있는 문화 이해, 언어 실력 향상, 그리고 평생 간직할 추억을
-            만들어보세요.
+        <div className="mt-20 text-center">
+          <h2 className="mb-8 text-5xl font-bold">
+            여행의 새로운 차원을 경험하세요
+          </h2>
+          <p className="mx-auto mb-12 max-w-4xl text-2xl leading-relaxed">
+            mannazu와 함께라면, 더 이상 단순한 관광객이 아닌 진정한 글로벌
+            시민이 될 수 있습니다. 현지인과의 교류를 통해 깊이 있는 문화 이해,
+            언어 실력 향상, 그리고 평생 간직할 추억을 만들어보세요.
           </p>
           <Link href={PATHS.TRIP}>
-            <button className='transform rounded-full bg-gradient-to-r from-pink-500 to-yellow-500 px-10 py-4 text-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:from-pink-600 hover:to-yellow-600'>
-              지금 바로 시작하기
-            </button>
+            {/*<button className='transform rounded-full bg-gradient-to-r from-pink-500 to-yellow-500 px-10 py-4 text-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:from-pink-600 hover:to-yellow-600'>*/}
+            <TripButton buttonText="추억을 만들 기회 찾아보기" />
           </Link>
         </div>
       </div>
     </div>
-  );
+  )
 }

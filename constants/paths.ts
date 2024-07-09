@@ -3,15 +3,10 @@
 //API 서버 주소
 export const API_SERVER = 'https://mannazo.diligentp.com'
 
-//라우팅을 위한 상수들
-export const HOME = '/'
-export const SAFETY = '/safety'
-
-//여행자 조회하기
+//여행자 조회하기 (POSTS)
 export const TRIP = '/trip'
-export const TRIP_LIST_BY_LOCATION = `${TRIP}/list?location=:location`
-export const TRIP_VIEW = `${TRIP}/:id`
-export const TRIP_ADD_FORM = `${TRIP}/form`
+export const MOBILE_TRIP = '/posts/mobile'
+export const DESKTOP_TRIP = '/posts/desktop'
 
 //쭈니(로컬, 현지인) 조회하기
 export const LOCAL = '/local'
