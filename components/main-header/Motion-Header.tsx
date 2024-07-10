@@ -5,5 +5,5 @@ export default function MotionHeader({
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return <header>{children}</header>
 }

@@ -1,13 +1,61 @@
+'use client'
+
+import React from 'react'
 import TravelerCard from '@/components/posts/desktop/Card'
+import {
+  Button,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from '@nextui-org/react'
 
 export default function ListTraveller() {
   let travelers = exampleTravelers
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 overflow-y-auto max-h-screen">
-      {travelers.map((traveler) => (
-        <TravelerCard key={traveler.id} traveler={traveler} />
-      ))}
+    <div className="relative min-h-screen">
+      <div className="grid max-h-screen grid-cols-1 gap-6 overflow-y-auto p-6 md:grid-cols-2 lg:grid-cols-3">
+        {travelers.map((traveler) => (
+          <TravelerCard key={traveler.id} traveler={traveler} />
+        ))}
+      </div>
+
+      <Button
+        auto
+        color="primary"
+        className="fixed bottom-6 right-6 z-10"
+        onPress={onOpen}
+      >
+        글 추가
+      </Button>
+
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                새 글 작성
+              </ModalHeader>
+              <ModalBody>
+                {/* 여기에 입력 폼을 추가하세요 */}
+                <p>입력 폼이 들어갈 자리입니다.</p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" variant="light" onPress={onClose}>
+                  취소
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  저장
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   )
 }
@@ -92,5 +140,85 @@ const exampleTravelers = [
       '자연을 사랑하는 아웃도어 매니아입니다. 록키 산맥을 트레킹하고 캐나다의 대자연을 만끽하고 싶어요!',
     preferredTags: ['자연', '트레킹', '사진', '캠핑'],
     languages: ['독일어', '영어', '프랑스어'],
+  },
+  {
+    id: 6,
+    nationality: '프랑스',
+    name: 'Sophie Dubois',
+    gender: '여성',
+    averageRating: 4.8,
+    feedbackCount: 28,
+    destinationCountry: '대한민국',
+    destinationCountryCode: 'KR',
+    destinationCity: '서울',
+    destinationDetail: '명동 인근',
+    introduction:
+      '한국 문화와 K-pop에 매료된 여행자입니다. 서울의 현대적인 면과 전통적인 면을 모두 경험하고 싶어요!',
+    preferredTags: ['K-pop', '한식', '쇼핑', '템플스테이'],
+    languages: ['프랑스어', '영어', '한국어(기초)'],
+  },
+  {
+    id: 7,
+    nationality: '인도',
+    name: 'Raj Patel',
+    gender: '남성',
+    averageRating: 4.6,
+    feedbackCount: 20,
+    destinationCountry: '스페인',
+    destinationCountryCode: 'ES',
+    destinationCity: '바르셀로나',
+    destinationDetail: '사그라다 파밀리아 근처',
+    introduction:
+      '건축과 디자인을 사랑하는 여행자입니다. 가우디의 작품들을 직접 보고 스페인의 열정적인 문화를 체험하고 싶어요!',
+    preferredTags: ['건축', '예술', '타파스', '플라멩코'],
+    languages: ['힌디어', '영어', '스페인어(기초)'],
+  },
+  {
+    id: 8,
+    nationality: '캐나다',
+    name: 'Emily Chen',
+    gender: '여성',
+    averageRating: 4.9,
+    feedbackCount: 35,
+    destinationCountry: '뉴질랜드',
+    destinationCountryCode: 'NZ',
+    destinationCity: '퀸스타운',
+    destinationDetail: '와카티푸 호수 주변',
+    introduction:
+      '아드레날린 junkie이자 자연 애호가입니다. 뉴질랜드의 극한 스포츠와 숨막히는 풍경을 경험하고 싶어요!',
+    preferredTags: ['번지점프', '스카이다이빙', '하이킹', '로드트립'],
+    languages: ['영어', '프랑스어', '중국어'],
+  },
+  {
+    id: 9,
+    nationality: '남아프리카공화국',
+    name: 'Thabo Nkosi',
+    gender: '남성',
+    averageRating: 4.7,
+    feedbackCount: 23,
+    destinationCountry: '브라질',
+    destinationCountryCode: 'BR',
+    destinationCity: '리우데자네이루',
+    destinationDetail: '코파카바나 해변 근처',
+    introduction:
+      '음악과 춤을 사랑하는 여행자입니다. 삼바의 리듬을 배우고 브라질의 축제 문화를 즐기고 싶어요!',
+    preferredTags: ['삼바', '축구', '카니발', '해변'],
+    languages: ['줄루어', '영어', '포르투갈어(기초)'],
+  },
+  {
+    id: 10,
+    nationality: '일본',
+    name: 'Yuki Tanaka',
+    gender: '여성',
+    averageRating: 4.8,
+    feedbackCount: 30,
+    destinationCountry: '이집트',
+    destinationCountryCode: 'EG',
+    destinationCity: '카이로',
+    destinationDetail: '기자 지역',
+    introduction:
+      '고대 문명에 관심이 많은 역사 buff입니다. 피라미드를 직접 보고 나일 강 크루즈를 즐기고 싶어요!',
+    preferredTags: ['고고학', '피라미드', '박물관', '사막투어'],
+    languages: ['일본어', '영어', '아랍어(기초)'],
   },
 ]

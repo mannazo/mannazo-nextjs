@@ -1,15 +1,12 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { uploadImageToS3 } from '@/utils/aws/s3'
-import { getServerSession } from 'next-auth/next'
-
-import axios from 'axios'
-import { API_SERVER } from '@/constants/paths'
-
+import { createUser } from '@/services/api'
 import { LANGUAGE, MBTI, NATIONALITY } from '@/constants/input-values'
 import InterestsSelection from '@/components/users/sign-up/InterestsSelection'
-import { authOptions } from '@/app/api/auth/auth'
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
 
 interface SignUpFormProps {
   initialEmail: string
@@ -25,9 +22,9 @@ export default function SignUpForm({
     name: initialName,
     nickname: '',
     nationality: '',
+    city: '',
     language: '',
     introduction: '',
-    city: '',
     gender: '',
     mbti: '',
     interests: [],
@@ -37,6 +34,15 @@ export default function SignUpForm({
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState('')
   const [error, setError] = useState('')
+  const [country, setCountry] = useState('')
+  const [city, setRegion] = useState('')
+
+  const handleInterestsChange = (selectedInterests) => {
+    setUserInfo((prev) => ({ ...prev, interests: selectedInterests }))
+  }
+
+  // 세션 정보 가져온다.
+  const { data: session, status } = useSession()
 
   useEffect(() => {
     if (selectedFile) {
@@ -61,12 +67,24 @@ export default function SignUpForm({
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    setError('')
+
+    if (!session || !session.user || !session.user.additionalInfo) {
+      setError('세션 정보를 불러올 수 없습니다.')
+      return
+    }
 
     try {
       const s3Url = await uploadImageToS3(selectedFile)
 
-      const signUpData = {
+      const { socialId, provider, secret } = session.user.additionalInfo
+
+      const loginRequestDTO = {
+        socialId: socialId,
+        secret: secret,
+        provider: provider,
+      }
+
+      const userRequestDTO = {
         email: userInfo.email, // 이메일 입력 필드 추가 필요
         name: userInfo.name,
         nickname: userInfo.nickname, // 닉네임 입력 필드 추가 필요
@@ -75,18 +93,17 @@ export default function SignUpForm({
         profileImage: s3Url,
         introduction: userInfo.introduction,
         city: userInfo.city, // 도시 입력 필드 추가 필요
-        authority: 'USER', // 기본값으로 설정
         gender: userInfo.gender, // 성별 입력 필드 추가 필요
         mbti: userInfo.mbti,
         interests: userInfo.interests.join(','), // 배열을 문자열로 변환
         birthday: userInfo.birthday,
-        lastLoginAt: new Date().toISOString(), // 현재 시간으로 설정
       }
-      console.log(signUpData)
-      const response = await axios.post(
-        'http://192.168.0.183:8080/user',
-        signUpData
-      )
+      console.log(loginRequestDTO, userRequestDTO)
+      let payload = {
+        loginRequestDTO: loginRequestDTO,
+        userRequestDTO: userRequestDTO,
+      }
+      const response = await createUser(payload)
 
       console.log(response.data)
       // 회원가입 성공 처리 (예: 로그인 페이지로 리다이렉트)
@@ -102,7 +119,7 @@ export default function SignUpForm({
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col justify-center bg-gray-100 py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign up for an account
@@ -110,7 +127,7 @@ export default function SignUpForm({
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label
@@ -124,7 +141,7 @@ export default function SignUpForm({
                 name="name"
                 id="name"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 value={userInfo.name}
                 onChange={handleChange}
               />
@@ -142,9 +159,31 @@ export default function SignUpForm({
                 name="nickname"
                 id="nickname"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 onChange={handleChange}
               />
+            </div>
+
+            {/* Gender 선택 */}
+            <div>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                Gender
+              </label>
+              <div className="flex space-x-4">
+                {['남자', '여자'].map((option) => (
+                  <label key={option} className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value={option.toLowerCase()}
+                      checked={userInfo.gender === option.toLowerCase()}
+                      onChange={handleChange}
+                      className="form-radio h-4 w-4 text-indigo-600"
+                    />
+                    <span className="ml-2">{option}</span>
+                  </label>
+                ))}
+              </div>
             </div>
 
             <div>
@@ -159,7 +198,7 @@ export default function SignUpForm({
                 name="birthday"
                 id="birthday"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 onChange={handleChange}
               />
             </div>
@@ -174,7 +213,7 @@ export default function SignUpForm({
               <select
                 name="mbti"
                 id="mbti"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 onChange={handleChange}
               >
                 {MBTI.map((value) => (
@@ -185,27 +224,45 @@ export default function SignUpForm({
               </select>
             </div>
 
-            <div>
-              <label
-                htmlFor="nationality"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Nationality
-              </label>
-              <select
-                name="nationality"
-                id="nationality"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                onChange={handleChange}
-              >
-                {NATIONALITY.map((value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
+            {/*국가와 지역 선택*/}
+            <div className="space-y-4">
+              <div>
+                <label
+                  htmlFor="nationality"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  Nationality
+                </label>
+                <CountryDropdown
+                  name="nationality"
+                  value={userInfo.nationality}
+                  onChange={(val) =>
+                    setUserInfo((prev) => ({ ...prev, nationality: val }))
+                  }
+                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="city"
+                  className="mb-1 block text-sm font-medium text-gray-700"
+                >
+                  Region
+                </label>
+                <RegionDropdown
+                  name="city"
+                  country={userInfo.nationality}
+                  value={userInfo.city}
+                  onChange={(val) =>
+                    setUserInfo((prev) => ({ ...prev, city: val }))
+                  }
+                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
             </div>
 
+            {/*언어 선택*/}
             <div>
               <label
                 htmlFor="language"
@@ -216,7 +273,7 @@ export default function SignUpForm({
               <select
                 name="language"
                 id="language"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 onChange={handleChange}
               >
                 {LANGUAGE.map((value) => (
@@ -227,15 +284,17 @@ export default function SignUpForm({
               </select>
             </div>
 
+            {/*관심가는 주제 선택(포스트 올릴 때 보여줄 것)*/}
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Interests
               </label>
               <div className="mt-2 space-y-2">
-                <InterestsSelection />
+                <InterestsSelection onChange={handleInterestsChange} />
               </div>
             </div>
 
+            {/*소개*/}
             <div>
               <label
                 htmlFor="introduction"
@@ -247,7 +306,7 @@ export default function SignUpForm({
                 id="introduction"
                 name="introduction"
                 rows={3}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
                 onChange={handleChange}
               ></textarea>
             </div>
@@ -264,27 +323,22 @@ export default function SignUpForm({
                 name="profilePhoto"
                 type="file"
                 accept="image/*"
-                className="mt-1 block w-full text-sm text-gray-500
-                  file:mr-4 file:py-2 file:px-4
-                  file:rounded-full file:border-0
-                  file:text-sm file:font-semibold
-                  file:bg-indigo-50 file:text-indigo-700
-                  hover:file:bg-indigo-100"
+                className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:rounded-full file:border-0 file:bg-indigo-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-700 hover:file:bg-indigo-100"
                 onChange={handleFileChange}
               />
             </div>
 
             {previewUrl && (
-              <div className="mt-4 relative">
+              <div className="relative mt-4">
                 <img
                   src={previewUrl}
                   alt="Profile preview"
-                  className="w-full h-64 object-cover rounded-lg shadow-md"
+                  className="h-64 w-full rounded-lg object-cover shadow-md"
                 />
                 <button
                   type="button"
                   onClick={handleRemoveImage}
-                  className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-2 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  className="absolute right-2 top-2 rounded-full bg-red-500 p-2 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -302,12 +356,12 @@ export default function SignUpForm({
               </div>
             )}
 
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-sm text-red-500">{error}</p>}
 
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Sign Up
               </button>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import LogoutButton from '@/components/(auth)/logout/LogoutButton'
 
 export default function HeaderProfile() {
@@ -15,23 +15,23 @@ export default function HeaderProfile() {
   return (
     <div>
       {isLoggedIn ? (
-        <div className="relative group">
+        <div className="group relative">
           <button
-            className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300"
             onClick={() => setProfileMenu(!profileMenu)}
           >
             {session.user.image ? (
               <img
                 src={session.user.image}
                 alt="Profile"
-                className="w-8 h-8 rounded-full"
+                className="h-8 w-8 rounded-full"
               />
             ) : (
               '👤'
             )}
           </button>
           {profileMenu && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+            <div className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg">
               <Link
                 href="/profile"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

@@ -4,16 +4,6 @@ import NaverProvider from 'next-auth/providers/naver'
 import GoogleProvider from 'next-auth/providers/google'
 import axios from 'axios'
 
-interface Session {
-  user: {
-    userId: string
-    name?: string | null
-    email?: string | null
-    image?: string | null
-    additionalInfo?: any
-  }
-}
-
 export const authOptions: NextAuthOptions = {
   providers: [
     KakaoProvider({
@@ -60,6 +50,16 @@ export const authOptions: NextAuthOptions = {
               timeout: 5000,
             }
           )
+
+          user.additionalInfo = {
+            firstTimeUser: response.data.firstTimeUser,
+            serverUserId: response.data.userId,
+            serverToken: response.data.token,
+            provider: account.provider,
+            socialId: user.id,
+            secret: secret,
+          }
+
           console.log('success: ', response.data)
         } catch (error) {
           console.error('Error sending login data to server:', error)
@@ -72,11 +72,15 @@ export const authOptions: NextAuthOptions = {
         token.userId = user.id
         token.additionalInfo = profile
       }
+      if (user?.additionalInfo) {
+        token.additionalInfo = user.additionalInfo
+      }
       return token
     },
     async session({ session, token }) {
-      ;(session as Session).user.userId = token.userId as string
-      ;(session as Session).user.additionalInfo = token.additionalInfo
+      if (token.additionalInfo) {
+        session.user.additionalInfo = token.additionalInfo
+      }
       return session
     },
   },
