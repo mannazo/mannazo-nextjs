@@ -9,6 +9,7 @@
 3. 파일 명명 규칙: `route.js` 또는 `route.ts`
 
 ## 디렉토리 구조 예시
+
 ```
 /
 ├── app/
@@ -29,26 +30,30 @@
 ## 파일 설명
 
 1. `api/hello/route.js`
-    - `/api/hello` 엔드포인트를 처리합니다.
-    - 간단한 "Hello, World!" API나 상태 확인용으로 사용할 수 있습니다.
+
+   - `/api/hello` 엔드포인트를 처리합니다.
+   - 간단한 "Hello, World!" API나 상태 확인용으로 사용할 수 있습니다.
 
 2. `api/users/route.js`
-    - `/api/users` 엔드포인트를 처리합니다.
-    - 사용자 목록 조회, 새 사용자 생성 등의 작업을 수행할 수 있습니다.
+
+   - `/api/users` 엔드포인트를 처리합니다.
+   - 사용자 목록 조회, 새 사용자 생성 등의 작업을 수행할 수 있습니다.
 
 3. `api/users/[id]/route.js`
-    - `/api/users/:id` 형태의 동적 라우트를 처리합니다.
-    - 특정 사용자 정보 조회, 수정, 삭제 등의 작업을 수행할 수 있습니다.
+
+   - `/api/users/:id` 형태의 동적 라우트를 처리합니다.
+   - 특정 사용자 정보 조회, 수정, 삭제 등의 작업을 수행할 수 있습니다.
 
 4. `api/auth/[...nextauth]/route.js`
-    - NextAuth.js와 같은 인증 라이브러리를 사용할 때 필요한 캐치올 라우트입니다.
-    - 다양한 인증 관련 엔드포인트를 처리합니다.
+   - NextAuth.js와 같은 인증 라이브러리를 사용할 때 필요한 캐치올 라우트입니다.
+   - 다양한 인증 관련 엔드포인트를 처리합니다.
 
 ## 사용 방법
 
 각 `route.js` 파일에서는 HTTP 메서드에 따른 함수를 export하여 API 로직을 구현합니다.
 
 예시:
+
 ```javascript
 export async function GET(request) {
   // GET 요청 처리 로직

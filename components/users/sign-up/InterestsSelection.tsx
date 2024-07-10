@@ -1,14 +1,16 @@
 'use client'
 
 import React, { useState } from 'react'
-import {INTERESTS} from '@/constants/input-values'
+import { INTERESTS } from '@/constants/input-values'
 
 export default function InterestsSelection() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([])
 
   const toggleInterest = (interest: string) => {
-    setSelectedInterests(prev =>
-      prev.includes(interest) ? prev.filter(i => i !== interest) : [...prev, interest]
+    setSelectedInterests((prev) =>
+      prev.includes(interest)
+        ? prev.filter((i) => i !== interest)
+        : [...prev, interest]
     )
   }
 
@@ -16,7 +18,7 @@ export default function InterestsSelection() {
     <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-4">Select Your Interests</h2>
       <div className="flex flex-wrap gap-2">
-        {INTERESTS.map(interest => (
+        {INTERESTS.map((interest) => (
           <button
             key={interest}
             onClick={() => toggleInterest(interest)}

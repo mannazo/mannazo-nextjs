@@ -33,35 +33,39 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account, profile }) {
       if (user && account) {
         try {
-          let secret = '';
+          let secret = ''
           switch (account.provider) {
             case 'kakao':
-              secret = process.env.KAKAO_CLIENT_SECRET!;
-              break;
+              secret = process.env.KAKAO_CLIENT_SECRET!
+              break
             case 'naver':
-              secret = process.env.NAVER_CLIENT_SECRET!;
-              break;
+              secret = process.env.NAVER_CLIENT_SECRET!
+              break
             case 'google':
-              secret = process.env.GOOGLE_CLIENT_SECRET!;
-              break;
+              secret = process.env.GOOGLE_CLIENT_SECRET!
+              break
             default:
-              console.error('Unknown provider');
-              return false;
+              console.error('Unknown provider')
+              return false
           }
 
-          const response = await axios.post(`${process.env.SERVER_URL}/auth/login`, {
-            socialId: user.id,
-            secret: secret,
-            provider: account.provider
-          }, {
-            timeout: 5000
-          });
-          console.log('success: ', response.data);
+          const response = await axios.post(
+            `${process.env.SERVER_URL}/auth/login`,
+            {
+              socialId: user.id,
+              secret: secret,
+              provider: account.provider,
+            },
+            {
+              timeout: 5000,
+            }
+          )
+          console.log('success: ', response.data)
         } catch (error) {
-          console.error('Error sending login data to server:', error);
+          console.error('Error sending login data to server:', error)
         }
       }
-      return true;
+      return true
     },
     async jwt({ token, user, account, profile }) {
       if (user) {
@@ -71,7 +75,7 @@ export const authOptions: NextAuthOptions = {
       return token
     },
     async session({ session, token }) {
-      (session as Session).user.userId = token.userId as string
+      ;(session as Session).user.userId = token.userId as string
       ;(session as Session).user.additionalInfo = token.additionalInfo
       return session
     },

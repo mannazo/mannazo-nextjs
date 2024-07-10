@@ -6,8 +6,8 @@
 /*<header className={classes.header}>ㅏ*/
 /*return 내용이 간결해지고, 적용 범위가 한정되는 장점이 있으나 쌩 css를 쓰기에 힘들 수 있음. 자기 선택.*/
 
-.container {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+/*.container {*/
+/*  padding: 2rem;*/
+/*  max-width: 1200px;*/
+/*  margin: 0 auto;*/
+/*}*/

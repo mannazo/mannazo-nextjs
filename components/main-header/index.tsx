@@ -7,14 +7,14 @@ import MotionHeader from './Motion-Header'
 export default function Header() {
   return (
     <MotionHeader>
-      <nav className="container mx-auto px-4 py-2 flex items-center justify-between">
+      <header className="container mx-auto flex items-center justify-between px-4 py-2">
         <Logo />
         <div className="flex items-center space-x-4">
           <AboutMenu />
           <SearchBar />
           <HeaderProfile />
         </div>
-      </nav>
+      </header>
     </MotionHeader>
   )
 }

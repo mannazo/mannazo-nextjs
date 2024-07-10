@@ -5,9 +5,9 @@ export default function Logo() {
   return (
     <Link
       href="/"
-      className="text-2xl font-bold text-blue-600 hover:text-blue-800"
+      className="text-xl font-bold text-blue-600 hover:text-blue-800"
     >
-      MANNAZU
+      M
     </Link>
   )
 }

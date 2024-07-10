@@ -13,12 +13,7 @@
 }
 
 .animatedTitle {
-  background: linear-gradient(
-      to right,
-      #60A5FA,
-      #7b27ff,
-      #dd4040
-  );
+  background: linear-gradient(to right, #60a5fa, #7b27ff, #dd4040);
   background-size: 200% auto;
   color: transparent;
   -webkit-background-clip: text;
@@ -29,6 +24,6 @@
   text-align: center;
   margin-bottom: 3rem;
   text-shadow:
-      2px 2px 4px rgba(0,0,0,0.5),
-      -2px -2px 4px rgba(255,255,255,0.1);
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.1);
 }
