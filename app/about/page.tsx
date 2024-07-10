@@ -1,13 +1,14 @@
-import Link from 'next/link';
-import * as PATHS from '@/constants/paths';
+import TripButton from '@/components/about/TripButton'
+import classes from '../../components/about/AnimatedTitle.module.css'
+import AnimatedTitle from '@/components/about/AnimatedTitle'
 
 const FeatureCard = ({ icon, title, description }) => (
-  <div className='transform rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
-    <div className='mb-4 text-5xl'>{icon}</div>
-    <h3 className='mb-3 text-2xl font-bold'>{title}</h3>
-    <p className='text-lg'>{description}</p>
+  <div className="transform rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="mb-4 text-5xl">{icon}</div>
+    <h3 className="mb-3 text-2xl font-bold">{title}</h3>
+    <p className="text-lg">{description}</p>
   </div>
-);
+)
 
 export default function AboutPage() {
   const features = [
@@ -35,35 +36,30 @@ export default function AboutPage() {
       description:
         '전 세계 친구들과 연결되어 시야를 넓혀보세요. 다양한 문화와 관점을 접할 수 있는 기회입니다.',
     },
-  ];
+  ]
 
   return (
-    <div className='min-h-screen bg-gray-900 text-white'>
-      <div className='container mx-auto px-4 py-16'>
-        <h1 className='mb-12 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-center text-6xl font-black text-transparent'>
-          mannazu: 여행의 새로운 차원
-        </h1>
+    <div className="min-h-screen bg-gray-900 text-white">
+      <div className="container mx-auto px-4 py-16">
+        <AnimatedTitle titleText="FIND MY LOCAL FRIEND!" />
 
-        <div className='mb-16 grid grid-cols-1 gap-8 md:grid-cols-2'>
+        <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}
         </div>
 
-        <div className='text-center'>
-          <h2 className='mb-6 text-4xl font-bold'>우리의 미션</h2>
-          <p className='mx-auto mb-8 max-w-3xl text-xl leading-relaxed'>
-            mannazu는 전 세계 사람들이 서로 만나고, 배우며, 성장할 수 있는 기회를 제공합니다. 우리는
-            문화의 장벽을 넘어 진정한 글로벌 커뮤니티를 만들어갑니다. 여행은 단순한 관광이 아닌,
-            세계를 이해하고 자신을 발견하는 여정이 되어야 한다고 믿습니다.
+        <div className="text-center">
+          <h2 className="mb-6 text-4xl font-bold">우리의 미션</h2>
+          <p className="mx-auto mb-8 max-w-3xl text-xl leading-relaxed">
+            mannazu는 전 세계 사람들이 서로 만나고, 배우며, 성장할 수 있는
+            기회를 제공합니다. 우리는 문화의 장벽을 넘어 진정한 글로벌
+            커뮤니티를 만들어갑니다. 여행은 단순한 관광이 아닌, 세계를 이해하고
+            자신을 발견하는 여정이 되어야 한다고 믿습니다.
           </p>
-          <Link href={PATHS.TRIP}>
-            <button className='transform rounded-full bg-gradient-to-r from-blue-400 to-purple-600 px-8 py-3 text-xl font-bold text-white transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-purple-700'>
-              mannazu와 함께 여행하기
-            </button>
-          </Link>
+          <TripButton buttonText="새로운 외국인 친구를 찾아보기" />
         </div>
       </div>
     </div>
-  );
+  )
 }

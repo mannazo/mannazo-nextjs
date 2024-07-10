@@ -1,13 +1,15 @@
 {
   "compilerOptions": {
-//    아래 옵션은 tsx 전환기에는 해제하고 오류 잡기
+    //    아래 옵션은 tsx 전환기에는 해제하고 오류 잡기
+    "suppressImplicitAnyIndexErrors": true,
+    "noPropertyAccessFromIndexSignature": false,
     "strictNullChecks": false,
     "noImplicitAny": false,
-//    아래 옵션은 nextjs를 위한 기본 설정
+    "strict": false,
+    //    아래 옵션은 nextjs를 위한 기본 설정
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",

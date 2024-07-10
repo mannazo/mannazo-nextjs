@@ -9,10 +9,10 @@ export default function LoginPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  const isFirstUser = true
-
   useEffect(() => {
     if (status === 'authenticated') {
+      const isFirstUser = session.user.additionalInfo.isFirstUser
+
       if (isFirstUser) {
         router.push('/users/sign-up')
       } else {
@@ -26,8 +26,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-4xl font-bold mb-4">Login</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+      <h1 className="mb-4 text-4xl font-bold">Login</h1>
       <LoginForm />
     </div>
   )

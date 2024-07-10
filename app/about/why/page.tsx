@@ -1,15 +1,17 @@
 'use client'
 
-import Link from 'next/link';
-import * as PATHS from '@/constants/paths';
+import Link from 'next/link'
+import * as PATHS from '@/constants/paths'
+import TripButton from '@/components/about/TripButton'
+import AnimatedTitle from '@/components/about/AnimatedTitle'
 
 const ReasonCard = ({ icon, title, description }) => (
-  <div className='transform rounded-2xl bg-gradient-to-br from-pink-500 to-orange-400 p-6 text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl'>
-    <div className='mb-4 text-5xl'>{icon}</div>
-    <h3 className='mb-3 text-2xl font-bold'>{title}</h3>
-    <p className='text-lg'>{description}</p>
+  <div className="transform rounded-2xl bg-gradient-to-br from-pink-500 to-orange-400 p-6 text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="mb-4 text-5xl">{icon}</div>
+    <h3 className="mb-3 text-2xl font-bold">{title}</h3>
+    <p className="text-lg">{description}</p>
   </div>
-);
+)
 
 export default function WhyMannazuPage() {
   const reasons = [
@@ -34,7 +36,8 @@ export default function WhyMannazuPage() {
     {
       icon: '🗣️',
       title: '언어와 문화 교류',
-      description: '현지인과의 실제적인 대화로 살아있는 언어와 문화를 경험해보세요.',
+      description:
+        '현지인과의 실제적인 대화로 살아있는 언어와 문화를 경험해보세요.',
     },
     {
       icon: '🍜',
@@ -45,37 +48,34 @@ export default function WhyMannazuPage() {
     {
       icon: '🌈',
       title: '새로운 친구, 새로운 모험',
-      description: '전 세계의 새로운 친구들을 만나 잊지 못할 추억을 만들어보세요!',
+      description:
+        '전 세계의 새로운 친구들을 만나 잊지 못할 추억을 만들어보세요!',
     },
-  ];
+  ]
 
   return (
-    <div className='min-h-screen bg-gray-900 text-white'>
-      <div className='container mx-auto px-4 py-16'>
-        <h1 className='mb-12 bg-gradient-to-r from-pink-400 to-yellow-400 bg-clip-text text-center text-6xl font-black text-transparent'>
-          왜 mannazu를 선택해야 할까요?
-        </h1>
+    <div className="min-h-screen bg-gray-900 text-white">
+      <div className="container mx-auto px-4 py-16">
+        <AnimatedTitle titleText="WHY MANNAZU?" />
 
-        <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {reasons.map((reason, index) => (
             <ReasonCard key={index} {...reason} />
           ))}
         </div>
 
-        <div className='mt-16 text-center'>
-          <h2 className='mb-6 text-4xl font-bold'>새로운 여행의 시작, mannazu와 함께</h2>
-          <p className='mx-auto mb-8 max-w-3xl text-xl leading-relaxed'>
-            mannazu는 단순한 여행 앱이 아닙니다. 우리는 전 세계 사람들을 연결하고, 문화를 공유하며,
-            평생 간직할 추억을 만들 수 있는 혁신적인 플랫폼입니다. 진정한 글로벌 시민으로서의 여행을
-            경험해보세요.
+        <div className="mt-16 text-center">
+          <h2 className="mb-6 text-4xl font-bold">
+            새로운 여행의 시작, mannazu와 함께
+          </h2>
+          <p className="mx-auto mb-8 max-w-3xl text-xl leading-relaxed">
+            mannazu는 단순한 여행 앱이 아닙니다. 우리는 전 세계 사람들을
+            연결하고, 문화를 공유하며, 평생 간직할 추억을 만들 수 있는 혁신적인
+            플랫폼입니다. 진정한 글로벌 시민으로서의 여행을 경험해보세요.
           </p>
-          <Link href={PATHS.TRIP}>
-            <button className='transform rounded-full bg-gradient-to-r from-pink-400 to-yellow-400 px-8 py-3 text-xl font-bold text-white transition-all duration-300 hover:scale-105 hover:from-pink-500 hover:to-yellow-500'>
-              지금 바로 mannazu 시작하기
-            </button>
-          </Link>
+          <TripButton buttonText="지금 바로 만나주!" />
         </div>
       </div>
     </div>
-  );
+  )
 }

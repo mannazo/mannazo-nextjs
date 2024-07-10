@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '../components/main-header'
-import { UiProvider } from './providers/ui-provider'
-import SessionProvider from './providers/session-provider'
+import Providers from '@/components/provider/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,12 +17,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={inter.className}>
-        <SessionProvider>
+        <Providers>
           <Header />
-          <UiProvider>{children}</UiProvider>
-        </SessionProvider>
+          {children}
+        </Providers>
       </body>
     </html>
   )
