@@ -3,7 +3,9 @@
 이 디렉토리는 프로젝트 전반에 걸쳐 사용되는 유틸리티 함수들을 포함합니다.
 
 ## 카테고리
+
 (예시)
+
 - `formatters/`: 날짜, 통화 등의 포맷팅 함수
 - `validators/`: 입력 유효성 검사 함수
 - `helpers/`: 기타 헬퍼 함수
@@ -20,4 +22,5 @@
 // formatters/date.js
 export const formatDate = (date, format = 'YYYY-MM-DD') => {
   // 날짜 포맷팅 로직
-};
+}
+```
