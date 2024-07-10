@@ -4,30 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="refactor: reformatting + tailwindcss 클래스 정렬">
-      <change afterPath="$PROJECT_DIR$/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/commons/CustomLoadingSpinner.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/provider/Providers.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/provider/UiProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/axios.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/api.ts" afterDir="false" />
+    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요.">
+      <change afterPath="$PROJECT_DIR$/utils/selector/LanguageSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/posts/desktop/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/posts/desktop/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/providers/session-provider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/providers/ui-provider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/Motion-Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/Motion-Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/Search-Bar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/Search-Bar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/sign-up/InterestsSelection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/sign-up/InterestsSelection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/next-auth.d.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +160,7 @@
       <workItem from="1720495151161" duration="257000" />
       <workItem from="1720496586925" duration="6286000" />
       <workItem from="1720543425357" duration="2780000" />
-      <workItem from="1720576442604" duration="28457000" />
+      <workItem from="1720576442604" duration="31894000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />
@@ -245,7 +226,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720579190552</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요.">
+      <option name="closed" value="true" />
+      <created>1720606946564</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720606946564</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +281,8 @@
     <MESSAGE value="feat: 회원가입중인 계정을 위한 sign-up form 구현" />
     <MESSAGE value="refactor: 컨벤션에 어긋난 네이밍 정정 (컴포넌트에는 파스칼 컨베션 적용)" />
     <MESSAGE value="refactor: reformatting + tailwindcss 클래스 정렬" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: reformatting + tailwindcss 클래스 정렬" />
+    <MESSAGE value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

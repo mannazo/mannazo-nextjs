@@ -7,6 +7,7 @@ import { createUser } from '@/services/api'
 import { LANGUAGE, MBTI, NATIONALITY } from '@/constants/input-values'
 import InterestsSelection from '@/components/users/sign-up/InterestsSelection'
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector'
+import LanguageSelector from '@/utils/selector/LanguageSelector'
 
 interface SignUpFormProps {
   initialEmail: string
@@ -36,9 +37,17 @@ export default function SignUpForm({
   const [error, setError] = useState('')
   const [country, setCountry] = useState('')
   const [city, setRegion] = useState('')
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
 
   const handleInterestsChange = (selectedInterests) => {
     setUserInfo((prev) => ({ ...prev, interests: selectedInterests }))
+  }
+
+  const handleLanguagesChange = (languages: string[]) => {
+    setSelectedLanguages(languages)
+    // 여기에서 필요한 다른 로직을 수행할 수 있습니다.
+    // 예: API 호출, 다른 상태 업데이트 등
+    console.log('Selected languages:', languages)
   }
 
   // 세션 정보 가져온다.
@@ -270,18 +279,12 @@ export default function SignUpForm({
               >
                 Language
               </label>
-              <select
-                name="language"
-                id="language"
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+
+              <LanguageSelector
                 onChange={handleChange}
-              >
-                {LANGUAGE.map((value) => (
-                  <option key={value} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </select>
+                name="language"
+                initialValue="English"
+              />
             </div>
 
             {/*관심가는 주제 선택(포스트 올릴 때 보여줄 것)*/}
