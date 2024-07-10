@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react'
 import VOCCard from "../VOC/VOCCard";
 import CardDataStats from "../CardDataStats";
 import { getNumberOfAllUsers, getNumberOfPosts, getNumberOfUsersByNationality } from '@/api/admin/route'
-import ChartThree from '../Charts/ChartThree';
-
+const ChartThree = dynamic(() => import("../Charts/ChartThree"), {
+  ssr: false,
+});
 interface CountryUsers {
   country: string;
   users: number;
@@ -94,7 +95,7 @@ const ECommerce: React.FC = () => {
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
 
-        <ChartThree data={usersbycountries}/>
+        <ChartThree/>
         <div className="col-span-12 xl:col-span-8">
           <VOCCard />
         </div>
