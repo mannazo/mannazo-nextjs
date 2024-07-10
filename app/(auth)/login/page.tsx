@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import LoginForm from '@/components/(auth)/login/LoginForm'
+import LoadingSpinner from '@/components/commons/LoadingSpinner'
 
 export default function LoginPage() {
   const { data: session, status } = useSession()
@@ -22,7 +23,7 @@ export default function LoginPage() {
   }, [status, router])
 
   if (status === 'loading' || status === 'authenticated') {
-    return <div>Loading...</div>
+    return <LoadingSpinner />
   }
 
   return (

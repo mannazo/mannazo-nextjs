@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요.">
-      <change afterPath="$PROJECT_DIR$/utils/selector/LanguageSelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/commons/LoadingSpinner.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/posts/TravelForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/posts/desktop/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/posts/desktop/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/commons/CustomLoadingSpinner.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,8 +72,8 @@
   "keyToString": {
     "JavaScript Debug.localhost:3000.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "4-feat-post-card",
-    "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/node_modules/prettier",
+    "git-widget-placeholder": "5-feat-post-form",
+    "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/components/posts/mobile",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.stylelint": "true",
@@ -117,18 +121,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts\mobile" />
       <recent name="$PROJECT_DIR$/app/posts/mobile" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\desktop" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\tip" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\why" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts" />
       <recent name="$PROJECT_DIR$/components/about" />
       <recent name="$PROJECT_DIR$/app/about" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\api\auth" />
       <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/app/providers" />
     </key>
   </component>
   <component name="RunManager">
