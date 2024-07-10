@@ -1,7 +1,15 @@
-export default function Page() {
+import ECommerce from "@/components/admin/Dashboard/E-commerce";
+import { Metadata } from "next";
+import DefaultLayout from '@/components/admin/Layouts/DefaultLayout'
+
+export default function Home() {
   return (
-    <div>
-      <h1>ExamplePage</h1>
-    </div>
-  )
+    <>
+   <DefaultLayout>
+     <ECommerce />
+   </DefaultLayout>
+
+
+    </>
+  );
 }
