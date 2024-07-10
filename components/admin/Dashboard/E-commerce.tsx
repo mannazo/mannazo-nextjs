@@ -1,23 +1,58 @@
 "use client";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import VOCCard from "../VOC/VOCCard";
 import CardDataStats from "../CardDataStats";
+import { getNumberOfAllUsers, getNumberOfPosts, getNumberOfUsersByNationality } from '@/api/admin/route'
+import ChartThree from '../Charts/ChartThree';
 
+interface CountryUsers {
+  country: string;
+  users: number;
+}
 
-const ChartThree = dynamic(() => import("../Charts/ChartThree"), {
-  ssr: false,
-});
+interface CountryUsersListProps {
+  data: CountryUsers[];
+}
 
 const ECommerce: React.FC = () => {
-  const tot = 250;
-  const prevtot = 230;
-  const rate = ((tot - prevtot) / prevtot) * 100;
 
+  const [posts, setPosts] = useState<string>("");
+  const [users, setUsers] = useState<string >("");
+  const [usersbycountries, setUsersbycountries] = useState<CountryUsers[]>();
+  const [loading, setLoading] = useState<boolean>();
+  const [error, setError] = useState<string >("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const postsData = await getNumberOfPosts();
+        // const usersData = await getNumberOfAllUsers();
+        // const userspernationality = await getNumberOfUsersByNationality();
+
+        setPosts("300");
+        setUsers("250");
+        setUsersbycountries([
+          { country: "USA", users: 100 },
+          { country: "Canada", users: 80 },
+          { country: "UK", users: 70 },
+          { country: "Germany", users: 60 },
+          { country: "France", users: 50 }]
+        );
+        console.log(usersbycountries)
+        setLoading(false);
+      } catch (err) {
+        console.log("errer")
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 ">
-        <CardDataStats title="Total Users" total={tot} rate={rate} levelUp>
+        <CardDataStats title="Total Users" total={users} rate="0" levelUp>
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -36,7 +71,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Posts" total="589" rate="11" levelUp>
+        <CardDataStats title="Total Posts" total={posts} rate="11" levelUp>
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -59,7 +94,7 @@ const ECommerce: React.FC = () => {
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
 
-        <ChartThree />
+        <ChartThree data={usersbycountries}/>
         <div className="col-span-12 xl:col-span-8">
           <VOCCard />
         </div>
