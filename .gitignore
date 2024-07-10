@@ -4,7 +4,11 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
-.idea
+
+#jetBrains
+workspace.xml
+usage.statistics.xml
+*.iml
 
 # dependencies
 /node_modules
