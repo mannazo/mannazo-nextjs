@@ -29,7 +29,7 @@ pipeline {
                     
                         if [ ! -f package-lock.json ]; then
                             echo "package-lock.json not found. Running npm install to generate it."
-                            npm install --prefer-offline --no-audit --maxsockets 50
+                            npm install --prefer-offline --no-audit --maxsockets 50 --legacy-peer-deps
                         else
                             echo "package-lock.json found. Running npm ci."
                             npm ci --prefer-offline --no-audit --maxsockets 50 --legacy-peer-deps 
@@ -100,7 +100,7 @@ pipeline {
                     # Docker 이미지 정리
                     docker rmi mannazo/mannazu-nextjs:${BUILD_NUMBER} || true
                     docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${BUILD_NUMBER} || true
-                    
+
                     docker system prune -f
                 '''
             }
