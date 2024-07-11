@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
 import { createPost } from '@/services/api'
 import {
   Input,
@@ -15,22 +16,32 @@ import LoadingSpinner from '@/components/commons/LoadingSpinner'
 import { format } from 'date-fns'
 
 interface TravelPlanFormProps {
-  onSubmitSuccess: () => void // 부모 컴포넌트에게 성공을 알리는 함수
+  onSubmitSuccess: () => void
 }
 
 const TravelPlanForm: React.FC<TravelPlanFormProps> = ({ onSubmitSuccess }) => {
+  const { data: session, status } = useSession()
+
   const [formData, setFormData] = useState({
+    userId: '',
     travelNationality: '',
     travelCity: '',
-    travelCityCustom: '',
     travelStartDate: null,
     travelEndDate: null,
-    travelStyle: [],
+    travelStatus: '등록',
+    travelStyle: '',
     travelPurpose: '',
     preferredGender: '',
     imageUrls: [],
   })
+
   const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      setFormData((prevData) => ({ ...prevData, userId: session.user.id }))
+    }
+  }, [session])
 
   const handleInputChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -51,7 +62,7 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({ onSubmitSuccess }) => {
   const handleStyleChange = (value) => {
     setFormData((prev) => ({
       ...prev,
-      travelStyle: value.split(',').map((item) => item.trim()),
+      travelStyle: value,
     }))
   }
 
@@ -67,16 +78,24 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({ onSubmitSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-    await new Promise((resolve) => setTimeout(resolve, 3000)) // 3초 지연
-    console.log(formData)
-    try {
-      const response = await createPost(formData)
+    // await new Promise((resolve) => setTimeout(resolve, 3000))
 
+    const submissionData = {
+      ...formData,
+      userId: '94760f77-9e64-4322-be0b-d4f6d7956299',
+      travelStyle: formData.travelStyle
+        .split(',')
+        .map((item) => item.trim())
+        .join(', '),
+    }
+
+    console.log(submissionData)
+    try {
+      const response = await createPost(submissionData)
       console.log('Form submitted successfully:', response.data)
-      onSubmitSuccess() // 부모 컴포넌트에게 성공을 알림
+      // onSubmitSuccess()
     } catch (error) {
       console.error('Error submitting form:', error)
-      // 여기에 에러 처리 로직을 추가
     } finally {
       setIsLoading(false)
     }
@@ -87,7 +106,6 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({ onSubmitSuccess }) => {
       <CountryDropdown
         value={formData.travelNationality}
         onChange={(val) => handleInputChange('travelNationality', val)}
-        // @ts-ignore
         className="w-full rounded border p-2"
       />
 
@@ -95,22 +113,14 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({ onSubmitSuccess }) => {
         country={formData.travelNationality}
         value={formData.travelCity}
         onChange={(val) => handleInputChange('travelCity', val)}
-        // @ts-ignore
         className="w-full rounded border p-2"
-      />
-
-      <Input
-        label="Custom City"
-        value={formData.travelCityCustom}
-        onChange={(e) => handleInputChange('travelCityCustom', e.target.value)}
-        placeholder="Enter custom city if not in the list"
       />
 
       <DateRangePicker label="Travel Dates" onChange={handleDateChange} />
 
       <Input
         label="Travel Style Tags"
-        value={formData.travelStyle.join(', ')}
+        value={formData.travelStyle}
         onChange={(e) => handleStyleChange(e.target.value)}
         placeholder="Enter tags separated by commas"
       />
@@ -127,9 +137,9 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({ onSubmitSuccess }) => {
         value={formData.preferredGender}
         onValueChange={(val) => handleInputChange('preferredGender', val)}
       >
-        <Radio value="male">Male</Radio>
-        <Radio value="female">Female</Radio>
-        <Radio value="any">Any</Radio>
+        <Radio value="남자">Male</Radio>
+        <Radio value="여자">Female</Radio>
+        <Radio value="상관없음">Any</Radio>
       </RadioGroup>
 
       <input

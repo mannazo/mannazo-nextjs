@@ -12,7 +12,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (status === 'authenticated') {
-      const isFirstUser = session.user.additionalInfo.isFirstUser
+      const isFirstUser = session.user.additionalInfo.firstTimeUser
 
       if (isFirstUser) {
         router.push('/users/sign-up')
