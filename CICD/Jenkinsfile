@@ -16,26 +16,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    // Jenkins의 캐시 디렉토리 지정
-                    def npmCacheDir = "${JENKINS_HOME}/npm-cache"
-
-                    // 캐시 디렉토리가 없으면 생성
-                    sh "mkdir -p ${npmCacheDir}"
-
-                    // npm 캐시 설정 및 ci 실행
-                    sh """
-                        npm config set cache "${npmCacheDir}"
-                    
-                        if [ ! -f package-lock.json ]; then
-                            echo "package-lock.json not found. Running npm install to generate it."
-                            npm install --prefer-offline --no-audit --maxsockets 50 --legacy-peer-deps
-                        else
-                            echo "package-lock.json found. Running npm ci."
-                            npm ci --prefer-offline --no-audit --maxsockets 50 --legacy-peer-deps 
-                        fi
-                    """
-                }             
+                sh 'npm ci'            
             }
         }
 
