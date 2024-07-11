@@ -9,31 +9,32 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS-21.4.0' // Jenkins에서 구성한 Node.js 도구 이름 사용
+        nodejs 'NodeJS-20.11.1' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
     }
 
     stages {
+        stage('Setup pnpm') {
+            steps {
+                sh 'npm install -g pnpm@8.15.4' // 최신 안정 버전의 pnpm 설치
+            }
+        }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'            
+                sh 'pnpm install 
             }
         }
 
         stage('Build') {
             steps {
-                // 프로젝트 빌드
-                sh 'npm run build'
+                sh 'pnpm run build'
             }                
         }
 
         stage('mannazu-nextjs 이미지 빌드') {
             steps {
                 script {
-
-                    // 현재 디렉토리 내용 확인
                     sh "ls -la"
-
                     docker.withRegistry("http://${DOCKER_REGISTRY_URL}", "${HARBOR_CREDENTIAL}") {
                         def customImage = docker.build("mannazo/mannazu-nextjs:${env.BUILD_NUMBER}", "-f CICD/Dockerfile .")
                         customImage.push()
@@ -45,11 +46,9 @@ pipeline {
         stage('mannazo-web 업데이트') {
             steps {
                 script { 
-                    // Git repository information for manifests
                     def manifestsRepoUrl = 'https://github.com/mannazo/mannazo-deploy.git'
                     def manifestsRepoBranch = 'main'
                     
-                    // Checkout manifests repository
                     git credentialsId: "${HARBOR_CREDENTIAL}", url: manifestsRepoUrl, branch: manifestsRepoBranch
                     sh """
                         git pull origin main
@@ -71,27 +70,10 @@ pipeline {
     post {
         always {
             echo 'Cleaning up workspace...'
-            script {
-                sh '''
-                    # 빌드 결과물 및 임시 파일 삭제
-                    rm -rf dist docker_build
-                    find . -name "*.log" -type f -delete
-                    find . -name "*.tmp" -type f -delete
-
-                    # Docker 이미지 정리
-                    docker rmi mannazo/mannazu-nextjs:${BUILD_NUMBER} || true
-                    docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${BUILD_NUMBER} || true
-
-                    docker system prune -f
-                '''
-            }
-            // Jenkins의 기본 정리 기능 사용
-            cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                    patterns: [[pattern: 'package.json', type: 'EXCLUDE'],
-                               [pattern: 'package-lock.json', type: 'EXCLUDE']])
+            cleanWs()
+            
+            // 로컬 Docker 이미지 정리
+            sh "docker rmi mannazo/mannazu-nextjs:${env.BUILD_NUMBER} || true"
         }
     }
 }
