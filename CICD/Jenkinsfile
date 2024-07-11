@@ -77,7 +77,7 @@ pipeline {
         }
         failure {
             discordSend title: "Mannazu-nextjs 빌드", 
-                        footer: "빌드가 성공했습니다.", 
+                        footer: "빌드가 실패했습니다.", 
                         link: env.BUILD_URL, result: currentBuild.currentResult, 
                         webhookURL: env.DISCORD_WEBHOOK
         }
