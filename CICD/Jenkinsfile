@@ -109,8 +109,7 @@ pipeline {
                     deleteDirs: true,
                     disableDeferredWipeout: true,
                     notFailBuild: true,
-                    patterns: [[pattern: 'node_modules', type: 'EXCLUDE'],
-                               [pattern: 'package.json', type: 'EXCLUDE'],
+                    patterns: [[pattern: 'package.json', type: 'EXCLUDE'],
                                [pattern: 'package-lock.json', type: 'EXCLUDE']])
         }
     }
