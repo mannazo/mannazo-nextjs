@@ -69,11 +69,8 @@ pipeline {
 
     post {
         always {
-            echo 'Cleaning up workspace...'
-            cleanWs()
-            
-            // 로컬 Docker 이미지 정리
-            sh "docker rmi mannazo/mannazu-nextjs:${env.BUILD_NUMBER} || true"
+            echo 'Workspace 정리..'
+            deleteDir()
         }
     }
 }
