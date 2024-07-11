@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요.">
-      <change afterPath="$PROJECT_DIR$/utils/selector/LanguageSelector.tsx" afterDir="false" />
+    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 여행 추가 폼 구현">
+      <change afterPath="$PROJECT_DIR$/.npmrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/next-auth.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/posts/TravelForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/posts/TravelForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,28 +66,28 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JavaScript Debug.localhost:3000.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "4-feat-post-card",
-    "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/node_modules/prettier",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "\\Users\\joonhoekim\\git\\mannazo-nextjs\\node_modules\\eslint",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.localhost:3000.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;5-feat-post-form&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jh/git/mannazo-nextjs/components/posts/mobile&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;\\Users\\joonhoekim\\git\\mannazo-nextjs\\node_modules\\eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
@@ -117,18 +119,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts\mobile" />
       <recent name="$PROJECT_DIR$/app/posts/mobile" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\desktop" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\tip" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\why" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts" />
       <recent name="$PROJECT_DIR$/components/about" />
       <recent name="$PROJECT_DIR$/app/about" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\api\auth" />
       <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/app/providers" />
     </key>
   </component>
   <component name="RunManager">
@@ -161,6 +163,7 @@
       <workItem from="1720496586925" duration="6286000" />
       <workItem from="1720543425357" duration="2780000" />
       <workItem from="1720576442604" duration="31894000" />
+      <workItem from="1720660456828" duration="4289000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />
@@ -234,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720606946564</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: 여행 추가 폼 구현">
+      <option name="closed" value="true" />
+      <created>1720616585688</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1720616585688</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,7 +293,8 @@
     <MESSAGE value="refactor: 컨벤션에 어긋난 네이밍 정정 (컴포넌트에는 파스칼 컨베션 적용)" />
     <MESSAGE value="refactor: reformatting + tailwindcss 클래스 정렬" />
     <MESSAGE value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
+    <MESSAGE value="feat: 여행 추가 폼 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 여행 추가 폼 구현" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
