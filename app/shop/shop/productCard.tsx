@@ -1,7 +1,7 @@
 import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, Checkbox, Input, Link} from "@nextui-org/react";
 
-import { Product } from '../_model/product'
+import { Product } from '@/_model/product'
 
 interface ProductList {
   product: Product;
@@ -13,13 +13,14 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
 
   return (
     <>
-    <Card shadow="sm" isPressable onPress={onOpen}>
-      <CardBody className="overflow-visible p-0">
+    <Card shadow="sm" isPressable onPress={onOpen} >
+      <CardBody className="overflow-visible p-0 ">
         <Image
           shadow="sm"
           radius="lg"
           width="100%"
-          className="w-full object-cover h-[140px]"
+
+          className="w-full object-cover h-[370px]"
           src={product.image}
         />
         {/*<h3 className="text-lg font-semibold mt-2">{product.name}</h3>*/}
@@ -46,6 +47,7 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
               shadow="sm"
               radius="lg"
               width="100%"
+
               className="w-full object-cover"
               src={product.image}
             />

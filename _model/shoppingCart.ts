@@ -1,4 +1,4 @@
-import { Product } from '../_model/product'
+import { Product } from './product'
 
 
 export interface ShoppingCart {
