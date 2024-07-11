@@ -11,6 +11,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from '@nextui-org/react'
+import TravelForm from '@/components/posts/TravelForm'
 
 export default function ListTraveller() {
   let travelers = exampleTravelers
@@ -41,15 +42,11 @@ export default function ListTraveller() {
                 새 글 작성
               </ModalHeader>
               <ModalBody>
-                {/* 여기에 입력 폼을 추가하세요 */}
-                <p>입력 폼이 들어갈 자리입니다.</p>
+                <TravelForm />
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="absolute bottom-2 right-2">
                 <Button color="danger" variant="light" onPress={onClose}>
-                  취소
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  저장
+                  Cancel
                 </Button>
               </ModalFooter>
             </>
