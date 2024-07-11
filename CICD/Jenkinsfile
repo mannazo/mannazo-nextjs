@@ -6,7 +6,7 @@ pipeline {
         HARBOR_CREDENTIAL = credentials("harbbor_robot")
         GIT_USER_EMAIL = "${params.git_user_email}"
         GIT_CREDENTIAL = credentials("DOLONG9")
-        DISCORD_URL = credentials("MANNAZU-DISCORD_WEBHOOK")
+        DISCORD_WEBHOOK = credentials("MANNAZU-DISCORD_WEBHOOK")
     }
 
     tools {
@@ -69,6 +69,20 @@ pipeline {
     }
 
     post {
+        success {
+            discordSend description: "알림테스트", 
+                        footer: "테스트 빌드가 성공했습니다.", 
+                        link: env.BUILD_URL, result: currentBuild.currentResult, 
+                        title: "테스트 젠킨스 job", 
+                        webhookURL: env.DISCORD_WEBHOOK
+        }
+        failure {
+            discordSend description: "알림테스트", 
+                        footer: "테스트 빌드가 실싪실실패했습니다.", 
+                        link: env.BUILD_URL, result: currentBuild.currentResult, 
+                        title: "테스트 젠킨스 job", 
+                        webhookURL: env.DISCORD_WEBHOOK
+        }
         always {
             echo 'Workspace 정리..'
             deleteDir()
