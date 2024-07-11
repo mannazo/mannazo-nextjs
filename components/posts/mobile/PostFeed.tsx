@@ -13,6 +13,7 @@ export default function PostFeed() {
       try {
         const response = await getPosts()
         setTravelers(response.data.content || [])
+        console.log(response)
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error)
       } finally {
