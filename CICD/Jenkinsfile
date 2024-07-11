@@ -1,0 +1,117 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_REGISTRY_URL = "${params.harbor_url}"
+        HARBOR_CREDENTIAL = "${params.harbor_credential}"
+        GIT_USER_EMAIL = "${params.git_user_email}"
+        GIT_CREDENTIAL = "${params.github_credential}"
+    }
+
+    tools {
+        nodejs 'NodeJS-21.4.0' // Jenkins에서 구성한 Node.js 도구 이름 사용
+    }
+
+    stages {
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Jenkins의 캐시 디렉토리 지정
+                    def npmCacheDir = "${JENKINS_HOME}/npm-cache"
+
+                    // 캐시 디렉토리가 없으면 생성
+                    sh "mkdir -p ${npmCacheDir}"
+
+                    // npm 캐시 설정 및 ci 실행
+                    sh """
+                        npm config set cache "${npmCacheDir}"
+                    
+                        if [ ! -f package-lock.json ]; then
+                            echo "package-lock.json not found. Running npm install to generate it."
+                            npm install --prefer-offline --no-audit --maxsockets 50
+                        else
+                            echo "package-lock.json found. Running npm ci."
+                            npm ci --prefer-offline --no-audit --maxsockets 50 --legacy-peer-deps 
+                        fi
+                    """
+                }             
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // 프로젝트 빌드
+                sh 'npm run build'
+            }                
+        }
+
+        stage('mannazu-nextjs 이미지 빌드') {
+            steps {
+                script {
+
+                    // 현재 디렉토리 내용 확인
+                    sh "ls -la"
+
+                    docker.withRegistry("http://${DOCKER_REGISTRY_URL}", "${HARBOR_CREDENTIAL}") {
+                        def customImage = docker.build("mannazo/mannazu-nextjs:${env.BUILD_NUMBER}", "-f CICD/Dockerfile .")
+                        customImage.push()
+                    }
+                }
+            }
+        }
+
+        stage('mannazo-web 업데이트') {
+            steps {
+                script { 
+                    // Git repository information for manifests
+                    def manifestsRepoUrl = 'https://github.com/mannazo/mannazo-deploy.git'
+                    def manifestsRepoBranch = 'main'
+                    
+                    // Checkout manifests repository
+                    git credentialsId: "${HARBOR_CREDENTIAL}", url: manifestsRepoUrl, branch: manifestsRepoBranch
+                    sh """
+                        git pull origin main
+                        sed -i 's|harbor.dorong9.com/mannazo/mannazu-nextjs:.*|harbor.dorong9.com/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}|' web/mannazu-web.yaml
+                        git add web/mannazu-web.yaml
+                        git config user.name 'DOLONG9'
+                        git config user.email "${GIT_USER_EMAIL}"
+                        git commit -m 'web/mannazu-web.yaml ${currentBuild.number} image versioning'
+                    """
+                    withCredentials([gitUsernamePassword(credentialsId: "${GIT_CREDENTIAL}")]) {
+                       sh "git remote set-url origin https://github.com/mannazo/mannazo-deploy.git" 
+                       sh "git push origin main"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up workspace...'
+            script {
+                sh '''
+                    # 빌드 결과물 및 임시 파일 삭제
+                    rm -rf dist docker_build
+                    find . -name "*.log" -type f -delete
+                    find . -name "*.tmp" -type f -delete
+
+                    # Docker 이미지 정리
+                    docker rmi mannazo/mannazu-nextjs:${BUILD_NUMBER} || true
+                    docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${BUILD_NUMBER} || true
+                    
+                    docker system prune -f
+                '''
+            }
+            // Jenkins의 기본 정리 기능 사용
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: 'node_modules', type: 'EXCLUDE'],
+                               [pattern: 'package.json', type: 'EXCLUDE'],
+                               [pattern: 'package-lock.json', type: 'EXCLUDE']])
+        }
+    }
+}
