@@ -51,6 +51,8 @@ export const authOptions: NextAuthOptions = {
             }
           )
 
+          console.log(response)
+
           user.additionalInfo = {
             firstTimeUser: response.data.firstTimeUser,
             serverUserId: response.data.userId,

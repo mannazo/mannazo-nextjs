@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Spinner } from '@nextui-org/react'
 import { useSession } from 'next-auth/react'
 import { uploadImageToS3 } from '@/utils/aws/s3'
 import { createUser } from '@/services/api'
@@ -32,12 +34,14 @@ export default function SignUpForm({
     birthday: '',
   })
 
+  const router = useRouter()
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState('')
   const [error, setError] = useState('')
   const [country, setCountry] = useState('')
   const [city, setRegion] = useState('')
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleInterestsChange = (selectedInterests) => {
     setUserInfo((prev) => ({ ...prev, interests: selectedInterests }))
@@ -76,6 +80,7 @@ export default function SignUpForm({
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    setIsLoading(true) // 로딩 시작
 
     if (!session || !session.user || !session.user.additionalInfo) {
       setError('세션 정보를 불러올 수 없습니다.')
@@ -115,10 +120,21 @@ export default function SignUpForm({
       const response = await createUser(payload)
 
       console.log(response.data)
+
+      // 회원가입 성공 후 라우팅
+      const previousPath = sessionStorage.getItem('previousPath')
+      if (previousPath && previousPath !== '/login') {
+        router.push(previousPath)
+      } else {
+        router.push('/')
+      }
+
       // 회원가입 성공 처리 (예: 로그인 페이지로 리다이렉트)
     } catch (error) {
       console.error('회원가입 중 오류 발생:', error)
       setError('회원가입 중 오류가 발생했습니다. 다시 시도해 주세요.')
+    } finally {
+      setIsLoading(false) // 로딩 종료
     }
   }
 
@@ -363,10 +379,11 @@ export default function SignUpForm({
 
             <div>
               <button
+                disabled={isLoading}
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                Sign Up
+                {isLoading ? <Spinner size="sm" /> : 'SIGN UP'}
               </button>
             </div>
           </form>

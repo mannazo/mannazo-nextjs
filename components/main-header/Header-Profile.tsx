@@ -12,10 +12,15 @@ export default function HeaderProfile() {
   //프로필 메뉴를 동적으로 보여주기 위한 상태
   const [profileMenu, setProfileMenu] = useState(false)
 
+  function beforeLoginHandler() {
+    // 로그인 페이지로 이동하기 전에 세션스토리지에 돌아갈 페이지 저장
+    sessionStorage.setItem('previousPath', window.location.pathname)
+  }
+
   return (
     <div>
       {isLoggedIn ? (
-        <div className="group relative">
+        <div className="group relative z-50">
           <button
             className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300"
             onClick={() => setProfileMenu(!profileMenu)}
@@ -49,7 +54,11 @@ export default function HeaderProfile() {
           )}
         </div>
       ) : (
-        <Link href="/login" className="text-blue-600 hover:text-blue-800">
+        <Link
+          href="/login"
+          className="text-blue-600 hover:text-blue-800"
+          onClick={beforeLoginHandler}
+        >
           Login
         </Link>
       )}

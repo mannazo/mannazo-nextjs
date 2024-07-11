@@ -2,21 +2,12 @@
 
 import React from 'react'
 import TravelerCard from '@/components/posts/desktop/Card'
-import {
-  Button,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from '@nextui-org/react'
+import { Button, useDisclosure } from '@nextui-org/react'
 import TravelForm from '@/components/posts/TravelForm'
 
 export default function ListTraveller() {
   let travelers = exampleTravelers
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <div className="relative min-h-screen">
       <div className="grid max-h-screen grid-cols-1 gap-6 overflow-y-auto p-6 md:grid-cols-2 lg:grid-cols-3">
@@ -26,33 +17,14 @@ export default function ListTraveller() {
       </div>
 
       <Button
-        auto
         color="primary"
         className="fixed bottom-6 right-6 z-10"
         onPress={onOpen}
       >
-        글 추가
+        Write a Post! ✏️
       </Button>
 
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                새 글 작성
-              </ModalHeader>
-              <ModalBody>
-                <TravelForm />
-              </ModalBody>
-              <ModalFooter className="absolute bottom-2 right-2">
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Cancel
-                </Button>
-              </ModalFooter>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
+      <TravelForm onSubmitSuccess={null} isOpen={isOpen} onClose={onClose} />
     </div>
   )
 }
