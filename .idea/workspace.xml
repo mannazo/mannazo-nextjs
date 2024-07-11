@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요.">
-      <change afterPath="$PROJECT_DIR$/utils/selector/LanguageSelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/_model/product.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/_model/shoppingCart.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/AddressForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/Info.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/InfoMobile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/PaymentForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/Review.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/SitemarkIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/ToggleColorMode.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/getCheckoutTheme.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/components/productCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/shop/components/productCards.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/product.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/shop/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/shop/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +65,9 @@
     &quot;repository&quot;: &quot;mannazo-nextjs&quot;
   }
 }</component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -68,7 +84,7 @@
   "keyToString": {
     "JavaScript Debug.localhost:3000.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "4-feat-post-card",
+    "git-widget-placeholder": "5-online-shop-of-mannazu",
     "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/node_modules/prettier",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -82,7 +98,7 @@
     "nodejs_package_manager_path": "yarn",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier",
     "settings.editor.selected.configurable": "inlay.hints",
-    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/Users/lilylee/Desktop/2024뉴딜/mannazo-nextjs/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -115,6 +131,14 @@
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
     </layout>
   </component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/posts/mobile" />
@@ -124,11 +148,11 @@
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\about\why" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$/app/shop/checkout" />
+      <recent name="$PROJECT_DIR$/app/shop" />
       <recent name="$PROJECT_DIR$/components/about" />
       <recent name="$PROJECT_DIR$/app/about" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\api\auth" />
-      <recent name="$PROJECT_DIR$/app" />
-      <recent name="$PROJECT_DIR$/app/providers" />
     </key>
   </component>
   <component name="RunManager">
@@ -239,6 +263,18 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/app/shop/checkout/AddressForm.js" />
+        <option value="$PROJECT_DIR$/app/shop/checkout/getCheckoutTheme.js" />
+        <option value="$PROJECT_DIR$/app/shop/checkout/Info.js" />
+        <option value="$PROJECT_DIR$/app/shop/checkout/InfoMobile.js" />
+        <option value="$PROJECT_DIR$/app/shop/checkout/PaymentForm.js" />
+        <option value="$PROJECT_DIR$/app/shop/checkout/Review.js" />
+        <option value="$PROJECT_DIR$/app/shop/checkout/SitemarkIcon.js" />
+        <option value="$PROJECT_DIR$/app/shop/checkout/ToggleColorMode.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="OPEN_GENERIC_TABS">
@@ -283,15 +319,5 @@
     <MESSAGE value="refactor: reformatting + tailwindcss 클래스 정렬" />
     <MESSAGE value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
     <option name="LAST_COMMIT_MESSAGE" value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/users/sign-up/SocialLoginButton.tsx</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

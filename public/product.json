@@ -1,0 +1,18 @@
+[
+  {
+    "product_id": 1,
+    "name": "Product 1",
+    "description": "Description for product 1",
+    "price": 29.99,
+    "category": "Category 1",
+    "image": "https://via.placeholder.com/150"
+  },
+  {
+    "product_id": 2,
+    "name": "Product 2",
+    "description": "Description for product 2",
+    "price": 39.99,
+    "category": "Category 2",
+    "image": "https://via.placeholder.com/150"
+  }
+]
