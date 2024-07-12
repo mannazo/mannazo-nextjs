@@ -35,7 +35,7 @@ const FeedItem = ({ post }) => {
           radius="full"
           size="sm"
         >
-          팔로우
+          <ChatBubbleOvalLeftIcon className="h-5 w-5" />
         </Button>
       </CardHeader>
       <CardBody className="px-3 py-0">
@@ -50,15 +50,15 @@ const FeedItem = ({ post }) => {
         )}
       </CardBody>
       <CardFooter className="gap-3">
-        <Button isIconOnly color="danger" aria-label="Like">
-          <HeartIcon className="h-5 w-5" />
-        </Button>
-        <Button isIconOnly color="primary" aria-label="Comment">
-          <ChatBubbleOvalLeftIcon className="h-5 w-5" />
-        </Button>
-        <Button isIconOnly color="secondary" aria-label="Share">
-          <PaperAirplaneIcon className="h-5 w-5" />
-        </Button>
+        {/*<Button isIconOnly color="danger" aria-label="Like">*/}
+        {/*  <HeartIcon className="h-5 w-5" />*/}
+        {/*</Button>*/}
+        {/*<Button isIconOnly color="primary" aria-label="Comment">*/}
+        {/*  <ChatBubbleOvalLeftIcon className="h-5 w-5" />*/}
+        {/*</Button>*/}
+        {/*<Button isIconOnly color="secondary" aria-label="Share">*/}
+        {/*  <PaperAirplaneIcon className="h-5 w-5" />*/}
+        {/*</Button>*/}
       </CardFooter>
     </Card>
   )
