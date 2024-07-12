@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요.">
+      <change afterPath="$PROJECT_DIR$/app/shop/checkout/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/shop/AddressCheckout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/shop/PaymentCheckout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/shop/ReviewCheckout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/shop/cart/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/shop/cart/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/shop/shop/productCards.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/shop/shop/productCards.tsx" afterDir="false" />
@@ -35,22 +39,22 @@
     &quot;assignee&quot;: &quot;joonhoekim&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/mannazo/mannazo-nextjs&quot;,
-    &quot;accountId&quot;: &quot;e419a69d-21e3-487e-bcea-fabc1bfd6ed1&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mannazo/mannazo-nextjs.git",
+    "accountId": "02ce1742-241b-40be-a728-827b5a759a80"
   },
-  &quot;recentNewPullRequestHead&quot;: {
-    &quot;server&quot;: {
-      &quot;useHttp&quot;: false,
-      &quot;host&quot;: &quot;github.com&quot;,
-      &quot;port&quot;: null,
-      &quot;suffix&quot;: null
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
     },
-    &quot;owner&quot;: &quot;mannazo&quot;,
-    &quot;repository&quot;: &quot;mannazo-nextjs&quot;
+    "owner": "mannazo",
+    "repository": "mannazo-nextjs"
   }
-}</component>
+}]]></component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
@@ -76,7 +80,7 @@
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "\\Users\\joonhoekim\\git\\mannazo-nextjs\\node_modules\\eslint",
+    "node.js.selected.package.eslint": "/Users/joonhoekim/git/mannazo-nextjs/node_modules/eslint",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.stylelint": "",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -122,6 +126,7 @@
       <map>
         <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
         <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
       </map>
     </option>
   </component>
@@ -154,7 +159,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17890.13" />
       </set>
     </attachedChunks>
   </component>
@@ -171,6 +176,7 @@
       <workItem from="1720496586925" duration="6286000" />
       <workItem from="1720543425357" duration="2780000" />
       <workItem from="1720576442604" duration="31894000" />
+      <workItem from="1720752613169" duration="13164000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />

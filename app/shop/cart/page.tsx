@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { ShoppingCart } from '@/_model/shoppingCart'
-import {Product } from '@/_model/product'
+import { Product } from '@/_model/product'
 import {
   Table,
   TableHeader,
@@ -12,71 +12,68 @@ import {
   TableCell,
   getKeyValue,
   Button,
+  Link,
 } from '@nextui-org/react'
 
 
 export default function Page() {
   const [cart,setCart] = useState<ShoppingCart>({ items:[] })
+  const [loading, setLoading] = useState<boolean>(true)
+
+
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem('cart') || '{"items": []}');
+    const storedCart = JSON.parse(localStorage.getItem('cart'));
     setCart(storedCart);
+    console.log(storedCart)
+    setLoading(false)
   }, []);
 
-  const removeFromCart = (productId: number) => {
-    setCart(prevCart => {
-      const updatedItems = prevCart.items.filter(item => item.product.product_id !== productId);
-      const updatedCart = { ...prevCart, items: updatedItems };
+  function removeFromCart(product_id: number) {
+    setCart(prevState => {
+      const updatedItems = prevState.items.filter(item => item.product.product_id !== product_id);
+      const updatedCart = { ...prevState, items: updatedItems };
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       return updatedCart;
-    });
-  };
+    })
+  }
 
-  const totalPrice = cart.items.reduce((total, item) => total + item.product.price * item.quantity, 0);
-
+  const total = cart.items.reduce(( total, item ) => {return total + item.product.price * item.quantity},0)
   return(
-    <>
+    <div className="container mx-auto px-4 py-8">
     <h1>Shopping Cart</h1>
-      {cart.items.length > 0 ? (
-        <Table aria-label="Shopping Cart" shadow={false} lined headerLined>
-          <Table.Header>
-            <Table.Column>PRODUCT</Table.Column>
-            <Table.Column>DESCRIPTION</Table.Column>
-            <Table.Column>PRICE</Table.Column>
-            <Table.Column>QUANTITY</Table.Column>
-            <Table.Column>ACTION</Table.Column>
-          </Table.Header>
-          <Table.Body>
-            {cart.items.map(({ product, quantity }) => (
-              <Table.Row key={product.product_id}>
-                <Table.Cell>{product.name}</Table.Cell>
-                <Table.Cell>{product.description}</Table.Cell>
-                <Table.Cell>${product.price}</Table.Cell>
-                <Table.Cell>{quantity}</Table.Cell>
-                <Table.Cell>
-                  <Button flat color="error" onPress={() => removeFromCart(product.product_id)}>
-                    Remove
-                  </Button>
-                </Table.Cell>
-              </Table.Row>
+      {!loading ? (
+        <>
+        <Table aria-label="Shopping cart">
+          <TableHeader>
+            <TableColumn>Product</TableColumn>
+            <TableColumn>Price</TableColumn>
+            <TableColumn>Quantity</TableColumn>
+            <TableColumn>Action</TableColumn>
+          </TableHeader>
+          {cart.items.length>0 ? (
+            <TableBody>
+            {cart.items.map((item) =>(
+              <TableRow>
+                <TableCell>{item.product.name}</TableCell>
+                <TableCell>{item.product.price}</TableCell>
+                <TableCell>{item.quantity}</TableCell>
+                <TableCell><Button onPress={()=> removeFromCart(item.product.product_id)}>Remove</Button></TableCell>
+              </TableRow>
             ))}
-          </Table.Body>
-          <Table.Footer>
-            <Table.Row>
-              <Table.Cell colSpan={4} css={{ textAlign: 'right' }}>
-                <h4>Total: ${totalPrice.toFixed(2)}</h4>
-              </Table.Cell>
-              <Table.Cell>
-
-                <Button auto color="primary">
-                  Proceed to Checkout
-                </Button>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Footer>
+          </TableBody>
+          ):(
+            <TableBody emptyContent={"Your cart is empty"}>{[]}</TableBody>
+          )}
         </Table>
-      ) : (
-        <h3>Your cart is empty.</h3>
-      )}
-    </>
+        <h3>Total: {total}</h3>
+        <Link href="/shop/checkout">
+          <Button>Checkout</Button>
+        </Link>
+
+        </>
+      ):(<p></p>)}
+
+
+    </div>
   )
 }

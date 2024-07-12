@@ -27,9 +27,11 @@ const ProductCards : React.FC = () => {
         items: [...prevCart.items, { product, quantity: 1 }]
       };
     })
-    console.log(cart)
+
     // update cart to localStorage for access from shooping car
     localStorage.setItem('cart', JSON.stringify(cart))
+    console.log(cart)
+
   //   localStorage is always stored as strings (JSON.stringify). so should be retrieved with JSOn.parse() to get the object form
 
   }
