@@ -1,14 +1,28 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import React from 'react'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Header from '../components/main-header'
-import Providers from '@/components/provider/Providers'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Providers } from '@/components/provider/Providers'
+import { siteConfig } from '@/config/site'
+import clsx from 'clsx'
+import { fontSans } from '@/config/fonts'
 
 export const metadata: Metadata = {
-  title: 'MANNAZU',
-  description: 'Travel to make Friend! 😁',
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: {
+    icon: '/favicon.ico',
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
 }
 
 export default function RootLayout({
@@ -17,9 +31,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>
+    <html suppressHydrationWarning lang="en">
+      <head />
+      <body
+        className={clsx(
+          'min-h-screen bg-background font-sans antialiased',
+          fontSans.variable
+        )}
+      >
+        <Providers themeProps={{ attribute: 'class', defaultTheme: 'system' }}>
           <Header />
           {children}
         </Providers>
