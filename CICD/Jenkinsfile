@@ -1,0 +1,102 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_REGISTRY_URL = "${params.harbor_url}"
+        HARBOR_CREDENTIAL = "${params.harbor_credential}"
+        GIT_USER_EMAIL = "${params.git_user_email}"
+        GIT_CREDENTIAL = "${params.github_credential}"
+        DISCORD_WEBHOOK = credentials("MANNAZU-DISCORD_WEBHOOK")
+    }
+
+    tools {
+        nodejs 'NodeJS-20.11.1' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
+    }
+
+    stages {
+        stage('.env.local 추가') {
+            steps {
+                script {
+                    if (params.BUILD_FILE) {
+                        writeFile file: '.env.local', text: readFile(params.BUILD_FILE)
+                    }
+                }
+            }
+        }
+
+        stage('Dependencies 설치') {
+            steps {
+                script {
+                    // 캐시 디렉토리 생성
+                    if (fileExists('node_modules')) {
+                        echo 'Using cached node_modules directory'
+                    } else {
+                        sh 'pnpm install'
+                    }
+                    sh 'pnpm run build'
+                }
+            }
+        }
+
+        stage('mannazu-nextjs 이미지 빌드') {
+            steps {
+                script {
+                    sh "ls -la"
+                    docker.withRegistry("http://${DOCKER_REGISTRY_URL}", "${HARBOR_CREDENTIAL}") {
+                        def customImage = docker.build("mannazo/mannazu-nextjs:${env.BUILD_NUMBER}", "-f CICD/Dockerfile .")
+                        customImage.push()
+                    }
+                }
+            }
+        }
+
+        stage('mannazo-web 업데이트') {
+            steps {
+                script { 
+                    def manifestsRepoUrl = 'https://github.com/mannazo/mannazo-deploy.git'
+                    def manifestsRepoBranch = 'main'
+                    
+                    git credentialsId: "${HARBOR_CREDENTIAL}", url: manifestsRepoUrl, branch: manifestsRepoBranch
+                    sh """
+                        git pull origin main
+                        sed -i 's|harbor.dorong9.com/mannazo/mannazu-nextjs:.*|harbor.dorong9.com/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}|' web/mannazu-web.yaml
+                        git add web/mannazu-web.yaml
+                        git config user.name 'DOLONG9'
+                        git config user.email "${GIT_USER_EMAIL}"
+                        git commit -m "web/mannazu-web.yaml ${currentBuild.number} image versioning"
+                    """
+                    withCredentials([gitUsernamePassword(credentialsId: "${GIT_CREDENTIAL}")]) {
+                        sh "git remote set-url origin https://github.com/mannazo/mannazo-deploy.git" 
+                        sh "git push origin main"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            discordSend title: "Mannazu-nextjs 빌드", 
+                        description: "빌드 성공!!",            
+                        footer: "Jenkins 에서 확인하세요", 
+                        link: env.BUILD_URL, result: currentBuild.currentResult, 
+                        webhookURL: env.DISCORD_WEBHOOK
+            script {
+                // Docker 이미지 삭제
+                sh "docker rmi mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
+                sh "docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
+            }                        
+        }
+        failure {
+            discordSend title: "Mannazu-nextjs 빌드", 
+                        description: "빌드 실패!!",
+                        footer: "Jenkins 에서 확인하세요", 
+                        link: env.BUILD_URL, result: currentBuild.currentResult, 
+                        webhookURL: env.DISCORD_WEBHOOK
+        }
+        always {
+            echo 'Workspace 정리..'
+            sh 'rm -rf **/* !node_modules' // node_modules 디렉토리를 제외하고 정리
+        }
+    }
+}

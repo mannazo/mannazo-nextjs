@@ -91,11 +91,11 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files)
-    const urls = files.map((file) => URL.createObjectURL(file))
-    setFormData((prev) => ({
-      ...prev,
-      imageUrls: [...prev.imageUrls, ...urls],
-    }))
+    // const urls = files.map((file) => URL.createObjectURL(file))
+    // setFormData((prev) => ({
+    //   ...prev,
+    //   imageUrls: [...prev.imageUrls, ...urls],
+    // }))
   }
 
   const handleSubmit = async (e) => {
@@ -152,7 +152,7 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
               <CountryDropdown
                 value={formData.travelNationality}
                 onChange={(val) => handleInputChange('travelNationality', val)}
-                className="w-full rounded border p-2"
+                {...({ className: 'w-full rounded border p-2' } as any)}
               />
 
               <RegionDropdown
@@ -160,6 +160,7 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
                 value={formData.travelCity}
                 onChange={(val) => handleInputChange('travelCity', val)}
                 className="w-full rounded border p-2"
+                {...({ className: 'w-full rounded border p-2' } as any)}
               />
 
               <DateRangePicker

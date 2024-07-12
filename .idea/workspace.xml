@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 여행 추가 폼 구현">
-      <change afterPath="$PROJECT_DIR$/app/users/profile/edit/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/profile/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/settings/edit/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileEditContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/UserProfileEdit.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/settings/SettingsContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/settings/SettingsEditContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/settings/SettingsInterestsSelection.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/profile-picture.jpg" afterDir="false" />
+    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="fix: Provider 세팅 오류 해결">
+      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mannazo-nextjs-secret" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/users/setting/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/settings/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/paths.ts" beforeDir="false" afterPath="$PROJECT_DIR$/constants/paths.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +40,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/mannazo/mannazo-nextjs.git&quot;,
-    &quot;accountId&quot;: &quot;cc5b0382-5624-48a7-b989-158e2b385d38&quot;
+    &quot;url&quot;: &quot;https://github.com/mannazo/mannazo-nextjs&quot;,
+    &quot;accountId&quot;: &quot;e4b1596c-856c-4a3c-8dce-01da52e59595&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -62,8 +54,8 @@
     &quot;repository&quot;: &quot;mannazo-nextjs&quot;
   }
 }</component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/node_modules/.pnpm/react-country-region-selector@3.6.1_prop-types@15.8.1_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-country-region-selector/index.d.ts" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -81,21 +73,21 @@
   "keyToString": {
     "JavaScript Debug.localhost:3000.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat-users2",
-    "last_opened_file_path": "/Users/jeonghuijun/git/mannazo-nextjs/components/users/settings",
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/components/posts/mobile",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.stylelint": "true",
     "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "/Users/joonhoekim/git/mannazo-nextjs/node_modules/eslint",
+    "node.js.selected.package.eslint": "\\Users\\joonhoekim\\git\\mannazo-nextjs\\node_modules\\eslint",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.stylelint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "/Users/jeonghuijun/git/mannazo-nextjs/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "/Users/jeonghuijun/git/mannazo-nextjs/node_modules/typescript/lib",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -128,29 +120,20 @@
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
     </layout>
   </component>
-  <component name="ReactDesignerToolWindowState">
-    <option name="myId2Visible">
-      <map>
-        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
-        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
-        <entry key="com.intellij.reactbuddy.storybook" value="false" />
-      </map>
-    </option>
-  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/components/users/settings" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts\mobile" />
       <recent name="$PROJECT_DIR$/app/posts/mobile" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\desktop" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\tip" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts" />
       <recent name="$PROJECT_DIR$/components/about" />
       <recent name="$PROJECT_DIR$/app/about" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\api\auth" />
+      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunManager">
@@ -160,13 +143,17 @@
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.localhost:3000" />
+        <item itemvalue="JavaScript Debug.localhost:3000" />
+        <item itemvalue="JavaScript Debug.localhost:3000" />
+        <item itemvalue="JavaScript Debug.localhost:3000" />
+        <item itemvalue="JavaScript Debug.localhost:3000" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17890.13" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
       </set>
     </attachedChunks>
   </component>
@@ -184,7 +171,7 @@
       <workItem from="1720543425357" duration="2780000" />
       <workItem from="1720576442604" duration="31894000" />
       <workItem from="1720660456828" duration="4289000" />
-      <workItem from="1720681887609" duration="22047000" />
+      <workItem from="1720750072616" duration="1330000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />
@@ -266,7 +253,31 @@
       <option name="project" value="LOCAL" />
       <updated>1720616585688</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: api 통해 가져온 정보로 카드 구성">
+      <option name="closed" value="true" />
+      <created>1720695156635</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1720695156635</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: community 기능 추가 (composite card 로 피드 구성)">
+      <option name="closed" value="true" />
+      <created>1720702452654</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1720702452654</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: Provider 세팅 오류 해결">
+      <option name="closed" value="true" />
+      <created>1720748418849</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720748418849</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +326,10 @@
     <MESSAGE value="refactor: reformatting + tailwindcss 클래스 정렬" />
     <MESSAGE value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
     <MESSAGE value="feat: 여행 추가 폼 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 여행 추가 폼 구현" />
+    <MESSAGE value="feat: api 통해 가져온 정보로 카드 구성" />
+    <MESSAGE value="feat: community 기능 추가 (composite card 로 피드 구성)" />
+    <MESSAGE value="fix: Provider 세팅 오류 해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Provider 세팅 오류 해결" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
