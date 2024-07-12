@@ -24,7 +24,7 @@ export const AUTH_SIGN_OUT = `${AUTH}/sign-out`
 export const AUTH_SIGN_UP_FORM = `${AUTH}/sign-up-form`
 
 //Profile: 회원정보 조회, 수정, 탈퇴 등
-export const PROFILE = '/profile'
+export const PROFILE = '/users/profile'
 export const PROFILE_VIEW = `${PROFILE}/:id`
 
 //MyPage: 나만 보는 개인정보 편집
