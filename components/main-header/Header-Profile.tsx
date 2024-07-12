@@ -38,13 +38,13 @@ export default function HeaderProfile() {
           {profileMenu && (
             <div className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg">
               <Link
-                href="/profile"
+                href="/users/profile"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 Profile
               </Link>
               <Link
-                href="/settings"
+                href="/users/settings"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 Settings
