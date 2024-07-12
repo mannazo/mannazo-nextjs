@@ -10,7 +10,11 @@ import {
   FaUtensils,
 } from 'react-icons/fa'
 
-const ShortFormMobileCard = ({ travelerPost }) => {
+interface ShortFormMobileCardProps {
+  traveler?: any
+}
+
+const ShortFormMobileCard = ({ traveler }) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleExpand = () => {
@@ -30,8 +34,8 @@ const ShortFormMobileCard = ({ travelerPost }) => {
   }
 
   const backgroundImageUrl =
-    travelerPost.imageUrls && travelerPost.imageUrls.length > 0
-      ? travelerPost.imageUrls[0]
+    traveler.imageUrls && traveler.imageUrls.length > 0
+      ? traveler.imageUrls[0]
       : getRandomImage()
 
   return (
@@ -74,17 +78,15 @@ const ShortFormMobileCard = ({ travelerPost }) => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-white">
-              {travelerPost.travelCity}
+              {traveler.travelCity}
             </h2>
-            <p className="text-sm text-white">
-              {travelerPost.travelNationality}
-            </p>
+            <p className="text-sm text-white">{traveler.travelNationality}</p>
           </div>
           <div className="flex items-center rounded-full bg-white bg-opacity-20 px-3 py-1">
             <FaCalendarAlt className="mr-1 text-yellow-400" />
             <span className="font-bold text-white">
-              {formatDate(travelerPost.travelStartDate)} -{' '}
-              {formatDate(travelerPost.travelEndDate)}
+              {formatDate(traveler.travelStartDate)} -{' '}
+              {formatDate(traveler.travelEndDate)}
             </span>
           </div>
         </div>
@@ -111,9 +113,9 @@ const ShortFormMobileCard = ({ travelerPost }) => {
                 size="lg"
               />
               <div className="ml-3">
-                <h2 className="text-xl font-bold">{travelerPost.travelCity}</h2>
+                <h2 className="text-xl font-bold">{traveler.travelCity}</h2>
                 <p className="text-sm text-gray-500">
-                  {travelerPost.travelNationality}
+                  {traveler.travelNationality}
                 </p>
               </div>
             </div>
@@ -123,7 +125,7 @@ const ShortFormMobileCard = ({ travelerPost }) => {
                 <FaMapMarkerAlt className="mr-2" /> Destination
               </h4>
               <p className="text-gray-600">
-                {travelerPost.travelNationality} - {travelerPost.travelCity}
+                {traveler.travelNationality} - {traveler.travelCity}
               </p>
             </div>
 
@@ -132,8 +134,8 @@ const ShortFormMobileCard = ({ travelerPost }) => {
                 <FaCalendarAlt className="mr-2" /> Travel Dates
               </h4>
               <p className="text-gray-600">
-                {formatDate(travelerPost.travelStartDate)} -{' '}
-                {formatDate(travelerPost.travelEndDate)}
+                {formatDate(traveler.travelStartDate)} -{' '}
+                {formatDate(traveler.travelEndDate)}
               </p>
             </div>
 
@@ -142,7 +144,7 @@ const ShortFormMobileCard = ({ travelerPost }) => {
                 <FaUserFriends className="mr-2" /> Travel Style
               </h4>
               <div className="flex flex-wrap gap-2">
-                {travelerPost.travelStyle.split(',').map((style, index) => (
+                {traveler.travelStyle.split(',').map((style, index) => (
                   <span
                     key={index}
                     className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800"
@@ -158,7 +160,7 @@ const ShortFormMobileCard = ({ travelerPost }) => {
                 <FaUtensils className="mr-2" /> Travel Purpose
               </h4>
               <div className="flex flex-wrap gap-2">
-                {travelerPost.travelPurpose.split(',').map((purpose, index) => (
+                {traveler.travelPurpose.split(',').map((purpose, index) => (
                   <span
                     key={index}
                     className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800"
@@ -171,12 +173,12 @@ const ShortFormMobileCard = ({ travelerPost }) => {
 
             <div className="mb-4">
               <h4 className="mb-2 font-semibold">Preferred Gender</h4>
-              <p className="text-gray-600">{travelerPost.preferredGender}</p>
+              <p className="text-gray-600">{traveler.preferredGender}</p>
             </div>
 
             <div className="mb-4">
               <h4 className="mb-2 font-semibold">Travel Status</h4>
-              <p className="text-gray-600">{travelerPost.travelStatus}</p>
+              <p className="text-gray-600">{traveler.travelStatus}</p>
             </div>
           </motion.div>
         )}

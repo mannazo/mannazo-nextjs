@@ -35,8 +35,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# env files
+/.env*
+# submodules are allowed to commit & push
+!mannazo-nextjs-secret/.env*
 
 # vercel
 .vercel
