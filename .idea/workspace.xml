@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="feat: 여행 추가 폼 구현">
-      <change afterPath="$PROJECT_DIR$/.npmrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/next-auth.d.ts" afterDir="false" />
+    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="fix: Provider 세팅 오류 해결">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/api/auth/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/posts/TravelForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/posts/TravelForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/provider/Providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/provider/Providers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/sign-up/SignUpForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature" />
+        <entry key="$PROJECT_DIR$" value="6-feat-post-feed" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,22 +40,25 @@
     &quot;assignee&quot;: &quot;joonhoekim&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/mannazo/mannazo-nextjs&quot;,
-    &quot;accountId&quot;: &quot;e419a69d-21e3-487e-bcea-fabc1bfd6ed1&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/mannazo/mannazo-nextjs",
+    "accountId": "e4b1596c-856c-4a3c-8dce-01da52e59595"
   },
-  &quot;recentNewPullRequestHead&quot;: {
-    &quot;server&quot;: {
-      &quot;useHttp&quot;: false,
-      &quot;host&quot;: &quot;github.com&quot;,
-      &quot;port&quot;: null,
-      &quot;suffix&quot;: null
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
     },
-    &quot;owner&quot;: &quot;mannazo&quot;,
-    &quot;repository&quot;: &quot;mannazo-nextjs&quot;
+    "owner": "mannazo",
+    "repository": "mannazo-nextjs"
   }
-}</component>
+}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/node_modules/.pnpm/react-country-region-selector@3.6.1_prop-types@15.8.1_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-country-region-selector/index.d.ts" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -70,7 +75,7 @@
   &quot;keyToString&quot;: {
     &quot;JavaScript Debug.localhost:3000.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;5-feat-post-form&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/jh/git/mannazo-nextjs/components/posts/mobile&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
@@ -140,6 +145,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.localhost:3000" />
+        <item itemvalue="JavaScript Debug.localhost:3000" />
       </list>
     </recent_temporary>
   </component>
@@ -164,6 +170,7 @@
       <workItem from="1720543425357" duration="2780000" />
       <workItem from="1720576442604" duration="31894000" />
       <workItem from="1720660456828" duration="4289000" />
+      <workItem from="1720750072616" duration="1330000" />
     </task>
     <task id="LOCAL-00001" summary="chore: tsconfig, eslint 설정">
       <option name="closed" value="true" />
@@ -245,7 +252,31 @@
       <option name="project" value="LOCAL" />
       <updated>1720616585688</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: api 통해 가져온 정보로 카드 구성">
+      <option name="closed" value="true" />
+      <created>1720695156635</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1720695156635</updated>
+    </task>
+    <task id="LOCAL-00012" summary="feat: community 기능 추가 (composite card 로 피드 구성)">
+      <option name="closed" value="true" />
+      <created>1720702452654</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1720702452654</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: Provider 세팅 오류 해결">
+      <option name="closed" value="true" />
+      <created>1720748418849</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720748418849</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +325,10 @@
     <MESSAGE value="refactor: reformatting + tailwindcss 클래스 정렬" />
     <MESSAGE value="feat: 로그인 폼 서버와 동작하도록 변경함. 차후 서버액션으로 변경 필요." />
     <MESSAGE value="feat: 여행 추가 폼 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 여행 추가 폼 구현" />
+    <MESSAGE value="feat: api 통해 가져온 정보로 카드 구성" />
+    <MESSAGE value="feat: community 기능 추가 (composite card 로 피드 구성)" />
+    <MESSAGE value="fix: Provider 세팅 오류 해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: Provider 세팅 오류 해결" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

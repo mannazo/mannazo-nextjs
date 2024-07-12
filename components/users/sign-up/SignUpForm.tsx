@@ -61,6 +61,7 @@ export default function SignUpForm({
     if (selectedFile) {
       const reader = new FileReader()
       reader.onloadend = () => {
+        // @ts-ignore
         setPreviewUrl(reader.result)
       }
       reader.readAsDataURL(selectedFile)
@@ -264,7 +265,10 @@ export default function SignUpForm({
                   onChange={(val) =>
                     setUserInfo((prev) => ({ ...prev, nationality: val }))
                   }
-                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  {...({
+                    className:
+                      'mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm',
+                  } as any)}
                 />
               </div>
 
@@ -282,7 +286,10 @@ export default function SignUpForm({
                   onChange={(val) =>
                     setUserInfo((prev) => ({ ...prev, city: val }))
                   }
-                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  {...({
+                    className:
+                      'mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm',
+                  } as any)}
                 />
               </div>
             </div>

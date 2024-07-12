@@ -9,7 +9,9 @@ import { ThemeProviderProps } from 'next-themes/dist/types'
 
 export interface ProvidersProps {
   children: React.ReactNode
-  themeProps?: ThemeProviderProps
+  // 버전 불일치 문제?
+  // themeProps?: ThemeProviderProps
+  themeProps?: Partial<ThemeProviderProps>
 }
 
 export function Providers({ children, themeProps }: ProvidersProps) {
