@@ -14,21 +14,27 @@ pipeline {
     }
 
     stages {
-        stage('Setup pnpm') {
+        
+        stage('.env.loacl 추가')
             steps {
-                sh 'npm install -g pnpm@8.15.4' // 최신 안정 버전의 pnpm 설치
+                script {
+                    if (paramas.BUILD_FILE) {
+                        writeFile file: '.env.local', text: readFile(params.BUILD_FILE)
+                    }
+                }
             }
-        }
 
-        stage('Install Dependencies') {
+        stage('Dependencies 설치') {
             steps {
-                sh 'pnpm install' 
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'pnpm run build'
+                script {
+                    // 캐시 디렉토리 생성
+                    if (fileExists('node_modules')) {
+                        echo 'Using cached node_modules directory'
+                    } else {
+                        sh 'pnpm install'
+                    }
+                    sh 'pnpm run build'
+                }
             }                
         }
 
@@ -71,19 +77,26 @@ pipeline {
     post {
         success {
             discordSend title: "Mannazu-nextjs 빌드", 
-                        footer: "빌드가 성공했습니다.", 
+                        description: "빌드 성공!!",            
+                        footer: "Jenkins 에서 확인하세요", 
                         link: env.BUILD_URL, result: currentBuild.currentResult, 
                         webhookURL: env.DISCORD_WEBHOOK
+            script {
+                // Docker image 삭제 
+                sh "docker rmi mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
+                sh "docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
+            }                        
         }
         failure {
             discordSend title: "Mannazu-nextjs 빌드", 
-                        footer: "빌드가 실패했습니다.", 
+                        description: "빌드 실패!!",
+                        footer: "Jenkins 에서 확인하세요", 
                         link: env.BUILD_URL, result: currentBuild.currentResult, 
                         webhookURL: env.DISCORD_WEBHOOK
         }
         always {
             echo 'Workspace 정리..'
-            deleteDir()
+            sh 'rm -rf **/* !node_modules' // node_modules 디렉토리를 제외하고 정리
         }
     }
 }
