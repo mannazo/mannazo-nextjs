@@ -1,5 +1,4 @@
 import TripButton from '@/components/about/TripButton'
-import classes from '../../components/about/AnimatedTitle.module.css'
 import AnimatedTitle from '@/components/about/AnimatedTitle'
 
 const FeatureCard = ({ icon, title, description }) => (

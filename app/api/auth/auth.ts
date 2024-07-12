@@ -1,4 +1,5 @@
 import type { NextAuthOptions } from 'next-auth'
+
 import KakaoProvider from 'next-auth/providers/kakao'
 import NaverProvider from 'next-auth/providers/naver'
 import GoogleProvider from 'next-auth/providers/google'
@@ -51,6 +52,8 @@ export const authOptions: NextAuthOptions = {
             }
           )
 
+          console.log(response)
+
           user.additionalInfo = {
             firstTimeUser: response.data.firstTimeUser,
             serverUserId: response.data.userId,
@@ -79,6 +82,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token.additionalInfo) {
+        // @ts-ignore
         session.user.additionalInfo = token.additionalInfo
       }
       return session

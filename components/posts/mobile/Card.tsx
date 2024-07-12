@@ -4,11 +4,15 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Avatar, Button } from '@nextui-org/react'
 import {
-  FaStar,
-  FaLanguage,
+  FaCalendarAlt,
   FaMapMarkerAlt,
   FaUserFriends,
+  FaUtensils,
 } from 'react-icons/fa'
+
+interface ShortFormMobileCardProps {
+  traveler?: any
+}
 
 const ShortFormMobileCard = ({ traveler }) => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -17,16 +21,32 @@ const ShortFormMobileCard = ({ traveler }) => {
     setIsExpanded(!isExpanded)
   }
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+  }
+
+  // 랜덤 이미지 URL 생성 함수
+  const getRandomImage = () => {
+    // 랜덤 ID를 생성하여 매번 다른 이미지가 로드되도록 함
+    const randomId = Math.floor(Math.random() * 1000)
+    return `https://picsum.photos/seed/${randomId}/800/600`
+  }
+
+  const backgroundImageUrl =
+    traveler.imageUrls && traveler.imageUrls.length > 0
+      ? traveler.imageUrls[0]
+      : getRandomImage()
+
   return (
     <motion.div
-      className="w-full h-screen relative overflow-hidden"
+      className="relative h-screen w-full overflow-hidden"
       onClick={toggleExpand}
     >
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          // backgroundImage: `url(https://source.unsplash.com/random/800x600?travel)`,
-          backgroundImage: `url(https://picsum.photos/800/600)`,
+          backgroundImage: `url(${backgroundImageUrl})`,
         }}
         animate={{
           scale: isExpanded ? 0.2 : 1,
@@ -48,22 +68,25 @@ const ShortFormMobileCard = ({ traveler }) => {
       />
 
       <motion.div
-        className="absolute top-0 left-0 right-0 p-6"
+        className="absolute left-0 right-0 top-0 p-6"
         animate={{
           y: isExpanded ? '100%' : 0,
           opacity: isExpanded ? 0 : 1,
         }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-white">{traveler.name}</h2>
-            <p className="text-sm text-white">{traveler.nationality}</p>
+            <h2 className="text-2xl font-bold text-white">
+              {traveler.travelCity}
+            </h2>
+            <p className="text-sm text-white">{traveler.travelNationality}</p>
           </div>
-          <div className="flex items-center bg-white bg-opacity-20 rounded-full px-3 py-1">
-            <FaStar className="text-yellow-400 mr-1" />
+          <div className="flex items-center rounded-full bg-white bg-opacity-20 px-3 py-1">
+            <FaCalendarAlt className="mr-1 text-yellow-400" />
             <span className="font-bold text-white">
-              {traveler.averageRating.toFixed(1)}
+              {formatDate(traveler.travelStartDate)} -{' '}
+              {formatDate(traveler.travelEndDate)}
             </span>
           </div>
         </div>
@@ -72,7 +95,7 @@ const ShortFormMobileCard = ({ traveler }) => {
       <AnimatePresence>
         {isExpanded && (
           <motion.div
-            className="absolute inset-0 bg-white p-6 overflow-y-auto"
+            className="absolute inset-0 overflow-y-auto bg-white p-6"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -80,56 +103,82 @@ const ShortFormMobileCard = ({ traveler }) => {
           >
             <div className="mb-4 flex items-center">
               <Avatar
-                src={`https://i.pravatar.cc/150?u=${traveler.id}`}
+                // src={
+                //   travelerPost.imageUrls[1] ||
+                //   `https://i.pravatar.cc/150?u=${travelerPost.userId}`
+                // }
+                src={
+                  'https://cdn3.iconfinder.com/data/icons/random-icon-set/512/user-512.png'
+                }
                 size="lg"
               />
               <div className="ml-3">
-                <h2 className="text-xl font-bold">{traveler.name}</h2>
-                <p className="text-sm text-gray-500">{traveler.nationality}</p>
+                <h2 className="text-xl font-bold">{traveler.travelCity}</h2>
+                <p className="text-sm text-gray-500">
+                  {traveler.travelNationality}
+                </p>
               </div>
             </div>
 
-            <p className="text-gray-700 mb-4">{traveler.introduction}</p>
-
             <div className="mb-4">
-              <h4 className="font-semibold mb-2 flex items-center">
+              <h4 className="mb-2 flex items-center font-semibold">
                 <FaMapMarkerAlt className="mr-2" /> Destination
               </h4>
               <p className="text-gray-600">
-                {traveler.destinationCountry} - {traveler.destinationCity}
+                {traveler.travelNationality} - {traveler.travelCity}
               </p>
             </div>
 
             <div className="mb-4">
-              <h4 className="font-semibold mb-2 flex items-center">
-                <FaUserFriends className="mr-2" /> Interests
+              <h4 className="mb-2 flex items-center font-semibold">
+                <FaCalendarAlt className="mr-2" /> Travel Dates
+              </h4>
+              <p className="text-gray-600">
+                {formatDate(traveler.travelStartDate)} -{' '}
+                {formatDate(traveler.travelEndDate)}
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <h4 className="mb-2 flex items-center font-semibold">
+                <FaUserFriends className="mr-2" /> Travel Style
               </h4>
               <div className="flex flex-wrap gap-2">
-                {traveler.preferredTags.map((tag, index) => (
+                {traveler.travelStyle.split(',').map((style, index) => (
                   <span
                     key={index}
-                    className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
+                    className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800"
                   >
-                    {tag}
+                    {style.trim()}
                   </span>
                 ))}
               </div>
             </div>
 
             <div className="mb-4">
-              <h4 className="font-semibold mb-2 flex items-center">
-                <FaLanguage className="mr-2" /> Languages
+              <h4 className="mb-2 flex items-center font-semibold">
+                <FaUtensils className="mr-2" /> Travel Purpose
               </h4>
               <div className="flex flex-wrap gap-2">
-                {traveler.languages.map((lang, index) => (
+                {traveler.travelPurpose.split(',').map((purpose, index) => (
                   <span
                     key={index}
-                    className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full"
+                    className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800"
                   >
-                    {lang}
+                    {purpose.trim()}
                   </span>
                 ))}
               </div>
+            </div>
+
+            <div className="mb-4">
+              <h4 className="mb-2 font-semibold">Preferred Gender</h4>
+              <p className="text-gray-600">{traveler.preferredGender}</p>
+            </div>
+
+            <div className="mb-4">
+              <h4 className="mb-2 font-semibold">Travel Status</h4>
+              <p className="text-gray-600">{traveler.travelStatus}</p>
             </div>
           </motion.div>
         )}
