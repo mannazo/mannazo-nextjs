@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_REGISTRY_URL = "${params.harbor_url}"
-        HARBOR_CREDENTAIL = "${params.harbor_credential}"
+        HARBOR_CREDENTIAL = "${params.harbor_credential}"
         GIT_USER_EMAIL = "${params.git_user_email}"
         GIT_CREDENTIAL = "${params.github_credential}"
         DISCORD_WEBHOOK = credentials("MANNAZU-DISCORD_WEBHOOK")
@@ -14,15 +14,15 @@ pipeline {
     }
 
     stages {
-        
-        stage('.env.loacl 추가')
+        stage('.env.local 추가') {
             steps {
                 script {
-                    if (paramas.BUILD_FILE) {
+                    if (params.BUILD_FILE) {
                         writeFile file: '.env.local', text: readFile(params.BUILD_FILE)
                     }
                 }
             }
+        }
 
         stage('Dependencies 설치') {
             steps {
@@ -35,7 +35,7 @@ pipeline {
                     }
                     sh 'pnpm run build'
                 }
-            }                
+            }
         }
 
         stage('mannazu-nextjs 이미지 빌드') {
@@ -63,11 +63,11 @@ pipeline {
                         git add web/mannazu-web.yaml
                         git config user.name 'DOLONG9'
                         git config user.email "${GIT_USER_EMAIL}"
-                        git commit -m 'web/mannazu-web.yaml ${currentBuild.number} image versioning'
+                        git commit -m "web/mannazu-web.yaml ${currentBuild.number} image versioning"
                     """
                     withCredentials([gitUsernamePassword(credentialsId: "${GIT_CREDENTIAL}")]) {
-                       sh "git remote set-url origin https://github.com/mannazo/mannazo-deploy.git" 
-                       sh "git push origin main"
+                        sh "git remote set-url origin https://github.com/mannazo/mannazo-deploy.git" 
+                        sh "git push origin main"
                     }
                 }
             }
@@ -82,7 +82,7 @@ pipeline {
                         link: env.BUILD_URL, result: currentBuild.currentResult, 
                         webhookURL: env.DISCORD_WEBHOOK
             script {
-                // Docker image 삭제 
+                // Docker 이미지 삭제
                 sh "docker rmi mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
                 sh "docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
             }                        
