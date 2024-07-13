@@ -10,35 +10,47 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS-20.11.1' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
+        nodejs 'NodeJS-21.4.0' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
     }
 
     stages {
-        stage('.env.local 추가') {
+        stage('의존성 설치') {
             steps {
                 script {
-                    if (params.BUILD_FILE) {
-                        writeFile file: '.env.local', text: readFile(params.BUILD_FILE)
+                    // package.json의 해시 계산
+                    def currentHash = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
+                    def previousHash = ""
+                    
+                    // 이전 해시 읽기 (파일이 없으면 빈 문자열)
+                    if (fileExists('node_modules/.package-json-hash')) {
+                        previousHash = readFile('node_modules/.package-json-hash').trim()
                     }
-                }
-            }
-        }
 
-        stage('Dependencies 설치') {
-            steps {
-                script {
-                    // 캐시 디렉토리 생성
-                    if (fileExists('node_modules')) {
-                        echo 'Using cached node_modules directory'
-                    } else {
+                    if (currentHash != previousHash || !fileExists('node_modules')) {
+                        echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
+                        sh 'npm install -g pnpm'
+                        sh 'rm -rf node_modules'
                         sh 'pnpm install'
+                        // 새 해시 저장
+                        writeFile file: 'node_modules/.package-json-hash', text: currentHash
+                    } else {
+                        echo '변경 없음. 기존 node_modules를 사용합니다.'
                     }
-                    sh 'pnpm run build'
                 }
             }
         }
 
-        stage('mannazu-nextjs 이미지 빌드') {
+        stage('빌드') {
+            steps {
+                script {
+                    echo '빌드 시작...'
+                    sh 'pnpm run build' // Next.js 빌드 실행
+                }
+            }
+        }
+
+
+        stage('도커 이미지 빌드') {
             steps {
                 script {
                     sh "ls -la"
@@ -96,7 +108,8 @@ pipeline {
         }
         always {
             echo 'Workspace 정리..'
-            sh 'rm -rf **/* !node_modules' // node_modules 디렉토리를 제외하고 정리
+            // 빌드 결과물만 정리하고 node_modules는 유지
+            sh 'rm -rf !(node_modules)'
         }
     }
 }
