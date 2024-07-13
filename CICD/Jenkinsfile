@@ -36,7 +36,7 @@ pipeline {
                         echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
                         sh 'rm -rf node_modules'
                         sh 'npm install -g pnpm'
-                        sh 'pnpm install'
+                        sh 'pnpm install @nextui-org/switch 2.0.31'
                         sh 'nextui add --all'
                         // 새 해시 저장
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
@@ -45,7 +45,7 @@ pipeline {
                         sh 'rm -rf node_modules'
                         sh 'npm install nextui-cli -g'
                         sh 'npm install -g pnpm'
-                        sh 'pnpm install'
+                        sh 'pnpm install @nextui-org/switch 2.0.31'
                         sh 'nextui add --all'
                     }
                 }
