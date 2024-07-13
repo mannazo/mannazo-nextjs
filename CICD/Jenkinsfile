@@ -14,40 +14,30 @@ pipeline {
     }
 
     stages {
-        stage('.env.local 추가') {
-            steps {
-                script {
-                    if (params.BUILD_FILE) {
-                        writeFile file: '.env.local', text: readFile(params.BUILD_FILE)
+        stages {
+            stage('의존성 설치') {
+                steps {
+                    script {
+                        // package.json의 해시 계산
+                        def currentHash = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
+                        def previousHash = ""
+                        
+                        // 이전 해시 읽기 (파일이 없으면 빈 문자열)
+                        if (fileExists('node_modules/.package-json-hash')) {
+                            previousHash = readFile('node_modules/.package-json-hash').trim()
+                        }
+
+                        if (currentHash != previousHash || !fileExists('node_modules')) {
+                            echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
+                            sh 'pnpm install'
+                            // 새 해시 저장
+                            writeFile file: 'node_modules/.package-json-hash', text: currentHash
+                        } else {
+                            echo '변경 없음. 기존 node_modules를 사용합니다.'
+                        }
                     }
                 }
             }
-        }
-
-        stage('의존성 설치') {
-            steps {
-                script {
-                    def nodeModulesExists = fileExists('node_modules')
-                    def packageJsonChanged = false
-
-                    if (nodeModulesExists) {
-                        // 현재 package.json과 node_modules 내의 .package-json.md5 비교
-                        def currentMd5 = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
-                        def previousMd5 = sh(script: "cat node_modules/.package-json.md5 2>/dev/null || echo ''", returnStdout: true).trim()
-                        packageJsonChanged = (currentMd5 != previousMd5)
-                    }
-
-                    if (!nodeModulesExists || packageJsonChanged) {
-                        echo 'node_modules가 없거나 package.json이 변경되었습니다. 의존성을 설치합니다.'
-                        sh 'pnpm install'
-                        // 새로운 package.json의 md5 저장
-                        sh 'md5sum package.json | cut -d" " -f1 > node_modules/.package-json.md5'
-                    } else {
-                        echo '기존 node_modules를 사용합니다.'
-                    }
-                }
-            }
-        }
 
         stage('mannazu-nextjs 이미지 빌드') {
             steps {
@@ -108,7 +98,7 @@ pipeline {
         always {
             echo 'Workspace 정리..'
             // 빌드 결과물만 정리하고 node_modules는 유지
-            sh 'rm -rf .next .env.local'
+            sh 'rm -rf .next'
         }
     }
 }
