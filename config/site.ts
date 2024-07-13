@@ -9,50 +9,42 @@ export const siteConfig = {
       href: '/',
     },
     {
-      label: 'Docs',
-      href: '/docs',
+      label: 'Mobile',
+      href: '/posts/mobile',
     },
     {
-      label: 'Pricing',
-      href: '/pricing',
+      label: 'Desktop',
+      href: '/posts/desktop',
     },
     {
-      label: 'Blog',
-      href: '/blog',
+      label: 'Community',
+      href: '/community',
     },
     {
-      label: 'About',
-      href: '/about',
+      label: 'Shop',
+      href: '/shop',
     },
   ],
   navMenuItems: [
     {
+      label: 'Posts',
+      href: '/posts/mobile',
+    },
+    {
+      label: 'Community',
+      href: '/community',
+    },
+    {
+      label: 'Shop',
+      href: '/shop',
+    },
+    {
       label: 'Profile',
-      href: '/profile',
-    },
-    {
-      label: 'Dashboard',
-      href: '/dashboard',
-    },
-    {
-      label: 'Projects',
-      href: '/projects',
-    },
-    {
-      label: 'Team',
-      href: '/team',
-    },
-    {
-      label: 'Calendar',
-      href: '/calendar',
+      href: '/users/profile',
     },
     {
       label: 'Settings',
-      href: '/settings',
-    },
-    {
-      label: 'Help & Feedback',
-      href: '/help-feedback',
+      href: '/users/',
     },
     {
       label: 'Logout',
@@ -60,10 +52,10 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: 'https://github.com/nextui-org/nextui',
-    twitter: 'https://twitter.com/getnextui',
-    docs: 'https://nextui.org',
-    discord: 'https://discord.gg/9b6yyZKmH4',
-    sponsor: 'https://patreon.com/jrgarciadev',
+    github: 'https://github.com/mannazo',
+    // twitter: 'https://twitter.com/getnextui',
+    // docs: 'https://nextui.org',
+    // discord: 'https://discord.gg/9b6yyZKmH4',
+    // sponsor: 'https://patreon.com/jrgarciadev',
   },
 }
