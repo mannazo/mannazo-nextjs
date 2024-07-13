@@ -8,7 +8,8 @@ WORKDIR /app
 COPY .next ./.next
 COPY public ./public
 COPY package.json ./
-COPY pnpm-lock.yaml ./  # pnpm lock 파일 추가
+# pnpm lock 파일 추가
+COPY pnpm-lock.yaml ./
 
 # 포트 설정
 EXPOSE 3000
