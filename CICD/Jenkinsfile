@@ -14,27 +14,25 @@ pipeline {
     }
 
     stages {
-        stages {
-            stage('의존성 설치') {
-                steps {
-                    script {
-                        // package.json의 해시 계산
-                        def currentHash = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
-                        def previousHash = ""
-                        
-                        // 이전 해시 읽기 (파일이 없으면 빈 문자열)
-                        if (fileExists('node_modules/.package-json-hash')) {
-                            previousHash = readFile('node_modules/.package-json-hash').trim()
-                        }
+        stage('의존성 설치') {
+            steps {
+                script {
+                    // package.json의 해시 계산
+                    def currentHash = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
+                    def previousHash = ""
+                    
+                    // 이전 해시 읽기 (파일이 없으면 빈 문자열)
+                    if (fileExists('node_modules/.package-json-hash')) {
+                        previousHash = readFile('node_modules/.package-json-hash').trim()
+                    }
 
-                        if (currentHash != previousHash || !fileExists('node_modules')) {
-                            echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
-                            sh 'pnpm install'
-                            // 새 해시 저장
-                            writeFile file: 'node_modules/.package-json-hash', text: currentHash
-                        } else {
-                            echo '변경 없음. 기존 node_modules를 사용합니다.'
-                        }
+                    if (currentHash != previousHash || !fileExists('node_modules')) {
+                        echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
+                        sh 'pnpm install'
+                        // 새 해시 저장
+                        writeFile file: 'node_modules/.package-json-hash', text: currentHash
+                    } else {
+                        echo '변경 없음. 기존 node_modules를 사용합니다.'
                     }
                 }
             }
