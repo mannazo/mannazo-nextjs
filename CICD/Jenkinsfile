@@ -28,7 +28,9 @@ pipeline {
 
                     if (currentHash != previousHash || !fileExists('node_modules')) {
                         echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
-                        sh 'pnpm install'
+                        sh 'npm install -g pnpm' // pnpm 설치
+                        sh 'rm -rf !(node_modules)' // node_modules를 제외한 모든 파일 삭제
+                        sh 'pnpm install' // 새로운 의존성 설치
                         // 새 해시 저장
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
                     } else {
@@ -38,7 +40,16 @@ pipeline {
             }
         }
 
-        stage('mannazu-nextjs 이미지 빌드') {
+        stage('pnpm run build') {
+            steps {
+                script {
+                    echo '빌드 시작...'
+                    sh 'pnpm run build' // Next.js 빌드 실행
+                }
+            }
+        }
+
+        stage('도커 이미지 빌드') {
             steps {
                 script {
                     sh "ls -la"
