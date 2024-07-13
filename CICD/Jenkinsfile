@@ -41,6 +41,9 @@ pipeline {
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
                     } else {
                         echo '변경 없음. 기존 node_modules를 사용합니다.'
+                        sh 'npm install -g pnpm'
+                        sh 'rm -rf node_modules'
+                        sh 'pnpm install'
                     }
                 }
             }
