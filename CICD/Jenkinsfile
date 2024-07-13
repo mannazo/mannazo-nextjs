@@ -37,7 +37,7 @@ pipeline {
                         sh 'npm install -g pnpm'
                         sh 'rm -rf node_modules'
                         // nextui-cli를 전역으로 설치
-                        sh 'pnpm add nextui-cli -g'
+                        sh 'npm install nextui-cli -g'
                         sh 'pnpm install --force'
                         // 새 해시 저장
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
