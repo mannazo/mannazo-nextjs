@@ -37,6 +37,7 @@ pipeline {
                         sh 'rm -rf node_modules'
                         sh 'npm install -g pnpm'
                         sh 'pnpm install'
+                        sh 'nextui add --all'
                         // 새 해시 저장
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
                     } else {
@@ -45,6 +46,7 @@ pipeline {
                         sh 'npm install nextui-cli -g'
                         sh 'npm install -g pnpm'
                         sh 'pnpm install'
+                        sh 'nextui add --all'
                     }
                 }
             }
