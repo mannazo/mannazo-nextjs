@@ -34,11 +34,12 @@ pipeline {
 
                     if (currentHash != previousHash || !fileExists('node_modules')) {
                         echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
-                        sh 'npm install -g pnpm'
+                        // sh 'npm install -g pnpm'
                         sh 'rm -rf node_modules'
                         // nextui-cli를 전역으로 설치
-                        sh 'npm install nextui-cli -g'
-                        sh 'pnpm install --force'
+                        sh 'npm install -g nextui-cli'
+                        // 명시된 의존성 전체 설치
+                        sh 'npm install'
                         // 새 해시 저장
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
                     } else {
@@ -52,7 +53,8 @@ pipeline {
             steps {
                 script {
                     echo '빌드 시작...'
-                    sh 'pnpm run build' // Next.js 빌드 실행
+                    // pnpm, npm 모두 set NEXT_DISABLE_TYPESCRIPT=1 && next build --no-lint 스크립트의 축약어
+                    sh 'npm run build' // Next.js 빌드 실행
                 }
             }
         }
