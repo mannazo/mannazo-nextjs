@@ -34,8 +34,8 @@ pipeline {
 
                     if (currentHash != previousHash || !fileExists('node_modules')) {
                         echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
-                        sh 'npm install -g pnpm'
                         sh 'rm -rf node_modules'
+                        sh 'npm install -g pnpm'
                         sh 'pnpm install'
                         // 새 해시 저장
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
