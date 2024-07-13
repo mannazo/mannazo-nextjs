@@ -10,7 +10,7 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS-20.11.1' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
+        nodejs 'NodeJS-21.4.0' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
     }
 
     stages {
