@@ -6,6 +6,7 @@ import { Providers } from '@/components/provider/Providers'
 import { siteConfig } from '@/config/site'
 import clsx from 'clsx'
 import { fontSans } from '@/config/fonts'
+import { Navbar } from '@/components/header/Navbar'
 
 export const metadata: Metadata = {
   title: {
@@ -35,12 +36,13 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          'min-h-screen bg-background font-sans antialiased',
+          'h-screen min-h-screen bg-background font-sans antialiased',
           fontSans.variable
         )}
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'system' }}>
-          <Header />
+          <Navbar />
+          {/*<Header />*/}
           {children}
         </Providers>
       </body>
