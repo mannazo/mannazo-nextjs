@@ -38,6 +38,7 @@ pipeline {
                     }
                 }
             }
+        }
 
         stage('mannazu-nextjs 이미지 빌드') {
             steps {
