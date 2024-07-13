@@ -24,16 +24,27 @@ pipeline {
             }
         }
 
-        stage('Dependencies 설치') {
+        stage('의존성 설치') {
             steps {
                 script {
-                    // 캐시 디렉토리 생성
-                    if (fileExists('node_modules')) {
-                        echo 'Using cached node_modules directory'
-                    } else {
-                        sh 'pnpm install'
+                    def nodeModulesExists = fileExists('node_modules')
+                    def packageJsonChanged = false
+
+                    if (nodeModulesExists) {
+                        // 현재 package.json과 node_modules 내의 .package-json.md5 비교
+                        def currentMd5 = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
+                        def previousMd5 = sh(script: "cat node_modules/.package-json.md5 2>/dev/null || echo ''", returnStdout: true).trim()
+                        packageJsonChanged = (currentMd5 != previousMd5)
                     }
-                    sh 'pnpm run build'
+
+                    if (!nodeModulesExists || packageJsonChanged) {
+                        echo 'node_modules가 없거나 package.json이 변경되었습니다. 의존성을 설치합니다.'
+                        sh 'pnpm install'
+                        // 새로운 package.json의 md5 저장
+                        sh 'md5sum package.json | cut -d" " -f1 > node_modules/.package-json.md5'
+                    } else {
+                        echo '기존 node_modules를 사용합니다.'
+                    }
                 }
             }
         }
@@ -96,7 +107,8 @@ pipeline {
         }
         always {
             echo 'Workspace 정리..'
-            sh 'rm -rf **/* !node_modules' // node_modules 디렉토리를 제외하고 정리
+            // 빌드 결과물만 정리하고 node_modules는 유지
+            sh 'rm -rf .next .env.local'
         }
     }
 }
