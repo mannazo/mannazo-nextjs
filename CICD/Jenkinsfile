@@ -17,6 +17,12 @@ pipeline {
         stage('의존성 설치') {
             steps {
                 script {
+                    // Discord 빌드 시작 메시지 보내기
+                    discordSend title: "Mannazu-nextjs", 
+                                description: "빌드 시작!!",
+                                link: env.BUILD_URL, result: currentBuild.currentResult, 
+                                webhookURL: env.DISCORD_WEBHOOK
+
                     // package.json의 해시 계산
                     def currentHash = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
                     def previousHash = ""

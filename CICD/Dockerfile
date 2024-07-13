@@ -8,7 +8,7 @@ WORKDIR /app
 COPY .next ./.next
 COPY public ./public
 COPY package.json ./
-COPY next.config.js ./  # next.config.js가 있다면 복사
+COPY pnpm-lock.yaml ./  # pnpm lock 파일 추가
 
 # 포트 설정
 EXPOSE 3000
