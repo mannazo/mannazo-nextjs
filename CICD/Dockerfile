@@ -8,8 +8,9 @@ WORKDIR /app
 COPY .npmrc ./
 
 # 빌드된 결과물과 필요한 파일 복사
-COPY .next ./.next
-COPY package.json package-lock.json ./
+COPY .next ./
+COPY package.json ./
+COPY package-lock.json ./
 
 # 포트 설정
 EXPOSE 3000
