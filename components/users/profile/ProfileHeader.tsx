@@ -16,7 +16,7 @@ import {
   Button,
 } from '@nextui-org/react'
 
-export default function ProfileContent() {
+export default function ProfileHeader() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [userData, setUserData] = useState(null)
@@ -111,9 +111,6 @@ export default function ProfileContent() {
                 {interest.trim()}
               </Chip>
             ))}
-            <Button onClick={handleEditClick} color="primary">
-              Edit Profile
-            </Button>
           </CardBody>
         </Card>
       )}

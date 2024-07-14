@@ -57,6 +57,31 @@ export default function HeaderProfile() {
                 <LogoutButton />
               </div>
             )}
+          </button>
+          {profileMenu && (
+            <div className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg">
+              <Link
+                href="/users/profile"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Profile
+              </Link>
+              <Link
+                href="/users/settings"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Settings
+              </Link>
+              <Link
+                href="/users/map"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Map
+              </Link>
+              <LogoutButton />
+            </div>
+          )}
+        </div>
           </div>
           <div>
             {/*채팅 배지와 버튼*/}

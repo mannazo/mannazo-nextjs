@@ -26,6 +26,10 @@ export default function SettingsContent() {
     router.push('/users/settings/edit')
   }
 
+  const handleDeleteClick = () => {
+    router.push('/users/settings/delete')
+  }
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (status === 'authenticated') {
@@ -112,7 +116,10 @@ export default function SettingsContent() {
               </Chip>
             ))}
             <Button onClick={handleEditClick} color="primary">
-              Edit Profile
+              계정 변경
+            </Button>
+            <Button onClick={handleDeleteClick} color="warning">
+              계정 탈퇴
             </Button>
           </CardBody>
         </Card>
