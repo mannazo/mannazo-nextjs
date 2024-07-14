@@ -7,9 +7,10 @@ WORKDIR /app
 # 빌드된 결과물과 필요한 파일 복사
 COPY .next ./.next
 COPY package.json ./
+COPY node_modules ./
 
 # 포트 설정
 EXPOSE 3000
 
 # 애플리케이션 실행
-CMD ["node", "server.js"]
+CMD ["pnpm", "start"]
