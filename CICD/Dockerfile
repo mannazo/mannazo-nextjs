@@ -10,7 +10,7 @@ COPY .npmrc ./
 # 빌드된 결과물과 필요한 파일 복사
 COPY .next ./
 COPY package.json ./
-COPY package-lock.json ./
+COPY pnpm-lock.yaml ./
 
 # 포트 설정
 EXPOSE 3000
