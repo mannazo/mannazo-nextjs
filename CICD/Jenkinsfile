@@ -14,7 +14,7 @@ pipeline {
     }
 
     stages {
-        stage('의존성 설치') {
+        stage('의존성 설치(package.json)') {
             steps {
                 script {
                     // Discord 빌드 시작 메시지 보내기
@@ -23,23 +23,21 @@ pipeline {
                                 link: env.BUILD_URL, result: currentBuild.currentResult, 
                                 webhookURL: env.DISCORD_WEBHOOK
 
-                    // package.json의 해시 계산
-                    def hashFile = '.deps-hash'
-                    def currentHash = sh(script: "md5sum package.json | sort | md5sum | cut -d' ' -f1", returnStdout: true).trim()
-                    def previousHash = ""
+                    // 현재 커밋 해시 가져오기
+                    def currentCommit = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     
-                    if (fileExists(hashFile)) {
-                        previousHash = readFile(hashFile).trim()
-                    }
+                    // 이전 빌드의 커밋 해시 가져오기 (없으면 빈 문자열)
+                    def previousCommit = sh(script: 'git rev-parse HEAD~1 || echo ""', returnStdout: true).trim()
 
-                    if (currentHash != previousHash || !fileExists('node_modules')) {
-                        echo 'package.json 이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
+                    def changes = sh(script: "git diff --name-only ${previousCommit} ${currentCommit} -- package.json", returnStdout: true).trim()
+                    if (changes) {
+                        echo 'package.json 이 변경되었습니다. 의존성을 새로 설치합니다.'
                         sh 'rm -rf node_modules'
+                        sh 'rm -rf pnpm-lock.yaml'                        
                         sh 'npm install -g pnpm'
                         sh 'pnpm install'
-                        writeFile file: hashFile, text: currentHash
                     } else {
-                        echo '변경 없음. 기존 node_modules를 사용합니다.'
+                        echo 'package.json 변경 없음. 기존 node_modules, pnpm-lock.yaml 을 사용합니다.'                    
                     }
                 }
             }
@@ -115,9 +113,10 @@ pipeline {
         }
         always {
             echo 'Workspace 정리..'
-            // node_modules와 package.json, pnpm-lock.yaml을 제외한 모든 파일 삭제
+            // node_modules와 pnpm-lock.yaml을 제외한 모든 파일 삭제
             sh '''
-            find . -maxdepth 1 ! -name '.' ! -name 'node_modules' ! -name 'package.json' ! -name 'pnpm-lock.yaml' ! -name '.deps-hash' -exec rm -rf {} +
+            find . ! -path "./node_modules/*" ! -name "pnpm-lock.yaml" -type f -exec rm -f {} +
+            ls -la
             '''
         }
     }
