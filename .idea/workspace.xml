@@ -5,12 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="fix: Provider 세팅 오류 해결">
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mannazo-nextjs-secret" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/map/GoogleMapAPI.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/api/profile/posts.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/users/map/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/users/profile/review/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/users/settings/delete/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/users/map/MapContent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileNav.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileOverviewContent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileReviewContent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/users/settings/SettingsDeleteContent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useInfiniteScroll.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/profile-postindex.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/review.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/users/profile/edit/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/profile/overview/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/users/profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/profile/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/users/profile/ProfileContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/profile/ProfileHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/users/profile/ProfileEditContent.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/users/profile/UserProfileEdit.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/users/settings/SettingsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/settings/SettingsContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/users/settings/SettingsEditContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/settings/SettingsEditContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mannazo-nextjs-secret" beforeDir="false" afterPath="$PROJECT_DIR$/mannazo-nextjs-secret" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +47,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature" />
+        <entry key="$PROJECT_DIR$" value="feat-users2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,8 +93,8 @@
   "keyToString": {
     "JavaScript Debug.localhost:3000.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/components/posts/mobile",
+    "git-widget-placeholder": "feat-user3",
+    "last_opened_file_path": "/Users/jeonghuijun/git/mannazo-nextjs/app/users/profile/review",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.stylelint": "true",
@@ -87,7 +107,7 @@
     "nodejs_package_manager_path": "yarn",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier",
     "settings.editor.selected.configurable": "inlay.hints",
-    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/Users/jeonghuijun/git/mannazo-nextjs/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -120,13 +140,21 @@
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
     </layout>
   </component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/users/profile/review" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts\mobile" />
       <recent name="$PROJECT_DIR$/app/posts/mobile" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\desktop" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\tip" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts" />
@@ -289,6 +317,21 @@
         <entry key="23a96f3f-7c02-48a0-8ef1-02392dc85a30" value="TOOL_WINDOW" />
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feat-user3" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="23a96f3f-7c02-48a0-8ef1-02392dc85a30">
@@ -304,7 +347,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="3-feat-oauth-and-create-user" />
+                        <option value="feature" />
                       </list>
                     </value>
                   </entry>

@@ -31,7 +31,9 @@ export default function SettingsEditContent() {
       if (status === 'authenticated') {
         try {
           const response = await axios.get(
-            `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            // `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            `https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`,
+
           )
           setUserData(response.data)
         } catch (error) {
@@ -52,7 +54,7 @@ export default function SettingsEditContent() {
       ...prevUserData,
       [name]: value.split(','),
     }))
-    console.log(userData)
+    console.log('line55:', userData)
   }
 
   const handleInputChange = (e) => {
@@ -62,7 +64,7 @@ export default function SettingsEditContent() {
       ...prevUserData,
       [name]: value,
     }))
-    console.log(userData)
+    console.log('line65', userData)
   }
 
   const handleInterestsChange = (selectedInterests) => {
@@ -71,39 +73,55 @@ export default function SettingsEditContent() {
       ...prevUserData,
       interests: selectedInterests.join(','),
     }))
-    console.log(userData)
+    console.log('interest',userData)
   }
 
   const handleSubmit = async (e) => {
-    const userRequestDTO = {
-      userId: session.user.additionalInfo.serverUserId,
-      email: userData.email, // 이메일 입력 필드 추가 필요
-      name: userData.name,
-      nickname: userData.nickname, // 닉네임 입력 필드 추가 필요
-      nationality: userData.nationality,
-      language: userData.language,
-      profileImage: userData.image,
-      introduction: userData.introduction,
-      city: userData.city, // 도시 입력 필드 추가 필요
-      gender: userData.gender, // 성별 입력 필드 추가 필요
-      mbti: userData.mbti,
-      interests: userData.interests.join(','), // 배열을 문자열로 변환
-      birthday: userData.birthday,
+    console.log('submit 1: userdata', userData)
+
+    const processField = (field) => {
+      if (typeof field === 'string') {
+        return field.includes(',') ? field.split(',') : [field]
+      } else if (Array.isArray(field)) {
+        return field.join(',')
+      }
+      return field
     }
 
+     const userRequestDTO = {
+       email: userData.email, // 이메일 입력 필드 추가 필요
+       name: userData.name,
+       nickname: userData.nickname, // 닉네임 입력 필드 추가 필요
+       nationality: userData.nationality,
+       language: processField(userData.language),
+       profileImage: userData.image,
+       introduction: userData.introduction,
+       city: userData.city, // 도시 입력 필드 추가 필요
+       gender: userData.gender, // 성별 입력 필드 추가 필요
+       mbti: userData.mbti,
+       interests: processField(userData.interests),
+       // interests: userData.interests.join(','), // 배열을 문자열로 변환
+       birthday: userData.birthday
+     }
+
+    console.log('submitv2', userData)
     e.preventDefault()
+    console.log('submit3', userData)
     try {
       // await axios.put(
       //   `https://mannazu.diligenp.com/user/${session.user.additionalInfo.serverUserId}`,
       //   { ...userData, userId: session.user.additionalInfo.serverUserId }
       // )
-      // router.push('/users/settings')
+      router.push('/users/settings')
+
       await axios.put(
-        `https://mannazu.diligenp.com/user/${session.user.additionalInfo.serverUserId}`,
+        `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`,
+        // `https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`,
         { userRequestDTO }
       )
-      console.log(userData)
+      console.log('submit4', userData)
     } catch (error) {
+      console.log('submiterr', userData)
       console.error('Error updating user data:', error)
     }
   }
@@ -122,12 +140,12 @@ export default function SettingsEditContent() {
           <h2 className="text-2xl font-bold">Edit Profile</h2>
         </CardHeader>
         <CardBody className="gap-4">
-          <Input
-            label="Name"
-            name="name"
-            value={userData.name && userData.name ? userData.name : ''}
-            onChange={handleInputChange}
-          />
+          {/*<Input*/}
+          {/*  label="Name"*/}
+          {/*  name="name"*/}
+          {/*  value={userData.name && userData.name ? userData.name : ''}*/}
+          {/*  onChange={handleInputChange}*/}
+          {/*/>*/}
           <Input
             label="Nickname"
             name="nickname"

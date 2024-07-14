@@ -49,6 +49,12 @@ export default function HeaderProfile() {
               >
                 Settings
               </Link>
+              <Link
+                href="/users/map"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Map
+              </Link>
               <LogoutButton />
             </div>
           )}
