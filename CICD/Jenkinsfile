@@ -24,21 +24,20 @@ pipeline {
                                 webhookURL: env.DISCORD_WEBHOOK
 
                     // package.json의 해시 계산
-                    def currentHash = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
+                    def hashFile = '.deps-hash'
+                    def currentHash = sh(script: "md5sum package.json pnpm-lock.yaml | sort | md5sum | cut -d' ' -f1", returnStdout: true).trim()
                     def previousHash = ""
                     
-                    // 이전 해시 읽기 (파일이 없으면 빈 문자열)
-                    if (fileExists('node_modules/.package-json-hash')) {
-                        previousHash = readFile('node_modules/.package-json-hash').trim()
+                    if (fileExists(hashFile)) {
+                        previousHash = readFile(hashFile).trim()
                     }
 
                     if (currentHash != previousHash || !fileExists('node_modules')) {
-                        echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
-                        sh 'rm -rf node_modules'                        
+                        echo 'package.json 또는 pnpm-lock.yaml이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
+                        sh 'rm -rf node_modules'
                         sh 'npm install -g pnpm'
                         sh 'pnpm install'
-                        // 새 해시 저장
-                        writeFile file: 'node_modules/.package-json-hash', text: currentHash
+                        writeFile file: hashFile, text: currentHash
                     } else {
                         echo '변경 없음. 기존 node_modules를 사용합니다.'
                     }
@@ -118,7 +117,7 @@ pipeline {
             echo 'Workspace 정리..'
             // node_modules와 package.json, pnpm-lock.yaml을 제외한 모든 파일 삭제
             sh '''
-            find . -maxdepth 1 ! -name '.' ! -name 'node_modules' ! -name 'package.json' ! -name 'pnpm-lock.yaml' -exec rm -rf {} +
+            find . -maxdepth 1 ! -name '.' ! -name 'node_modules' ! -name 'package.json' ! -name 'pnpm-lock.yaml' ! -name '.deps-hash' -exec rm -rf {} +
             '''
         }
     }
