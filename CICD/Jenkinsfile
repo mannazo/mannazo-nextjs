@@ -34,17 +34,13 @@ pipeline {
 
                     if (currentHash != previousHash || !fileExists('node_modules')) {
                         echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
-                        sh 'rm -rf node_modules'
+                        sh 'rm -rf node_modules'                        
                         sh 'npm install -g pnpm'
-                        sh 'pnpm install --force'
+                        sh 'pnpm install'
                         // 새 해시 저장
                         writeFile file: 'node_modules/.package-json-hash', text: currentHash
                     } else {
                         echo '변경 없음. 기존 node_modules를 사용합니다.'
-                        sh 'rm -rf node_modules'
-                        sh 'npm install nextui-cli -g'
-                        sh 'npm install -g pnpm'
-                        sh 'pnpm install --force'
                     }
                 }
             }
@@ -54,8 +50,7 @@ pipeline {
             steps {
                 script {
                     echo '빌드 시작...'
-                    // pnpm, npm 모두 set NEXT_DISABLE_TYPESCRIPT=1 && next build --no-lint 스크립트의 축약어
-                    sh 'npm run build' // Next.js 빌드 실행
+                    sh 'pnpm run build' // Next.js 빌드 실행
                 }
             }
         }
@@ -120,9 +115,7 @@ pipeline {
         always {
             echo 'Workspace 정리..'
             // 빌드 결과물만 정리하고 node_modules는 유지
-            // sh 'rm -rf !(node_modules)'
-            deleteDir()
-            
+            sh 'rm -rf !(node_modules)'
         }
     }
 }
