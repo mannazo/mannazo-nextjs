@@ -14,4 +14,4 @@ ENV NODE_ENV production
 EXPOSE 3000
 
 # 애플리케이션 실행
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
