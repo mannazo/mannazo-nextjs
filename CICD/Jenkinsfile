@@ -116,9 +116,9 @@ pipeline {
         }
         always {
             echo 'Workspace 정리..'
-            // 빌드 결과물만 정리하고 node_modules는 유지
+            // node_modules와 package.json, pnpm-lock.yaml을 제외한 모든 파일 삭제
             sh '''
-            find . -maxdepth 1 ! -name '.' ! -name 'node_modules' -exec rm -rf {} +
+            find . -maxdepth 1 ! -name '.' ! -name 'node_modules' ! -name 'package.json' ! -name 'pnpm-lock.yaml' -exec rm -rf {} +
             '''
         }
     }
