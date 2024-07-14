@@ -38,8 +38,6 @@ pipeline {
                         sh 'pnpm install'
                     } else {
                         echo 'package.json 변경 없음. 기존 node_modules, pnpm-lock.yaml 을 사용합니다.'      
-                        sh 'npm install -g pnpm'
-                        sh 'pnpm install'                                      
                     }
                 }
             }
