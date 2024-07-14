@@ -41,7 +41,7 @@ export default function Page() {
 
       {getStepContent(active)}
 
-      <Button onPress={handleNext}></Button>
+      <Button onPress={handleNext}>NEXT</Button>
       </div>
     </>
   );

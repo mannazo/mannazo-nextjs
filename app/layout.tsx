@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '../components/main-header'
 import Providers from '@/components/provider/Providers'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+    <Script src="https://cdn.iamport.kr/v1/iamport.js" />
+
+    <body className={inter.className}>
         <Providers>
           <Header />
           {children}
