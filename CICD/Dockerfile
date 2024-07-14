@@ -15,4 +15,4 @@ COPY pnpm-lock.yaml ./
 EXPOSE 3000
 
 # 애플리케이션 실행
-CMD ["node", "node_modules/.bin/next", "start"]
+CMD ["npx", "next", "start"]
