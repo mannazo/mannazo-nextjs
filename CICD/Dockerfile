@@ -8,11 +8,8 @@ WORKDIR /app
 COPY .next ./.next
 COPY package.json ./
 
-# 환경 변수 설정
-ENV NODE_ENV production
-
 # 포트 설정
 EXPOSE 3000
 
 # 애플리케이션 실행
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
