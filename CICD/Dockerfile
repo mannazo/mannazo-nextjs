@@ -10,8 +10,6 @@ COPY node_modules ./node_modules
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 
-# 프로덕션 의존성 설치
-RUN pnpm install --prod
 
 # 포트 설정
 EXPOSE 3000
