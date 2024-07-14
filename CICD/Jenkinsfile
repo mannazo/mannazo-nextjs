@@ -43,74 +43,74 @@ pipeline {
             }
         }
 
-        stage('빌드') {
-            steps {
-                script {
-                    echo '빌드 시작...'
-                    sh 'pnpm run build' // Next.js 빌드 실행
-                }
-            }
-        }
+        // stage('빌드') {
+        //     steps {
+        //         script {
+        //             echo '빌드 시작...'
+        //             sh 'pnpm run build' // Next.js 빌드 실행
+        //         }
+        //     }
+        // }
 
 
-        stage('도커 이미지 빌드') {
-            steps {
-                script {
-                    sh "ls -la"
-                    docker.withRegistry("http://${DOCKER_REGISTRY_URL}", "${HARBOR_CREDENTIAL}") {
-                        def customImage = docker.build("mannazo/mannazu-nextjs:${env.BUILD_NUMBER}", "-f CICD/Dockerfile .")
-                        customImage.push()
-                    }
-                }
-            }
-        }
+        // stage('도커 이미지 빌드') {
+        //     steps {
+        //         script {
+        //             sh "ls -la"
+        //             docker.withRegistry("http://${DOCKER_REGISTRY_URL}", "${HARBOR_CREDENTIAL}") {
+        //                 def customImage = docker.build("mannazo/mannazu-nextjs:${env.BUILD_NUMBER}", "-f CICD/Dockerfile .")
+        //                 customImage.push()
+        //             }
+        //         }
+        //     }
+        // }
 
-        stage('mannazo-web 업데이트') {
-            steps {
-                script { 
-                    def manifestsRepoUrl = 'https://github.com/mannazo/mannazo-deploy.git'
-                    def manifestsRepoBranch = 'main'
+        // stage('mannazo-web 업데이트') {
+        //     steps {
+        //         script { 
+        //             def manifestsRepoUrl = 'https://github.com/mannazo/mannazo-deploy.git'
+        //             def manifestsRepoBranch = 'main'
                     
-                    git credentialsId: "${HARBOR_CREDENTIAL}", url: manifestsRepoUrl, branch: manifestsRepoBranch
-                    sh """
-                        git pull origin main
-                        sed -i 's|harbor.dorong9.com/mannazo/mannazu-nextjs:.*|harbor.dorong9.com/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}|' web/mannazu-web.yaml
-                        git add web/mannazu-web.yaml
-                        git config user.name 'DOLONG9'
-                        git config user.email "${GIT_USER_EMAIL}"
-                        git commit -m "web/mannazu-web.yaml ${currentBuild.number} image versioning"
-                    """
-                    withCredentials([gitUsernamePassword(credentialsId: "${GIT_CREDENTIAL}")]) {
-                        sh "git remote set-url origin https://github.com/mannazo/mannazo-deploy.git" 
-                        sh "git push origin main"
-                    }
-                }
-            }
-        }
+        //             git credentialsId: "${HARBOR_CREDENTIAL}", url: manifestsRepoUrl, branch: manifestsRepoBranch
+        //             sh """
+        //                 git pull origin main
+        //                 sed -i 's|harbor.dorong9.com/mannazo/mannazu-nextjs:.*|harbor.dorong9.com/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}|' web/mannazu-web.yaml
+        //                 git add web/mannazu-web.yaml
+        //                 git config user.name 'DOLONG9'
+        //                 git config user.email "${GIT_USER_EMAIL}"
+        //                 git commit -m "web/mannazu-web.yaml ${currentBuild.number} image versioning"
+        //             """
+        //             withCredentials([gitUsernamePassword(credentialsId: "${GIT_CREDENTIAL}")]) {
+        //                 sh "git remote set-url origin https://github.com/mannazo/mannazo-deploy.git" 
+        //                 sh "git push origin main"
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     post {
-        success {
-            discordSend title: "Mannazu-nextjs 빌드", 
-                        description: "빌드 성공!!",            
-                        footer: "Jenkins 에서 확인하세요", 
-                        link: env.BUILD_URL, result: currentBuild.currentResult, 
-                        webhookURL: env.DISCORD_WEBHOOK
-            script {
-                // Docker 이미지 삭제
-                sh "docker rmi mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
-                sh "docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
-            }                        
-        }
-        failure {
-            script {
-                discordSend title: "Mannazu-auth-service", 
-                            description: "빌드 실패!!",
-                            footer: "젠킨스에서 확인하세요", 
-                            link: env.BUILD_URL, result: currentBuild.currentResult, 
-                            webhookURL: env.DISCORD_WEBHOOK
-            }
-        }
+        // success {
+        //     discordSend title: "Mannazu-nextjs 빌드", 
+        //                 description: "빌드 성공!!",            
+        //                 footer: "Jenkins 에서 확인하세요", 
+        //                 link: env.BUILD_URL, result: currentBuild.currentResult, 
+        //                 webhookURL: env.DISCORD_WEBHOOK
+        //     script {
+        //         // Docker 이미지 삭제
+        //         sh "docker rmi mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
+        //         sh "docker rmi ${DOCKER_REGISTRY_URL}/mannazo/mannazu-nextjs:${env.BUILD_NUMBER}"
+        //     }                        
+        // }
+        // failure {
+        //     script {
+        //         discordSend title: "Mannazu-auth-service", 
+        //                     description: "빌드 실패!!",
+        //                     footer: "젠킨스에서 확인하세요", 
+        //                     link: env.BUILD_URL, result: currentBuild.currentResult, 
+        //                     webhookURL: env.DISCORD_WEBHOOK
+        //     }
+        // }
         always {
             echo 'Workspace 정리..'
             // node_modules와 pnpm-lock.yaml을 제외한 모든 파일 삭제
