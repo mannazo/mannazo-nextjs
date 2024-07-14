@@ -106,11 +106,13 @@ pipeline {
             }                        
         }
         failure {
-            discordSend title: "Mannazu-nextjs 빌드", 
-                        description: "빌드 실패!!",
-                        footer: "Jenkins 에서 확인하세요", 
-                        link: env.BUILD_URL, result: currentBuild.currentResult, 
-                        webhookURL: env.DISCORD_WEBHOOK
+            script {
+                discordSend title: "Mannazu-auth-service", 
+                            description: "빌드 실패!!",
+                            footer: "젠킨스에서 확인하세요", 
+                            link: env.BUILD_URL, result: currentBuild.currentResult, 
+                            webhookURL: env.DISCORD_WEBHOOK
+            }
         }
         always {
             echo 'Workspace 정리..'
