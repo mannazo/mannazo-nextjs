@@ -1,5 +1,32 @@
 import React from 'react'
 import Feed from '@/components/community/Feed'
+import CreatePostButton from '@/components/community/CreatePostButton'
+import { getCommunityPosts } from '@/services/api'
+import { revalidatePath } from 'next/cache'
+
+async function getPosts() {
+  try {
+    const response = await getCommunityPosts()
+    console.log('response', response)
+    return response.data
+  } catch (e) {
+    console.error('Error getPosts:', e)
+    return dummyPosts
+  } finally {
+  }
+}
+
+export default async function Home() {
+  const posts = await getPosts()
+
+  return (
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="mb-8 text-center text-3xl font-bold">SHARE YOUR STORY</h1>
+      <CreatePostButton />
+      <Feed posts={posts} />
+    </main>
+  )
+}
 
 const dummyPosts = [
   {
@@ -175,12 +202,3 @@ const dummyPosts = [
     image: 'https://picsum.photos/seed/havana/800/600',
   },
 ]
-
-export default function Home() {
-  return (
-    <main className="container mx-auto py-8">
-      <h1 className="mb-8 text-center text-3xl font-bold">Mannazo 여행 피드</h1>
-      <Feed posts={dummyPosts} />
-    </main>
-  )
-}

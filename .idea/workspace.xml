@@ -4,31 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="fix: Provider 세팅 오류 해결">
-      <change afterPath="$PROJECT_DIR$/app/api/map/GoogleMapAPI.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/profile/posts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/map/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/profile/review/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/settings/delete/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/map/MapContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileNav.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileOverviewContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileReviewContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/settings/SettingsDeleteContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/useInfiniteScroll.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/profile-postindex.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/review.ts" afterDir="false" />
+    <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="chore: .gitignore : .idea/ 추가">
+      <change afterPath="$PROJECT_DIR$/app/chat/room/[chatId]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/BlockUserModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/ChatBody.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/ChatHeader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/ChatList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/ChatListItem.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/ChatMessage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/ChatRoom.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/ChatRoomList.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/FeedbackModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/InputArea.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/chat/SearchBar.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/commons/icons.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/commons/theme-switch.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/header/Navbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024__7__11__PM_4_54__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2024__7__11__PM_4_54__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/users/profile/edit/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/profile/overview/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/users/profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/profile/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/chat/list/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/chat/list/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/community/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/community/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/profile/ProfileContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/profile/ProfileHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/profile/ProfileEditContent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/profile/UserProfileEdit.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/settings/SettingsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/settings/SettingsContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/settings/SettingsEditContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/settings/SettingsEditContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mannazo-nextjs-secret" beforeDir="false" afterPath="$PROJECT_DIR$/mannazo-nextjs-secret" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/site.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/site.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/api.ts" afterDir="false" />
     </list>
@@ -93,8 +93,8 @@
   "keyToString": {
     "JavaScript Debug.localhost:3000.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat-user3",
-    "last_opened_file_path": "/Users/jeonghuijun/git/mannazo-nextjs/app/users/profile/review",
+    "git-widget-placeholder": "feat-main-header",
+    "last_opened_file_path": "C:/Users/jh/git/mannazo-nextjs/components/chat",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.stylelint": "true",
@@ -106,8 +106,8 @@
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "yarn",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "ts.external.directory.path": "/Users/jeonghuijun/git/mannazo-nextjs/node_modules/typescript/lib",
+    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "ts.external.directory.path": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -150,18 +150,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/users/profile/review" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts\mobile" />
-      <recent name="$PROJECT_DIR$/app/posts/mobile" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\posts\desktop" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\components\chat" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\app\chat\room" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\app\chat\list" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\types" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\components\header" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jh\git\mannazo-nextjs\app\chat\room\[chatId]" />
+      <recent name="C:\Users\jh\git\mannazo-nextjs\components\commons" />
       <recent name="C:\Users\jh\git\mannazo-nextjs\components\posts" />
       <recent name="$PROJECT_DIR$/components/about" />
       <recent name="$PROJECT_DIR$/app/about" />
-      <recent name="C:\Users\jh\git\mannazo-nextjs\app\api\auth" />
-      <recent name="$PROJECT_DIR$/app" />
     </key>
   </component>
   <component name="RunManager">

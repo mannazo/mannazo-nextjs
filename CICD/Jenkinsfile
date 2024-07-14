@@ -10,35 +10,53 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS-20.11.1' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
+        nodejs 'NodeJS-22.4.0' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
     }
 
     stages {
-        stage('.env.local 추가') {
+        stage('의존성 설치') {
             steps {
                 script {
-                    if (params.BUILD_FILE) {
-                        writeFile file: '.env.local', text: readFile(params.BUILD_FILE)
-                    }
-                }
-            }
-        }
+                    // Discord 빌드 시작 메시지 보내기
+                    discordSend title: "Mannazu-nextjs", 
+                                description: "빌드 시작!!",
+                                link: env.BUILD_URL, result: currentBuild.currentResult, 
+                                webhookURL: env.DISCORD_WEBHOOK
 
-        stage('Dependencies 설치') {
-            steps {
-                script {
-                    // 캐시 디렉토리 생성
-                    if (fileExists('node_modules')) {
-                        echo 'Using cached node_modules directory'
-                    } else {
+                    // package.json의 해시 계산
+                    def currentHash = sh(script: "md5sum package.json | cut -d' ' -f1", returnStdout: true).trim()
+                    def previousHash = ""
+                    
+                    // 이전 해시 읽기 (파일이 없으면 빈 문자열)
+                    if (fileExists('node_modules/.package-json-hash')) {
+                        previousHash = readFile('node_modules/.package-json-hash').trim()
+                    }
+
+                    if (currentHash != previousHash || !fileExists('node_modules')) {
+                        echo 'package.json이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
+                        sh 'rm -rf node_modules'                        
+                        sh 'npm install -g pnpm'
                         sh 'pnpm install'
+                        // 새 해시 저장
+                        writeFile file: 'node_modules/.package-json-hash', text: currentHash
+                    } else {
+                        echo '변경 없음. 기존 node_modules를 사용합니다.'
                     }
-                    sh 'pnpm run build'
                 }
             }
         }
 
-        stage('mannazu-nextjs 이미지 빌드') {
+        stage('빌드') {
+            steps {
+                script {
+                    echo '빌드 시작...'
+                    sh 'pnpm run build' // Next.js 빌드 실행
+                }
+            }
+        }
+
+
+        stage('도커 이미지 빌드') {
             steps {
                 script {
                     sh "ls -la"
@@ -88,15 +106,20 @@ pipeline {
             }                        
         }
         failure {
-            discordSend title: "Mannazu-nextjs 빌드", 
-                        description: "빌드 실패!!",
-                        footer: "Jenkins 에서 확인하세요", 
-                        link: env.BUILD_URL, result: currentBuild.currentResult, 
-                        webhookURL: env.DISCORD_WEBHOOK
+            script {
+                discordSend title: "Mannazu-auth-service", 
+                            description: "빌드 실패!!",
+                            footer: "젠킨스에서 확인하세요", 
+                            link: env.BUILD_URL, result: currentBuild.currentResult, 
+                            webhookURL: env.DISCORD_WEBHOOK
+            }
         }
         always {
             echo 'Workspace 정리..'
-            sh 'rm -rf **/* !node_modules' // node_modules 디렉토리를 제외하고 정리
+            // 빌드 결과물만 정리하고 node_modules는 유지
+            sh '''
+            find . -maxdepth 1 ! -name '.' ! -name 'node_modules' -exec rm -rf {} +
+            '''
         }
     }
 }
