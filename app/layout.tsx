@@ -1,7 +1,6 @@
 import React from 'react'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
-import Header from '../components/main-header'
 import { Providers } from '@/components/provider/Providers'
 import { siteConfig } from '@/config/site'
 import clsx from 'clsx'
@@ -42,7 +41,6 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'system' }}>
           <Navbar />
-          {/*<Header />*/}
           {children}
         </Providers>
       </body>
