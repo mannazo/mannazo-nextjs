@@ -6,12 +6,6 @@ WORKDIR /app
 
 # 빌드된 결과물과 필요한 파일 복사
 COPY .next ./.next
-COPY public ./public
-COPY package.json ./
-COPY pnpm-lock.yaml ./
-
-# Jenkins에서 이미 설치된 node_modules를 Docker 이미지에 복사
-COPY node_modules ./node_modules  
 
 # 환경 변수 설정
 ENV NODE_ENV production
