@@ -25,7 +25,7 @@ pipeline {
 
                     // package.json의 해시 계산
                     def hashFile = '.deps-hash'
-                    def currentHash = sh(script: "md5sum package.json pnpm-lock.yaml | sort | md5sum | cut -d' ' -f1", returnStdout: true).trim()
+                    def currentHash = sh(script: "md5sum package.json | sort | md5sum | cut -d' ' -f1", returnStdout: true).trim()
                     def previousHash = ""
                     
                     if (fileExists(hashFile)) {
@@ -33,7 +33,7 @@ pipeline {
                     }
 
                     if (currentHash != previousHash || !fileExists('node_modules')) {
-                        echo 'package.json 또는 pnpm-lock.yaml이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
+                        echo 'package.json 이 변경되었거나 node_modules가 없습니다. 의존성을 새로 설치합니다.'
                         sh 'rm -rf node_modules'
                         sh 'npm install -g pnpm'
                         sh 'pnpm install'
