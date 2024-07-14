@@ -5,32 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="451af9f6-0fa1-4a1a-817e-37ddca0f1a0b" name="Changes" comment="fix: Provider 세팅 오류 해결">
-      <change afterPath="$PROJECT_DIR$/app/api/map/GoogleMapAPI.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/api/profile/posts.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/map/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/profile/review/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/users/settings/delete/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/map/MapContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileNav.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileOverviewContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/profile/ProfileReviewContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/users/settings/SettingsDeleteContent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/useInfiniteScroll.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/profile-postindex.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/review.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/users/profile/edit/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/profile/overview/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/users/profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/users/profile/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/main-header/Header-Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/profile/ProfileContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/profile/ProfileHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/profile/ProfileEditContent.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/profile/UserProfileEdit.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/settings/SettingsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/settings/SettingsContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/users/settings/SettingsEditContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/users/settings/SettingsEditContent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mannazo-nextjs-secret" beforeDir="false" afterPath="$PROJECT_DIR$/mannazo-nextjs-secret" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/services/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,28 +64,28 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JavaScript Debug.localhost:3000.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat-user3",
-    "last_opened_file_path": "/Users/jeonghuijun/git/mannazo-nextjs/app/users/profile/review",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "\\Users\\joonhoekim\\git\\mannazo-nextjs\\node_modules\\eslint",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "yarn",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "ts.external.directory.path": "/Users/jeonghuijun/git/mannazo-nextjs/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.localhost:3000.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat-user3&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeonghuijun/git/mannazo-nextjs/app/users/profile/review&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;\\Users\\joonhoekim\\git\\mannazo-nextjs\\node_modules\\eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\jh\\git\\mannazo-nextjs\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/jeonghuijun/git/mannazo-nextjs/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
