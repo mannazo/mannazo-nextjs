@@ -117,7 +117,9 @@ pipeline {
         always {
             echo 'Workspace 정리..'
             // 빌드 결과물만 정리하고 node_modules는 유지
-            sh 'rm -rf !(node_modules)'
+            sh '''
+            find . -maxdepth 1 ! -name 'node_modules' -exec rm -rf {} +
+            '''
         }
     }
 }

@@ -10,8 +10,8 @@ COPY public ./public
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 
-# 프로덕션 의존성 설치
-RUN npm install -g pnpm && pnpm install --prod
+# Jenkins에서 이미 설치된 node_modules를 Docker 이미지에 복사
+COPY node_modules ./node_modules  
 
 # 환경 변수 설정
 ENV NODE_ENV production
