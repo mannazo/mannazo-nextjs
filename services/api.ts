@@ -11,7 +11,7 @@ export const updatePost = (postId) => api.put(`/post/${postId}`)
 export const deletePost = (postId) => api.delete(`/post/${postId}`)
 
 // 커뮤니티 post 관련
-export const getCommunityPosts = () => api.get('/community')
+export const getCommunityPosts = () => api.get('/community/findAll')
 export const getCommunityPostDetail = (communityPostId) =>
   api.get(`/community/${communityPostId}`)
 export const deleteCommunityPost = (communityPostId) =>

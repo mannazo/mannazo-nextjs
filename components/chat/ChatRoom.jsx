@@ -9,7 +9,6 @@ import useChatMessages from '@/hooks/useChatMessages'
 import useChatSSE from '@/hooks/useChatSSE'
 
 const ChatRoom = ({ chatRoomId }) => {
-  chatRoomId = '1' // 리스트에서 선택한 챗룸으로 보냄
   const { viewportHeight, containerRef } = useViewportHeight()
   const { messages, sendMessage } = useChatMessages()
   const sseMessages = useChatSSE(chatRoomId)
