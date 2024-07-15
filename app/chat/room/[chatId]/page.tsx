@@ -8,7 +8,7 @@ export default function ChatRoomPage({
 }) {
   return (
     <>
-      <ChatRoom />
+      <ChatRoom chatRoomId={1} />
     </>
   )
 }

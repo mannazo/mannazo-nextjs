@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Avatar, Button } from '@nextui-org/react'
+import { Avatar } from '@nextui-org/react'
 import {
   FaCalendarAlt,
   FaMapMarkerAlt,
@@ -11,10 +11,15 @@ import {
 } from 'react-icons/fa'
 
 interface ShortFormMobileCardProps {
-  traveler?: any
+  traveler: {
+    post: any
+    user: any
+  }
 }
 
-const ShortFormMobileCard = ({ traveler }) => {
+const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
+  traveler,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const toggleExpand = () => {
@@ -26,16 +31,14 @@ const ShortFormMobileCard = ({ traveler }) => {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   }
 
-  // 랜덤 이미지 URL 생성 함수
   const getRandomImage = () => {
-    // 랜덤 ID를 생성하여 매번 다른 이미지가 로드되도록 함
     const randomId = Math.floor(Math.random() * 1000)
     return `https://picsum.photos/seed/${randomId}/800/600`
   }
 
   const backgroundImageUrl =
-    traveler.imageUrls && traveler.imageUrls.length > 0
-      ? traveler.imageUrls[0]
+    traveler.post.imageUrls && traveler.post.imageUrls.length > 0
+      ? traveler.post.imageUrls[0]
       : getRandomImage()
 
   return (
@@ -68,7 +71,7 @@ const ShortFormMobileCard = ({ traveler }) => {
       />
 
       <motion.div
-        className="absolute left-0 right-0 top-0 p-6"
+        className="absolute bottom-0 left-0 right-0 bg-white/30 p-6 backdrop-blur-md dark:bg-black/30"
         animate={{
           y: isExpanded ? '100%' : 0,
           opacity: isExpanded ? 0 : 1,
@@ -77,16 +80,18 @@ const ShortFormMobileCard = ({ traveler }) => {
       >
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-white">
-              {traveler.travelCity}
+            <h2 className="text-2xl font-bold text-white dark:text-white">
+              {traveler.post.travelCity}
             </h2>
-            <p className="text-sm text-white">{traveler.travelNationality}</p>
+            <p className="text-sm text-gray-200 dark:text-gray-300">
+              {traveler.post.travelNationality}
+            </p>
           </div>
-          <div className="flex items-center rounded-full bg-white bg-opacity-20 px-3 py-1">
+          <div className="flex items-center rounded-full bg-white/60 px-3 py-1 dark:bg-gray-800/60">
             <FaCalendarAlt className="mr-1 text-yellow-400" />
-            <span className="font-bold text-white">
-              {formatDate(traveler.travelStartDate)} -{' '}
-              {formatDate(traveler.travelEndDate)}
+            <span className="font-bold text-gray-800 dark:text-white">
+              {formatDate(traveler.post.travelStartDate)} -{' '}
+              {formatDate(traveler.post.travelEndDate)}
             </span>
           </div>
         </div>
@@ -95,7 +100,7 @@ const ShortFormMobileCard = ({ traveler }) => {
       <AnimatePresence>
         {isExpanded && (
           <motion.div
-            className="absolute inset-0 overflow-y-auto bg-white p-6"
+            className="absolute inset-0 overflow-y-auto bg-white p-6 dark:bg-gray-900"
             initial={{ y: '100%' }}
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
@@ -103,82 +108,79 @@ const ShortFormMobileCard = ({ traveler }) => {
           >
             <div className="mb-4 flex items-center">
               <Avatar
-                // src={
-                //   travelerPost.imageUrls[1] ||
-                //   `https://i.pravatar.cc/150?u=${travelerPost.userId}`
-                // }
                 src={
+                  traveler.user?.profileImage ||
                   'https://cdn3.iconfinder.com/data/icons/random-icon-set/512/user-512.png'
                 }
                 size="lg"
               />
               <div className="ml-3">
-                <h2 className="text-xl font-bold">{traveler.travelCity}</h2>
-                <p className="text-sm text-gray-500">
-                  {traveler.travelNationality}
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                  {traveler.user?.nickname || 'Anonymous'}
+                </h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  {traveler.user?.nationality || 'Unknown'}
                 </p>
               </div>
             </div>
 
             <div className="mb-4">
-              <h4 className="mb-2 flex items-center font-semibold">
+              <h4 className="mb-2 flex items-center font-semibold text-gray-800 dark:text-white">
                 <FaMapMarkerAlt className="mr-2" /> Destination
               </h4>
-              <p className="text-gray-600">
-                {traveler.travelNationality} - {traveler.travelCity}
+              <p className="text-gray-600 dark:text-gray-300">
+                {traveler.post.travelNationality} - {traveler.post.travelCity}
               </p>
             </div>
 
             <div className="mb-4">
-              <h4 className="mb-2 flex items-center font-semibold">
+              <h4 className="mb-2 flex items-center font-semibold text-gray-800 dark:text-white">
                 <FaCalendarAlt className="mr-2" /> Travel Dates
               </h4>
-              <p className="text-gray-600">
-                {formatDate(traveler.travelStartDate)} -{' '}
-                {formatDate(traveler.travelEndDate)}
+              <p className="text-gray-600 dark:text-gray-300">
+                {formatDate(traveler.post.travelStartDate)} -{' '}
+                {formatDate(traveler.post.travelEndDate)}
               </p>
             </div>
 
             <div className="mb-4">
-              <h4 className="mb-2 flex items-center font-semibold">
+              <h4 className="mb-2 flex items-center font-semibold text-gray-800 dark:text-white">
                 <FaUserFriends className="mr-2" /> Travel Style
               </h4>
               <div className="flex flex-wrap gap-2">
-                {traveler.travelStyle.split(',').map((style, index) => (
-                  <span
-                    key={index}
-                    className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800"
-                  >
-                    {style.trim()}
-                  </span>
-                ))}
+                <span className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800 dark:bg-blue-900 dark:text-blue-100">
+                  {traveler.post.travelStyle}
+                </span>
               </div>
             </div>
 
             <div className="mb-4">
-              <h4 className="mb-2 flex items-center font-semibold">
+              <h4 className="mb-2 flex items-center font-semibold text-gray-800 dark:text-white">
                 <FaUtensils className="mr-2" /> Travel Purpose
               </h4>
               <div className="flex flex-wrap gap-2">
-                {traveler.travelPurpose.split(',').map((purpose, index) => (
-                  <span
-                    key={index}
-                    className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800"
-                  >
-                    {purpose.trim()}
-                  </span>
-                ))}
+                <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800 dark:bg-green-900 dark:text-green-100">
+                  {traveler.post.travelPurpose}
+                </span>
               </div>
             </div>
 
             <div className="mb-4">
-              <h4 className="mb-2 font-semibold">Preferred Gender</h4>
-              <p className="text-gray-600">{traveler.preferredGender}</p>
+              <h4 className="mb-2 font-semibold text-gray-800 dark:text-white">
+                Preferred Gender
+              </h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                {traveler.post.preferredGender}
+              </p>
             </div>
 
             <div className="mb-4">
-              <h4 className="mb-2 font-semibold">Travel Status</h4>
-              <p className="text-gray-600">{traveler.travelStatus}</p>
+              <h4 className="mb-2 font-semibold text-gray-800 dark:text-white">
+                Travel Status
+              </h4>
+              <p className="text-gray-600 dark:text-gray-300">
+                {traveler.post.travelStatus}
+              </p>
             </div>
           </motion.div>
         )}
