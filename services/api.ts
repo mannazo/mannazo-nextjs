@@ -25,3 +25,8 @@ export const createCommunityPost = (postData) =>
 export const getChatList = (userId) => api.get('/chat/list')
 export const getChatRoom = (roomId) => api.get('/chat/roomId/' + roomId)
 export const createChatRoom = () => api.post('/chat/room')
+export const sendChatMessage = (
+  senderId: string,
+  roomId: string,
+  msg: string
+) => api.post('https://mannazo.diligentp.com/chat/', { senderId, roomId, msg })
