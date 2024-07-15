@@ -8,7 +8,8 @@ import useViewportHeight from '@/hooks/useViewportHeight'
 import useChatMessages from '@/hooks/useChatMessages'
 import useChatSSE from '@/hooks/useChatSSE'
 
-const ChatRoom = ({ chatRoomId }) => {
+//센더 아이디도 받아서 보내주자
+const ChatRoom = ({ chatRoomId, senderId }) => {
   const { viewportHeight, containerRef } = useViewportHeight()
   const { messages, sendMessage } = useChatMessages()
   const sseMessages = useChatSSE(chatRoomId)

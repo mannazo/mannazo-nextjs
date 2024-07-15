@@ -4,11 +4,11 @@ import ChatRoom from '@/components/chat/ChatRoom'
 export default function ChatRoomPage({
   params,
 }: {
-  params: { chatId: string }
+  params: { chatRoomId: string }
 }) {
   return (
     <>
-      <ChatRoom chatRoomId={1} />
+      <ChatRoom chatRoomId={params.chatRoomId} />
     </>
   )
 }
