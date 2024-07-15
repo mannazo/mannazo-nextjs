@@ -4,31 +4,11 @@ import { useState, useEffect, useRef } from 'react'
 import ChatHeader from './ChatHeader'
 import ChatBody from './ChatBody.jsx'
 import InputArea from './InputArea.jsx'
+import useViewportHeight from '@/hooks/useViewportHeight'
 
 const ChatRoom = () => {
-  const [viewportHeight, setViewportHeight] = useState(0)
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        const windowHeight = window.innerHeight
-        const containerTop = containerRef.current.getBoundingClientRect().top
-        const newHeight = windowHeight - containerTop
-        setViewportHeight(newHeight)
-      }
-    }
-
-    handleResize() // 초기 높이 설정
-
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('scroll', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('scroll', handleResize)
-    }
-  }, [])
+  //뷰포트 변경사항 감지해서 높이 알려주는 훅
+  const { viewportHeight, containerRef } = useViewportHeight()
 
   return (
     <div
@@ -37,7 +17,7 @@ const ChatRoom = () => {
       style={{ height: `${viewportHeight}px` }}
     >
       <ChatHeader className="flex-shrink-0" />
-      <div className="flex-grow overflow-y-auto">
+      <div className="flex-grow overflow-y-auto scrollbar-hide">
         <ChatBody />
       </div>
       <InputArea className="flex-shrink-0" />

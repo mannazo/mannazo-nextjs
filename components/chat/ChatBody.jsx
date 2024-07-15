@@ -1,6 +1,6 @@
 const ChatBody = () => {
   return (
-    <div className="mb-4 h-96 h-full overflow-y-auto rounded-lg bg-white p-4 shadow-inner scrollbar-hide">
+    <div className="mb-4 h-full overflow-y-auto rounded-lg bg-white p-4 shadow-inner scrollbar-hide">
       <ChatMessage sender="user" />
       <ChatMessage sender="other" />
       <ChatMessage sender="other" />
@@ -11,7 +11,8 @@ const ChatBody = () => {
       <ChatMessage sender="other" />
       <ChatMessage sender="other" />
       <ChatMessage sender="user" />
-      {/* Add more ChatMessage components as needed */}
+      <ChatMessage sender="user" />
+      <ChatMessage sender="user" />
     </div>
   )
 }
