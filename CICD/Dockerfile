@@ -7,7 +7,7 @@ WORKDIR /app
 # 빌드된 결과물과 필요한 파일 복사
 COPY .next ./.next
 COPY public ./public
-COPY next.config.js ./
+COPY next.config.mjs ./
 
 ENV NODE_ENV production
 
