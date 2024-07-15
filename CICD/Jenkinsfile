@@ -45,10 +45,12 @@ pipeline {
                         sh "mkdir -p ${CACHE_DIR}"
                         sh "cp -R node_modules ${CACHE_DIR}/"
                         sh "cp pnpm-lock.yaml ${CACHE_DIR}/"
+                        sh 'pnpm prune --prod'  // 개발 의존성 제거
                     } else {
                         echo '캐시된 node_modules를 사용합니다.'
                         sh "cp -R ${CACHE_DIR}/node_modules ."
                         sh "cp ${CACHE_DIR}/pnpm-lock.yaml ."
+                        sh 'pnpm prune --prod'  // 개발 의존성 제거
                     }
                 }
             }
