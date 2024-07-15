@@ -37,14 +37,12 @@ pipeline {
 
                     if (changes || !cacheExists) {
                         echo 'package.json이 변경되었거나 캐시가 없습니다. 의존성을 새로 설치합니다.'
-                        sh 'rm -rf node_modules'
-                        sh 'rm -rf pnpm-lock.yaml'
+                        sh "rm -rf ${CACHE_DIR}"
                         sh 'npm install -g pnpm'
-                        sh 'pnpm install'
+                        sh 'pnpm install --prod'
                         
                         // 새로 설치한 node_modules를 캐시
                         sh "mkdir -p ${CACHE_DIR}"
-                        sh "rm -rf ${CACHE_DIR}/node_modules"
                         sh "cp -R node_modules ${CACHE_DIR}/"
                         sh "cp pnpm-lock.yaml ${CACHE_DIR}/"
                     } else {
