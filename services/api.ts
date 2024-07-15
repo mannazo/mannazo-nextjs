@@ -9,7 +9,8 @@ export const deleteUser = (id) => api.delete(`/user/${id}`)
 
 // 여행 post 관련
 export const createPost = (postData) => api.post('/post', postData)
-export const getPostsByPage = (page) => api.get(`/post/findAll?page=${page}`)
+export const getPostsByPage = (page, size) =>
+  api.get(`/post/findAll?page=${page}&size=${size || null}`)
 export const updatePost = (postId) => api.put(`/post/${postId}`)
 export const deletePost = (postId) => api.delete(`/post/${postId}`)
 
