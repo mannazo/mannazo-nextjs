@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import LogoutButton from '@/components/(auth)/logout/LogoutButton'
+import { Badge } from '@nextui-org/badge'
+import { Button } from '@nextui-org/react'
+import { ChatBubbleLeftRightIcon } from '@heroicons/react/16/solid'
 
 export default function HeaderProfile() {
   const { data: session, status } = useSession()
@@ -18,47 +21,59 @@ export default function HeaderProfile() {
   }
 
   return (
-    <div>
+    <div className="flex items-center space-x-2">
       {isLoggedIn ? (
-        <div className="group relative z-50">
-          <button
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300"
-            onClick={() => setProfileMenu(!profileMenu)}
-          >
-            {session.user.image ? (
-              <img
-                src={session.user.image}
-                alt="Profile"
-                className="h-8 w-8 rounded-full"
-              />
-            ) : (
-              '👤'
+        <>
+          <div className="group relative z-50">
+            <button
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300"
+              onClick={() => setProfileMenu(!profileMenu)}
+            >
+              {session.user.image ? (
+                <img
+                  src={session.user.image}
+                  alt="Profile"
+                  className="h-8 w-8 rounded-full"
+                />
+              ) : (
+                '👤'
+              )}
+            </button>
+
+            {profileMenu && (
+              <div className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg">
+                <Link
+                  href="/users/profile"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Profile
+                </Link>
+                <Link
+                  href="/users/settings"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Settings
+                </Link>
+                <LogoutButton />
+              </div>
             )}
-          </button>
-          {profileMenu && (
-            <div className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg">
-              <Link
-                href="/users/profile"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Profile
-              </Link>
-              <Link
-                href="/users/settings"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Settings
-              </Link>
-              <Link
-                href="/users/map"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Map
-              </Link>
-              <LogoutButton />
-            </div>
-          )}
-        </div>
+          </div>
+          <div>
+            {/*채팅 배지와 버튼*/}
+            <Link href="/chat/list">
+              <Badge content="99+" shape="circle" color="danger">
+                <Button
+                  radius="full"
+                  isIconOnly
+                  aria-label="more than 99 notifications"
+                  variant="light"
+                >
+                  <ChatBubbleLeftRightIcon />
+                </Button>
+              </Badge>
+            </Link>
+          </div>
+        </>
       ) : (
         <Link
           href="/login"

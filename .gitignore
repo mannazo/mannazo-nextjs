@@ -9,6 +9,7 @@ yarn.lock
 workspace.xml
 usage.statistics.xml
 *.iml
+.idea/
 
 # dependencies
 /node_modules
@@ -46,3 +47,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/.idea/.gitignore
+/.idea/prettier.xml
+/.idea/*
