@@ -4,11 +4,16 @@ FROM node:22.4.0-alpine
 # 작업 디렉토리 설정
 WORKDIR /app
 
+# 의존성 설치
+COPY package.json pnpm-lock.yaml ./
+RUN npm install -g pnpm && pnpm install --prod
+
+
 # 빌드된 결과물과 필요한 파일 복사
 COPY .next ./.next
 COPY public ./public
 COPY next.config.mjs ./
-COPY node_modules ./
+# COPY node_modules ./
 
 ENV NODE_ENV production
 
