@@ -1,33 +1,20 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import ChatMessage from '@/components/chat/ChatMessage'
+import useChatSSE from '@/hooks/useChatSSE'
+import { useSession } from 'next-auth/react'
 
-function ChatComponent() {
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    const eventSource = new EventSource(
-      'https://mannazu.diligentp.com/chat/roomId/1'
-    )
-    eventSource.onmessage = (event) => {
-      const newData = JSON.parse(event.data)
-      setData((prevData) => [...prevData, newData])
-    }
-
-    eventSource.onerror = (error) => {
-      console.error('EventSource failed:', error)
-      eventSource.close()
-    }
-
-    return () => {
-      eventSource.close()
-    }
-  }, [])
+function ChatComponent({ chatRoomId }) {
+  const messages = useChatSSE(chatRoomId)
+  const { data: session } = useSession()
 
   return (
-    <div>
-      {data.map((item, index) => (
-        <div key={index}>{JSON.stringify(item)}</div>
+    <div className="mb-4 h-full overflow-y-auto rounded-lg bg-white p-4 shadow-inner scrollbar-hide">
+      {messages.map((message) => (
+        <ChatMessage
+          message={message}
+          currentUserId={'jun'} // currentUserId={session.user.additionalInfo.serverUserId}
+        />
       ))}
     </div>
   )

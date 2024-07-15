@@ -32,6 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html suppressHydrationWarning lang="en">
+      {/*이 빈 <head /> 태그는 호환성을 위해 존재함
+      서드파티 라이브러리나 스크립트가 필요할 때 <head> 내용을 조작할 수 있게 함.
+      Next.js의 App Router에서는 일반적으로 메타데이터 API를 사용하여 <head> 내용을 관리하지만,
+      이 방식으로 기존의 <head> 조작 방식과의 호환성도 유지할 수 있음.*/}
       <head />
       <body
         className={clsx(
