@@ -124,7 +124,7 @@ export default function Page() {
           )}
         </Table>
           <h3>Total: {total}</h3>
-          <Link href="/shop/checkout">
+          <Link href="/shop/cart/checkout">
             <Button>Checkout</Button>
           </Link>
 

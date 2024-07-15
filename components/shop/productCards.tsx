@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react' ;
 import ProductCard from './productCard'
 import {Product} from '@/_model/product'
 import { ShoppingCart } from '@/_model/shoppingCart'
-import ShoppingCartIcon from '../shop/shoppingCartIcon'
+import ShoppingCartIcon from './shoppingCartIcon'
 import Link from 'next/link'
 
 const ProductCards : React.FC = () => {

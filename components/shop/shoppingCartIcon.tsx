@@ -1,7 +1,7 @@
 // components/ShoppingCartIcon.tsx
 import React from 'react';
 import { Badge, Button } from '@nextui-org/react';
-import { ShoppingCart } from '../../../_model/shoppingCart';
+import { ShoppingCart } from '../../_model/shoppingCart';
 import { FaShoppingCart } from "react-icons/fa";
 
 interface ShoppingCartIconProps {
@@ -18,13 +18,7 @@ const ShoppingCartIcon: React.FC<ShoppingCartIconProps> = ({ cart }) => {
             <Badge color="error" className="absolute top-0 right-0 rounded-full" content={itemCount} />
           )}
     </button>
-    //
-    // <div className="relative">
-    //   <button auto flat color="primary" icon={<MdOutlineShoppingCart size="1.5em" />} />
-    //   {itemCount > 0 && (
-    //     <Badge color="error" className="absolute top-0 right-0 rounded-full" content={itemCount} />
-    //   )}
-    // </div>
+
   );
 };
 

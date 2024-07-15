@@ -1,4 +1,4 @@
-import ProductCards from '@/app/shop/shop/productCards'
+import ProductCards from '@/components/shop/productCards'
 
 
 export default function Page() {
