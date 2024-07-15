@@ -101,9 +101,9 @@ pipeline {
 
     post {
         success {
-            discordSend title: "Mannazu-nextjs 빌드", 
+            discordSend title: "Mannazu-nextjs", 
                         description: "빌드 성공!!",            
-                        footer: "Jenkins 에서 확인하세요", 
+                        footer: "젠킨스에서 확인하세요", 
                         link: env.BUILD_URL, result: currentBuild.currentResult, 
                         webhookURL: env.DISCORD_WEBHOOK
             script {
@@ -114,7 +114,7 @@ pipeline {
         }
         failure {
             script {
-                discordSend title: "Mannazu-auth-service", 
+                discordSend title: "Mannazu-nextjs", 
                             description: "빌드 실패!!",
                             footer: "젠킨스에서 확인하세요", 
                             link: env.BUILD_URL, result: currentBuild.currentResult, 
