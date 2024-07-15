@@ -10,7 +10,7 @@ interface ShoppingCartIconProps {
 
 const ShoppingCartIcon: React.FC<ShoppingCartIconProps> = ({ cart }) => {
   const itemCount = cart.items.reduce((count, item) => count + item.quantity, 0);
-
+  // console.log(cart)
   return (
     <button>
       <FaShoppingCart size={24} />

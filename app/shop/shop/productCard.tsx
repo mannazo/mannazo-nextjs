@@ -55,12 +55,12 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
             <p className="text-blue-600 font-bold mt-2">${product.price}</p>
           </ModalBody>
           <ModalFooter>
-
-
-
-            <Button color="primary" onPress={() => { addtocart(product); onClose; }}>
+            {product.stock > 0 ? ( <Button color="primary" onPress={() => {
+              addtocart(product);
+            }}>
               Add to Cart
-            </Button>
+            </Button>): (<p>Out of stock</p>) }
+
 
           </ModalFooter>
         </>

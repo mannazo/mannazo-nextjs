@@ -12,7 +12,7 @@ import {
   TableCell,
   getKeyValue,
   Button,
-  Link,
+  Link, Input,
 } from '@nextui-org/react'
 
 
@@ -28,6 +28,7 @@ export default function Page() {
     setLoading(false)
   }, []);
 
+
   function removeFromCart(product_id: number) {
     setCart(prevState => {
       const updatedItems = prevState.items.filter(item => item.product.product_id !== product_id);
@@ -36,8 +37,51 @@ export default function Page() {
       return updatedCart;
     })
   }
+  function decreaseQuantity(product_id: number) {
+    setCart(prevCart => {
+      const existingItem = prevCart.items.find(item => item.product.product_id === product_id);
 
-  const total = cart.items.reduce(( total, item ) => {return total + item.product.price * item.quantity},0)
+      if (existingItem) {
+        if (existingItem.quantity === 1) {
+          // Remove item if quantity is 1
+          const updatedItems = prevCart.items.filter(item => item.product.product_id !== product_id);
+          const updatedCart = { ...prevCart, items: updatedItems };
+          localStorage.setItem('cart', JSON.stringify(updatedCart));
+          return updatedCart;
+        } else {
+          // Decrease quantity
+          const updatedItems = prevCart.items.map(item =>
+            item.product.product_id === product_id
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          );
+          const updatedCart = { ...prevCart, items: updatedItems };
+          localStorage.setItem('cart', JSON.stringify(updatedCart));
+          return updatedCart;
+        }
+      } else {
+        // Item not in cart, return previous state
+        return prevCart;
+      }
+    });
+  }
+
+  function increaseQuantity(product_id: number) {
+    setCart(prevCart => {
+      const updatedItems = prevCart.items.map(item =>
+        item.product.product_id === product_id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      const updatedCart = { ...prevCart, items: updatedItems };
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+  }
+
+  const total = cart.items.reduce(( total, item ) => {
+    return total + item.product.price * item.quantity
+  },0)
   return(
     <div className="container mx-auto px-4 py-8">
     <h1>Shopping Cart</h1>
@@ -53,25 +97,39 @@ export default function Page() {
           {cart.items.length>0 ? (
             <TableBody>
             {cart.items.map((item) =>(
-              <TableRow>
+              <TableRow key={item.product.product_id}>
                 <TableCell>{item.product.name}</TableCell>
                 <TableCell>{item.product.price}</TableCell>
-                <TableCell>{item.quantity}</TableCell>
-                <TableCell><Button onPress={()=> removeFromCart(item.product.product_id)}>Remove</Button></TableCell>
+                <TableCell>
+                  <div className="flex items-center">
+                    <Button onPress={() => decreaseQuantity(item.product.product_id)} >-</Button>
+                    <Input value={item.quantity.toString()} readOnly width="50px"
+                           className="text-center" />
+                    <Button onPress={() => increaseQuantity(item.product.product_id)}>+</Button>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  {/*<Button onPress={()=> removeFromCart(item.product.product_id)}>Remove</Button>*/}
+
+                  <Button onPress={() => removeFromCart(item.product.product_id)} auto flat
+                          color="error">
+                    Remove
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
-          </TableBody>
-          ):(
-            <TableBody emptyContent={"Your cart is empty"}>{[]}</TableBody>
+            </TableBody>
+          ) : (
+            <TableBody emptyContent={'Your cart is empty'}>{[]}</TableBody>
           )}
         </Table>
-        <h3>Total: {total}</h3>
-        <Link href="/shop/checkout">
-          <Button>Checkout</Button>
-        </Link>
+          <h3>Total: {total}</h3>
+          <Link href="/shop/checkout">
+            <Button>Checkout</Button>
+          </Link>
 
         </>
-      ):(<p></p>)}
+      ) : (<p></p>)}
 
 
     </div>

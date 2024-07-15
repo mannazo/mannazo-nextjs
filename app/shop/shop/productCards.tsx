@@ -14,25 +14,37 @@ const ProductCards : React.FC = () => {
     fetch('/product.json').then(response => response.json())
     .then((data:Product[]) => {
       setProducts(data)
-      console.log(products)
+      console.log(products.toString())
     })
 
   }, []);
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(cart);
+  }, [cart]);
 
   const addToCart = (product: Product ) => {
     // add to cart
+    console.log(cart)
     setCart(prevCart => {
-      return {
-        ...prevCart,
-        items: [...prevCart.items, { product, quantity: 1 }]
-      };
+      const existingItem = prevCart.items.find(item => item.product.product_id === product.product_id)
+      // Existing item: Find in prevcart ( an item of which=> item's product's product id === product's product id)
+      if(existingItem) {
+        console.log("Old item")
+        return {
+          ...prevCart,
+          items: [...prevCart.items.map(item => item.product.product_id===product.product_id ? {...item, quantity:item.quantity+1} : item)]
+        };
+      }else{
+        console.log("New item")
+        return {
+          ...prevCart,
+          items: [...prevCart.items, { product, quantity: 1 }]
+        };
+      }
+
     })
 
-    // update cart to localStorage for access from shooping car
-    localStorage.setItem('cart', JSON.stringify(cart))
-    console.log(cart)
-
-  //   localStorage is always stored as strings (JSON.stringify). so should be retrieved with JSOn.parse() to get the object form
 
   }
   return (
