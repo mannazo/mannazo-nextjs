@@ -61,15 +61,15 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
   // 버튼 클릭에 대한 핸들러
   const handleClick = () => {
     if (session) {
-      const userId1 = session.user.additionalInfo.serverUserId
-      const userId2 = post.user.userId
+      const senderId = session.user.additionalInfo.serverUserId
+      const postUserId = post.user.userId
 
       // 로그인된 사용자를 위한 로직
       // 1. 글올린사람 + 채팅요청한사람 두개 아이디로 하나의 챗룸을 만든다. : useCreateChatRoom 훅을 만들어두었음.
       // 2. 해당 챗룸으로 사용자를 이동시킨다. (navigation)
 
-      // success/loading/fail/error 에 대한 처리는 mutate에 위임한다.
-      mutate({ userId1, userId2 })
+      // success/loading/fail/error 에 대한 처리는 mutate에 위임한다. (tanstack-query)
+      mutate({ senderId, postUserId })
     } else {
       //로그인 안된 경우 /login 으로 보냄
       router.push('/login')
