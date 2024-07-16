@@ -1,5 +1,4 @@
 import api from '../lib/axios'
-
 // axios api 호출 함수 정의
 // user 관련
 export const createUser = (signUpData) => api.post('/user', signUpData)
@@ -35,3 +34,10 @@ export const sendChatMessage = (
   roomId: string,
   msg: string
 ) => api.post('https://mannazo.diligentp.com/chat/', { senderId, roomId, msg })
+
+//Shop 관련
+export const createProduct = (productData) => api.post('/shop', productData)
+export const fetchProducts = () => api.get('/products')
+
+//Order 관련
+export const createOrder = (orderData) => api.post('/shop/order', orderData)
