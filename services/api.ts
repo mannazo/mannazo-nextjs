@@ -28,8 +28,8 @@ export const createCommunityPost = (postData) =>
 // 채팅 관련 (추가해야 함)
 export const getChatList = (userId) => api.get(`/chat/list/${userId}`)
 export const getChatRoom = (roomId) => api.get(`/chat/roomId/${roomId}`)
-export const createChatRoom = (userId1: string, userId2: string) =>
-  api.post('/chat/room', { userId1, userId2 })
+export const createChatRoom = (user1Id: string, user2Id: string) =>
+  api.post('/chat/room', { user1Id, user2Id })
 export const sendChatMessage = (
   senderId: string,
   roomId: string,
