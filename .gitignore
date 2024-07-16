@@ -47,6 +47,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/.idea/.gitignore
-/.idea/prettier.xml
-/.idea/*

@@ -95,24 +95,11 @@ export const Navbar = () => {
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
         <NavbarItem className="hidden md:flex">
-          {/*<Button*/}
-          {/*  isExternal*/}
-          {/*  as={Link}*/}
-          {/*  className="bg-default-100 text-sm font-normal text-default-600"*/}
-          {/*  href={siteConfig.links.sponsor}*/}
-          {/*  startContent={<HeartFilledIcon className="text-danger" />}*/}
-          {/*  variant="flat"*/}
-          {/*>*/}
-          {/*  Sponsor*/}
-          {/*</Button>*/}
           <HeaderProfile />
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="basis-1 pl-4 sm:hidden" justify="end">
-        {/*<Link isExternal aria-label="Github" href={siteConfig.links.github}>*/}
-        {/*  <GithubIcon className="text-default-500" />*/}
-        {/*</Link>*/}
         <ThemeSwitch />
         <HeaderProfile />
         <NavbarMenuToggle />
@@ -124,6 +111,7 @@ export const Navbar = () => {
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
+                href={item.href}
                 color={
                   index === 2
                     ? 'primary'
@@ -131,7 +119,6 @@ export const Navbar = () => {
                       ? 'danger'
                       : 'foreground'
                 }
-                href="#"
                 size="lg"
               >
                 {item.label}

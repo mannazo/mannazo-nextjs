@@ -1,34 +1,41 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import ChatHeader from './ChatHeader'
 import ChatBody from './ChatBody.jsx'
 import InputArea from './InputArea.jsx'
+import useViewportHeight from '@/hooks/useViewportHeight'
+import useChatMessages from '@/hooks/useChatMessages'
+import useChatSSE from '@/hooks/useChatSSE'
+import { useChatStore } from '@/store/chatStore'
 
-const ChatRoom = () => {
-  const [viewportHeight, setViewportHeight] = useState(0)
-  const containerRef = useRef(null)
+const ChatRoom = ({ chatRoomId }) => {
+  const { viewportHeight, containerRef } = useViewportHeight()
+  const { messages, sendMessage } = useChatMessages()
+  const sseMessages = useChatSSE(chatRoomId)
+  const [allMessages, setAllMessages] = useState([])
+  const currentChatUsers = useChatStore((state) => state.currentChatUsers) // 추가
 
   useEffect(() => {
-    const handleResize = () => {
-      if (containerRef.current) {
-        const windowHeight = window.innerHeight
-        const containerTop = containerRef.current.getBoundingClientRect().top
-        const newHeight = windowHeight - containerTop
-        setViewportHeight(newHeight)
-      }
+    setAllMessages([...messages, ...sseMessages])
+  }, [messages, sseMessages])
+
+  const handleSendMessage = async (message) => {
+    try {
+      // currentChatUsers가 null이 아니라고 가정
+      const [senderId, receiverId] = currentChatUsers || ['', '']
+      await sendMessage(senderId, chatRoomId, message)
+    } catch (error) {
+      console.error('Error sending message:', error)
     }
+  }
 
-    handleResize() // 초기 높이 설정
+  // currentChatUsers가 null인 경우 처리...
+  if (!currentChatUsers) {
+    return <div>Loading...</div>
+  }
 
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('scroll', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('scroll', handleResize)
-    }
-  }, [])
+  const [currentUserId, otherUserId] = currentChatUsers
 
   return (
     <div
@@ -36,11 +43,17 @@ const ChatRoom = () => {
       className="mx-auto flex max-w-4xl flex-col rounded-lg bg-gray-100 p-4 shadow-md"
       style={{ height: `${viewportHeight}px` }}
     >
-      <ChatHeader className="flex-shrink-0" />
-      <div className="flex-grow overflow-y-auto">
-        <ChatBody />
+      <ChatHeader className="flex-shrink-0" otherUserId={otherUserId} />
+      <div className="flex-grow overflow-y-auto scrollbar-hide">
+        <div>
+          <ChatBody
+            chatRoomId={chatRoomId}
+            messages={allMessages}
+            currentUserId={currentUserId}
+          />
+        </div>
       </div>
-      <InputArea className="flex-shrink-0" />
+      <InputArea className="flex-shrink-0" onSendMessage={handleSendMessage} />
     </div>
   )
 }

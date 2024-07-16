@@ -26,8 +26,8 @@ export const siteConfig = {
     },
     {
       label: 'Map',
-      href: '/map',
-    },
+      href: '/users/map',
+    }
   ],
   navMenuItems: [
     {
@@ -41,6 +41,10 @@ export const siteConfig = {
     {
       label: 'Shop',
       href: '/shop',
+    },
+    {
+      label: 'Map',
+      href: '/users/map',
     },
     {
       label: 'Profile',
