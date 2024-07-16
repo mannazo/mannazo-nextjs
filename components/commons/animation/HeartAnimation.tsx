@@ -22,8 +22,8 @@ const HeartAnimation = ({ x, y }) => {
     const timer = setTimeout(
       () => {
         setVisible(false)
-      },
-      style.animation.split(' ')[1].replace('s', '') * 1000
+      }
+      // style.animation.split(' ')[1].replace('s', '') * 1000
     )
 
     return () => clearTimeout(timer)
