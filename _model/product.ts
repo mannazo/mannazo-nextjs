@@ -1,9 +1,8 @@
 export interface Product {
-  product_id: number,
-  name: string,
+  shop_id: number,
+  product_name: string,
   description: string,
   price: number,
-  category: string,
   stock: number;
-  image: string
+  product_image: string
 }
