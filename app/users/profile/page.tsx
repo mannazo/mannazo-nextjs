@@ -1,11 +1,14 @@
-import { useRouter } from 'next/navigation'
-import ProfileContent from '@/components/users/profile/ProfileContent'
-import ProfileEditContent from '@/components/users/profile/ProfileEditContent'
+'use client'
+
+import ProfileHeader from '@/components/users/profile/ProfileHeader'
+import ProfileNav from '@/components/users/profile/ProfileNav'
 
 export default function Profile() {
+
   return (
     <>
-      <ProfileContent />
+      <ProfileHeader />
+      <ProfileNav />
     </>
   )
 }

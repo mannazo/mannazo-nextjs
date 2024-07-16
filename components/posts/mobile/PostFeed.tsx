@@ -19,7 +19,7 @@ export default function PostFeed() {
 
     setIsLoading(true)
     try {
-      const response = await getPostsByPage(page)
+      const response = await getPostsByPage(page, 3)
       const newTravelers = response.data.content || []
       setTravelers((prevTravelers) => [...prevTravelers, ...newTravelers])
       setPage((prevPage) => prevPage + 1)

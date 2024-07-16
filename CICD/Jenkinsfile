@@ -7,38 +7,65 @@ pipeline {
         GIT_USER_EMAIL = "${params.git_user_email}"
         GIT_CREDENTIAL = "${params.github_credential}"
         DISCORD_WEBHOOK = credentials("MANNAZU-DISCORD_WEBHOOK")
+        CACHE_DIR = "/var/jenkins_home/npm_cache/mannazu-nextjs"
     }
 
     tools {
-        nodejs 'NodeJS-20.11.1' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
+        nodejs 'NodeJS-22.4.0' // Next.js 14.2.4와 호환되는 Node.js 버전으로 변경
     }
 
     stages {
-        stage('.env.local 추가') {
+        stage('의존성 설치(package.json)') {
             steps {
                 script {
-                    if (params.BUILD_FILE) {
-                        writeFile file: '.env.local', text: readFile(params.BUILD_FILE)
-                    }
-                }
-            }
-        }
+                    // Discord 빌드 시작 메시지 보내기
+                    discordSend title: "Mannazu-nextjs", 
+                                description: "빌드 시작!!",
+                                link: env.BUILD_URL, result: currentBuild.currentResult, 
+                                webhookURL: env.DISCORD_WEBHOOK
 
-        stage('Dependencies 설치') {
-            steps {
-                script {
-                    // 캐시 디렉토리 생성
-                    if (fileExists('node_modules')) {
-                        echo 'Using cached node_modules directory'
-                    } else {
+                    // 현재 커밋 해시 가져오기
+                    def currentCommit = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+                    
+                    // 이전 빌드의 커밋 해시 가져오기 (없으면 빈 문자열)
+                    def previousCommit = sh(script: 'git rev-parse HEAD~1 || echo ""', returnStdout: true).trim()
+
+                    def changes = sh(script: "git diff --name-only ${previousCommit} ${currentCommit} -- package.json", returnStdout: true).trim()
+
+                    // 캐시된 node_modules가 있는지 확인
+                    def cacheExists = fileExists "${CACHE_DIR}/node_modules"
+
+                    if (changes || !cacheExists) {
+                        echo 'package.json이 변경되었거나 캐시가 없습니다. 의존성을 새로 설치합니다.'
+                        sh 'rm -rf node_modules'
+                        sh 'rm -rf pnpm-lock.yaml'
+                        sh 'npm install -g pnpm'
                         sh 'pnpm install'
+                        
+                        // 새로 설치한 node_modules를 캐시
+                        sh "mkdir -p ${CACHE_DIR}"
+                        sh "rm -rf ${CACHE_DIR}/node_modules"
+                        sh "cp -R node_modules ${CACHE_DIR}/"
+                        sh "cp pnpm-lock.yaml ${CACHE_DIR}/"
+                    } else {
+                        echo '캐시된 node_modules를 사용합니다.'
+                        sh "cp -R ${CACHE_DIR}/node_modules ."
+                        sh "cp ${CACHE_DIR}/pnpm-lock.yaml ."
                     }
-                    sh 'pnpm run build'
                 }
             }
         }
 
-        stage('mannazu-nextjs 이미지 빌드') {
+        stage('빌드') {
+            steps {
+                script {
+                    echo '빌드 시작...'
+                    sh 'pnpm run build' // Next.js 빌드 실행
+                }
+            }
+        }
+
+        stage('도커 이미지 빌드') {
             steps {
                 script {
                     sh "ls -la"
@@ -88,15 +115,18 @@ pipeline {
             }                        
         }
         failure {
-            discordSend title: "Mannazu-nextjs 빌드", 
-                        description: "빌드 실패!!",
-                        footer: "Jenkins 에서 확인하세요", 
-                        link: env.BUILD_URL, result: currentBuild.currentResult, 
-                        webhookURL: env.DISCORD_WEBHOOK
+            script {
+                discordSend title: "Mannazu-auth-service", 
+                            description: "빌드 실패!!",
+                            footer: "젠킨스에서 확인하세요", 
+                            link: env.BUILD_URL, result: currentBuild.currentResult, 
+                            webhookURL: env.DISCORD_WEBHOOK
+            }
         }
         always {
             echo 'Workspace 정리..'
-            sh 'rm -rf **/* !node_modules' // node_modules 디렉토리를 제외하고 정리
+            // node_modules와 pnpm-lock.yaml을 제외한 모든 파일 삭제
+            deleteDir() // 워크스페이스의 모든 내용을 삭제
         }
     }
 }
