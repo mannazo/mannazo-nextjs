@@ -1,7 +1,9 @@
-export default function Page() {
+import ChatRoomList from '@/components/chat/ChatRoomList'
+
+export default function ChatListPage() {
   return (
-    <div>
-      <h1>ExamplePage</h1>
+    <div className="">
+      <ChatRoomList />
     </div>
   )
 }
