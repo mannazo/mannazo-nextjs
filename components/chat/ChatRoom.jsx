@@ -14,7 +14,7 @@ const ChatRoom = ({ chatRoomId }) => {
   const { messages, sendMessage } = useChatMessages()
   const sseMessages = useChatSSE(chatRoomId)
   const [allMessages, setAllMessages] = useState([])
-  const currentChatUsers = useChatStore((state) => state.currentChatUsers) // 추가
+  const currentChatUsers = useChatStore((state) => state.currentChatUsers)
 
   useEffect(() => {
     setAllMessages([...messages, ...sseMessages])
