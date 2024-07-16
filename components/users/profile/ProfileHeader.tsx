@@ -41,6 +41,7 @@ export default function ProfileHeader() {
             `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
           )
           setUserData(response.data)
+          console.log(response.data)
         } catch (error) {
           console.error('Error fetching user data:', error)
         } finally {

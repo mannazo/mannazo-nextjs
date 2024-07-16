@@ -25,17 +25,39 @@ export default function SettingsEditContent() {
   const router = useRouter()
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [userRequestDTO, setUserRequestDTO] = useState(null)
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (status === 'authenticated') {
         try {
           const response = await axios.get(
-            // `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
-            `https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`,
+            `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            // `https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`,
 
           )
-          setUserData(response.data)
+          console.log("responsedata:")
+          console.log(response.data)
+          // setUserData(response.data)
+          setUserData({
+            ...response.data,
+            language: response.data.language.split(','), // 문자열을 배열로 변환
+            // interests: response.data.interests.split(','), // 문자열을 배열로 변환
+          })
+          // setUserRequestDTO({
+          //   email: userData.data.email,
+          //   name: userData.data.name,
+          //   nickname: userData.data.nickname,
+          //   nationality: userData.data.nationality,
+          //   language: userData.data.language.split(','),
+          //   profileImage: userData.data.image,
+          //   introduction: userData.data.introduction,
+          //   city: userData.data.city,
+          //   gender: userData.data.gender,
+          //   mbti: userData.data.mbti,
+          //   interests: userData.data.interests.join(','),
+          //   birthday: userData.data.birthday,
+          // })
         } catch (error) {
           console.error('Error fetching user data:', error)
         } finally {
@@ -88,37 +110,81 @@ export default function SettingsEditContent() {
       return field
     }
 
-     const userRequestDTO = {
-       email: userData.email, // 이메일 입력 필드 추가 필요
-       name: userData.name,
-       nickname: userData.nickname, // 닉네임 입력 필드 추가 필요
-       nationality: userData.nationality,
-       language: processField(userData.language),
-       profileImage: userData.image,
-       introduction: userData.introduction,
-       city: userData.city, // 도시 입력 필드 추가 필요
-       gender: userData.gender, // 성별 입력 필드 추가 필요
-       mbti: userData.mbti,
-       interests: processField(userData.interests),
-       // interests: userData.interests.join(','), // 배열을 문자열로 변환
-       birthday: userData.birthday
-     }
+     // const userRequestDTO = {
+     //   email: userData.email, // 이메일 입력 필드 추가 필요
+     //   name: userData.name,
+     //   nickname: userData.nickname, // 닉네임 입력 필드 추가 필요
+     //   nationality: userData.nationality,
+     //   // language: processField(userData.language),
+     //   language: userData.language.join(','), // 배열을 문자열로 변환
+     //   profileImage: userData.image,
+     //   introduction: userData.introduction,
+     //   city: userData.city, // 도시 입력 필드 추가 필요
+     //   gender: userData.gender, // 성별 입력 필드 추가 필요
+     //   mbti: userData.mbti,
+     //   // interests: processField(userData.interests),
+     //   interests: userData.interests,
+     //   // interests: userData.interests.join(','), // 배열을 문자열로 변환
+     //   birthday: userData.birthday
+     //
+     // }
+
+    // "email": "string",
+    // "name": "string",
+    // "nickname": "string",
+    // "nationality": "string",
+    // "language": "string",
+    // "profileImage": "string",
+    // "introduction": "string",
+    // "city": "string",
+    // "gender": "string",
+    // "mbti": "string",
+    // "interests": "string",
+    // "birthday": "2024-07-15"
 
     console.log('submitv2', userData)
     e.preventDefault()
+
+    const userRequestDTO = {
+      email: userData.email, // 이메일 입력 필드 추가 필요
+      name: userData.name,
+      nickname: userData.nickname, // 닉네임 입력 필드 추가 필요
+      nationality: userData.nationality,
+      // language: processField(userData.language),
+      language: userData.language.join(','), // 배열을 문자열로 변환
+      profileImage: userData.image,
+      introduction: userData.introduction,
+      city: userData.city, // 도시 입력 필드 추가 필요
+      gender: userData.gender, // 성별 입력 필드 추가 필요
+      mbti: userData.mbti,
+      // interests: processField(userData.interests),
+      interests: userData.interests,
+      // interests: userData.interests.join(','), // 배열을 문자열로 변환
+      birthday: userData.birthday
+
+    }
     console.log('submit3', userData)
     try {
+      console.log("서버로 보낼 데이터");
+      console.log(userRequestDTO);
       // await axios.put(
       //   `https://mannazu.diligenp.com/user/${session.user.additionalInfo.serverUserId}`,
       //   { ...userData, userId: session.user.additionalInfo.serverUserId }
       // )
-      router.push('/users/settings')
+      // router.push('/users/settings')
 
-      await axios.put(
-        `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`,
+      const response = await axios.put(
+        `https://mannazo.diligentp.com/user/${session.user.additionalInfo.serverUserId}`,
         // `https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`,
-        { userRequestDTO }
+        userRequestDTO
       )
+      router.push('/users/settings')
+      console.log('Server Response:', response.data) // 서버 응답 로그 출력
+
+      // ).then((response) => {
+      //   console.log("서버로 부터 온 데이터");
+      //   console.log(response.data.body);
+      // })
       console.log('submit4', userData)
     } catch (error) {
       console.log('submiterr', userData)
@@ -130,8 +196,10 @@ export default function SettingsEditContent() {
     return <LoadingSpinner />
   }
 
+  // const languageValue =
+  //   userData && userData.language ? userData.language.join(',') : ''
   const languageValue =
-    userData && userData.language ? userData.language.join(',') : ''
+    userData && Array.isArray(userData.language) ? userData.language.join(',') : ''
 
   return (
     <form onSubmit={handleSubmit}>
@@ -253,7 +321,8 @@ export default function SettingsEditContent() {
             <InterestsSelection
               onChange={handleInterestsChange}
               initialSelectedInterests={
-                userData && userData.interests
+                userData && userData.interests && typeof
+                userData.interests === 'string'
                   ? userData.interests.split(',')
                   : []
               } // 기존 interests를 전달

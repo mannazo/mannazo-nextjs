@@ -29,11 +29,12 @@ export default function SettingsDeleteContent() {
     if (confirm) {
       try {
         // 탈퇴 로직 실행
-        await axios.delete(`https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`); // 적절한 API 엔드포인트로 수정
+        // await axios.delete(`https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`); // 적절한 API 엔드포인트로 수정
+        await axios.delete(`https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`);
         console.log('사용자가 탈퇴하였습니다.');
 
         // 메인 페이지로 라우터 푸시
-        router.push('/');
+        // router.push('/');
       } catch (error) {
         console.error('Error deleting account:', error);
       }
