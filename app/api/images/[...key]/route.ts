@@ -2,7 +2,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
-import { validateEnv } from '@/app/api/upload/route'
 
 export async function GET(
   request: NextRequest,
@@ -11,19 +10,16 @@ export async function GET(
   const key = params.key.join('/')
   console.log(`Requested key: ${key}`)
 
-  // 환경 변수 검증
-  const env = validateEnv()
-
   const s3Client = new S3Client({
-    region: env.AWS_REGION,
+    region: process.env.AWS_REGION,
     credentials: {
-      accessKeyId: env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     },
   })
 
   const command = new GetObjectCommand({
-    Bucket: env.AWS_BUCKET_NAME,
+    Bucket: process.env.AWS_BUCKET_NAME,
     Key: key,
   })
 

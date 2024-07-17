@@ -19,7 +19,7 @@ interface EnvVariables {
 }
 
 // 환경 변수 검증 함수
-export function validateEnv(): EnvVariables {
+function validateEnv(): EnvVariables {
   const requiredEnvVars = [
     'AWS_REGION',
     'AWS_ACCESS_KEY_ID',
