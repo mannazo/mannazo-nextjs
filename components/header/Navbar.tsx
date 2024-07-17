@@ -37,8 +37,8 @@ export const Navbar = () => {
         input: 'text-sm',
       }}
       endContent={
-        <Kbd className="hidden lg:inline-block" keys={['command']}>
-          K
+        <Kbd className="hidden lg:inline-block" keys={['up']}>
+          😁
         </Kbd>
       }
       labelPlacement="outside"
@@ -77,29 +77,9 @@ export const Navbar = () => {
         </ul>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden basis-1/5 sm:flex sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden gap-2 sm:flex">
-          {/*<Link isExternal aria-label="Twitter" href={siteConfig.links.twitter}>*/}
-          {/*  <TwitterIcon className="text-default-500" />*/}
-          {/*</Link>*/}
-          {/*<Link isExternal aria-label="Discord" href={siteConfig.links.discord}>*/}
-          {/*  <DiscordIcon className="text-default-500" />*/}
-          {/*</Link>*/}
-          {/*<Link isExternal aria-label="Github" href={siteConfig.links.github}>*/}
-          {/*  <GithubIcon className="text-default-500" />*/}
-          {/*</Link>*/}
-          <ThemeSwitch />
-        </NavbarItem>
+      <NavbarContent className="basis-1 pl-4" justify="end">
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        <NavbarItem className="hidden md:flex">
-          <ProfileSection />
-        </NavbarItem>
-      </NavbarContent>
 
-      <NavbarContent className="basis-1 pl-4 sm:hidden" justify="end">
         <ThemeSwitch />
         <ProfileSection />
         <NavbarMenuToggle />
