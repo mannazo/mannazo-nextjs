@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import ReactCountryFlag from 'react-country-flag'
+import { CountryRegionData } from 'react-country-region-selector'
+
 import Link from 'next/link'
 import {
   Navbar,
@@ -20,6 +22,19 @@ import BlockUserModal from './BlockUserModal'
 import useChatStore from '@/store/chatStore'
 
 const ChatHeader = () => {
+  // 국가명을 입력받아 flag에서 필요로하는 ISO 국가코드를 반환하는 함수
+  function getCountryCode(countryName: string): string | undefined {
+    const countryEntry = CountryRegionData.find(
+      (entry) => entry[0].toLowerCase() === countryName.toLowerCase()
+    )
+
+    if (countryEntry && countryEntry.length > 1) {
+      return countryEntry[1]
+    }
+
+    return ''
+  }
+
   // zustand 로 전역저장한 값들을 꺼내온다. (채팅방 들어올 때마다 전역저장함)
   const {
     currentRoom,
@@ -32,7 +47,6 @@ const ChatHeader = () => {
   } = useChatStore()
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false)
   const [isBlockUserOpen, setIsBlockUserOpen] = useState(false)
-  const userName = receiver.nickname
 
   const handleFeedbackSubmit = (feedbackData) => {
     // 여기에서 피드백 데이터를 처리합니다
@@ -56,15 +70,26 @@ const ChatHeader = () => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Avatar src="https://example.com/avatar.jpg" size="md" />
+            {/*<Avatar src={receiver.profileImage} size="md" />*/}
+            <ReactCountryFlag
+              countryCode={getCountryCode(receiver.nationality)}
+              style={{
+                width: '2em',
+                height: '2em',
+              }}
+              svg
+            />
           </NavbarItem>
           <NavbarItem>
             <div className="flex flex-col">
               <div className="flex items-center">
-                <span className="mr-2 text-lg font-bold">{userName}</span>
-                <ReactCountryFlag countryCode="US" />
+                <span className="mr-2 text-lg font-bold">
+                  {receiver.nickname}
+                </span>
               </div>
-              <span className="text-sm text-default-500">Status message</span>
+              <span className="text-sm text-default-500">
+                {receiver.nationality}
+              </span>
             </div>
           </NavbarItem>
         </NavbarContent>
@@ -108,7 +133,7 @@ const ChatHeader = () => {
         isOpen={isBlockUserOpen}
         onClose={() => setIsBlockUserOpen(false)}
         onSubmit={handleBlockUser}
-        userName={userName}
+        userName={receiver.nickname}
       />
     </>
   )
