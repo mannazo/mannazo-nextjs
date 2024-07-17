@@ -4,11 +4,13 @@ import { useMutation } from '@tanstack/react-query'
 import { createChatRoom } from '@/services/api'
 import { useRouter } from 'next/navigation'
 import { AxiosResponse } from 'axios'
-import { useChatStore } from '@/store/chatStore'
+import { useSession } from 'next-auth/react'
+import useChatStore from '@/store/chatStore'
 
 export const useCreateChatRoom = () => {
   const router = useRouter()
-  const setCurrentChatUsers = useChatStore((state) => state.setCurrentChatUsers)
+  const { data: session, status } = useSession()
+  const { setReceiver, setCurrentUser } = useChatStore()
 
   return useMutation({
     mutationFn: ({
@@ -22,9 +24,23 @@ export const useCreateChatRoom = () => {
       return createChatRoom(sortedUserId1, sortedUserId2)
     },
     onSuccess: (response: AxiosResponse, variables) => {
+      console.log('response is', response.data)
+      if (status === 'unauthenticated') {
+        router.push('/login')
+      }
+
+      if (
+        response.data.user1.userId === session.user.additionalInfo.serverUserId
+      ) {
+        setReceiver(response.data.user2)
+        setCurrentUser(response.data.user1)
+      } else {
+        setReceiver(response.data.user1)
+        setCurrentUser(response.data.user2)
+      }
+
       const chatRoomId = response.data.chatRoomId
       if (chatRoomId) {
-        setCurrentChatUsers([variables.senderId, variables.postUserId])
         router.push(`/chat/room/${chatRoomId}`)
       } else {
         console.error('채팅방 ID를 받지 못했습니다.')

@@ -25,7 +25,7 @@ import {
   SearchIcon,
   Logo,
 } from '@/components/commons/icons'
-import HeaderProfile from '@/components/main-header/Header-Profile'
+import ProfileSection from '@/components/header/ProfileSection'
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/16/solid'
 
 export const Navbar = () => {
@@ -95,13 +95,13 @@ export const Navbar = () => {
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
         <NavbarItem className="hidden md:flex">
-          <HeaderProfile />
+          <ProfileSection />
         </NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="basis-1 pl-4 sm:hidden" justify="end">
         <ThemeSwitch />
-        <HeaderProfile />
+        <ProfileSection />
         <NavbarMenuToggle />
       </NavbarContent>
 
@@ -111,6 +111,7 @@ export const Navbar = () => {
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
+                href={item.href}
                 color={
                   index === 2
                     ? 'primary'
@@ -118,7 +119,6 @@ export const Navbar = () => {
                       ? 'danger'
                       : 'foreground'
                 }
-                href="#"
                 size="lg"
               >
                 {item.label}

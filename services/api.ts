@@ -26,14 +26,17 @@ export const createCommunityPost = (postData) =>
 
 // 채팅 관련 (추가해야 함)
 export const getChatList = (userId) => api.get(`/chat/list/${userId}`)
-export const getChatRoom = (roomId) => api.get(`/chat/roomId/${roomId}`)
-export const createChatRoom = (userId1: string, userId2: string) =>
-  api.post('/chat/room', { userId1, userId2 })
+// 채팅방 이벤트 스트림은 EventSource 인스턴스로 받음. useChatSSE 훅을 참고
+// export const getChatRoom = (roomId) => api.get(`/chat/roomId/${roomId}`)
+export const createChatRoom = (user1Id: string, user2Id: string) =>
+  api.post('/chat/room', { user1Id, user2Id })
 export const sendChatMessage = (
   senderId: string,
   roomId: string,
   msg: string
 ) => api.post('https://mannazo.diligentp.com/chat/', { senderId, roomId, msg })
+export const getChatRoomList = (userId) =>
+  api.get(`/chat/room/userId/${userId}`)
 
 //Shop 관련
 export const createProduct = (productData) => api.post('/shop', productData)

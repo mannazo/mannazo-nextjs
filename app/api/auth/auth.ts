@@ -70,6 +70,9 @@ export const authOptions: NextAuthOptions = {
       }
       return true
     },
+    // async redirect({ url, baseUrl }) {
+    //   return 'https://mannazu.com/'
+    // },
     async jwt({ token, user, account, profile }) {
       if (user) {
         token.userId = user.id

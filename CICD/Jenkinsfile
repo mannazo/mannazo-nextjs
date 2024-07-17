@@ -37,14 +37,12 @@ pipeline {
 
                     if (changes || !cacheExists) {
                         echo 'package.json이 변경되었거나 캐시가 없습니다. 의존성을 새로 설치합니다.'
-                        sh 'rm -rf node_modules'
-                        sh 'rm -rf pnpm-lock.yaml'
+                        sh "rm -rf ${CACHE_DIR}"
                         sh 'npm install -g pnpm'
                         sh 'pnpm install'
                         
                         // 새로 설치한 node_modules를 캐시
                         sh "mkdir -p ${CACHE_DIR}"
-                        sh "rm -rf ${CACHE_DIR}/node_modules"
                         sh "cp -R node_modules ${CACHE_DIR}/"
                         sh "cp pnpm-lock.yaml ${CACHE_DIR}/"
                     } else {
@@ -103,9 +101,9 @@ pipeline {
 
     post {
         success {
-            discordSend title: "Mannazu-nextjs 빌드", 
+            discordSend title: "Mannazu-nextjs", 
                         description: "빌드 성공!!",            
-                        footer: "Jenkins 에서 확인하세요", 
+                        footer: "젠킨스에서 확인하세요", 
                         link: env.BUILD_URL, result: currentBuild.currentResult, 
                         webhookURL: env.DISCORD_WEBHOOK
             script {
@@ -116,7 +114,7 @@ pipeline {
         }
         failure {
             script {
-                discordSend title: "Mannazu-auth-service", 
+                discordSend title: "Mannazu-nextjs", 
                             description: "빌드 실패!!",
                             footer: "젠킨스에서 확인하세요", 
                             link: env.BUILD_URL, result: currentBuild.currentResult, 

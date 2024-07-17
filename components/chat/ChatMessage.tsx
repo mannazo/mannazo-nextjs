@@ -2,8 +2,6 @@ import React from 'react'
 import { parseISO, format } from 'date-fns'
 
 const ChatMessage = ({ message, currentUserId }) => {
-  console.log('message:', message)
-  console.log('currentUserId:', currentUserId)
   const { id, senderId, roomId, msg, createdAt } = message
   const isUser = senderId === currentUserId
 
