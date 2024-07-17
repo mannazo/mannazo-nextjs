@@ -3,10 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "set NEXT_DISABLE_TYPESCRIPT=1 && next build --no-lint",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "env-cmd -f ./mannazo-nextjs-secret/.env.local next dev",
+    "build": "cross-env NEXT_DISABLE_TYPESCRIPT=1 env-cmd -f ./mannazo-nextjs-secret/.env.prod next build --no-lint",
+    "test:env": "cross-env NEXT_DISABLE_TYPESCRIPT=1 env-cmd -f ./mannazo-nextjs-secret/.env.local node -p \"JSON.stringify(process.env, null, 2)\"",
+    "build:local": "cross-env NEXT_DISABLE_TYPESCRIPT=1 env-cmd -f ./mannazo-nextjs-secret/.env.local next build --no-lint",
+    "build:prod": "cross-env NEXT_DISABLE_TYPESCRIPT=1 env-cmd -f ./mannazo-nextjs-secret/.env.prod next build --no-lint",
+    "start": "env-cmd -f ./mannazo-nextjs-secret/.env.prod next start",
+    "start:local": "env-cmd -f ./mannazo-nextjs-secret/.env.local next start",
+    "start:prod": "env-cmd -f ./mannazo-nextjs-secret/.env.prod next start",
+    "lint": "env-cmd -f ./mannazo-nextjs-secret/.env.local next lint",
+    "lint:fix": "env-cmd -f ./mannazo-nextjs-secret/.env.local next lint --fix"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.614.0",
@@ -23,7 +29,6 @@
     "clsx": "^2.1.1",
     "country-region-data": "^3.0.0",
     "date-fns": "^3.6.0",
-    "dotenv": "^16.4.5",
     "framer-motion": "^11.3.2",
     "fuse.js": "^7.0.0",
     "gsap": "^3.12.5",
@@ -56,6 +61,8 @@
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.4",
     "postcss": "^8.4.39",
