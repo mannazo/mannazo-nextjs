@@ -1,7 +1,7 @@
 'use client'
 
-import SearchBar from '@/components/chat/SearchBar.jsx'
-import ChatList from '@/components/chat/ChatList.jsx'
+import SearchBar from '@/components/chat/SearchBar'
+import ChatList from '@/components/chat/ChatList'
 import useViewportHeight from '@/hooks/useViewportHeight'
 
 const ChatRoomList = () => {

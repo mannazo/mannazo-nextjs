@@ -17,11 +17,22 @@ import {
 import { ChevronLeft, MoreVertical } from 'lucide-react'
 import FeedbackModal from './FeedbackModal'
 import BlockUserModal from './BlockUserModal'
+import useChatStore from '@/store/chatStore'
 
 const ChatHeader = () => {
+  // zustand 로 전역저장한 값들을 꺼내온다. (채팅방 들어올 때마다 전역저장함)
+  const {
+    currentRoom,
+    setCurrentRoom,
+    rooms,
+    receiver,
+    setReceiver,
+    currentUser,
+    setCurrentUser,
+  } = useChatStore()
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false)
   const [isBlockUserOpen, setIsBlockUserOpen] = useState(false)
-  const userName = 'John Doe' // 예시 사용자 이름
+  const userName = receiver.nickname
 
   const handleFeedbackSubmit = (feedbackData) => {
     // 여기에서 피드백 데이터를 처리합니다

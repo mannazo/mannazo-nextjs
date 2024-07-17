@@ -15,6 +15,7 @@ import Marquee from 'react-fast-marquee'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useCreateChatRoom } from '@/hooks/useCreateChatRoom'
+import useChatStore from '@/store/chatStore'
 
 interface TravelPostCardProps {
   post: {
