@@ -18,7 +18,6 @@ pipeline {
         stage('의존성 설치(package.json)') {
             steps {
                 script {
-                    // sh "git submodule update --init --recursive"
                     // Discord 빌드 시작 메시지 보내기
                     discordSend title: "Mannazu-nextjs", 
                                 description: "빌드 시작!!",
@@ -57,10 +56,7 @@ pipeline {
 
         stage('빌드') {
             steps {
-                script {
-                    dir('mannazo-nextjs-secret'){
-                        sh "ls -al"              
-                    }      
+                script {  
                     echo '빌드 시작...'
                     sh 'pnpm run build' // Next.js 빌드 실행
                 }

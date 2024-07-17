@@ -12,7 +12,7 @@ RUN npm install -g pnpm && pnpm install --prod
 COPY .next ./.next
 COPY public ./public
 COPY next.config.mjs ./
-COPY .env.prod ./mannazo-nextjs-secret/.env.prod
+COPY mannazo-nextjs-secret/.env.prod ./mannazo-nextjs-secret/.env.prod
 
 # 프로덕션 모드
 ENV NODE_ENV production
