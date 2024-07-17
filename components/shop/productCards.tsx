@@ -63,13 +63,19 @@ const ProductCards: React.FC = () => {
   }
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold">Featured Products</h1>
-      <Link href="/shop/cart">
-        <ShoppingCartIcon cart={cart} />
-      </Link>
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="mb-8 text-3xl font-bold">Featured Products</h1>
+        <Link href="/shop/cart">
+          <ShoppingCartIcon cart={cart} />
+        </Link>
+      </div>
+
       <div className="flex flex-wrap justify-between">
         {products.map((product) => (
-          <div key={product.shop_id} className="w-full p-2 sm:w-1/2 lg:w-1/4">
+          <div
+            key={product.shop_id}
+            className="w-full p-2 sm:w-1/2 md:w-1/3 lg:w-1/3"
+          >
             <ProductCard product={product} addtocart={addToCart} />
           </div>
         ))}

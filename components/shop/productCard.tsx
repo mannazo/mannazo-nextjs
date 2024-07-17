@@ -20,13 +20,13 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
 
   return (
     <>
-      <Card className="h-[800px]" shadow="sm" isPressable onPress={onOpen}>
+      <Card shadow="sm" isPressable onPress={onOpen}>
         <CardBody className="overflow-visible p-0">
           <Image
             shadow="sm"
             radius="lg"
             width="100%"
-            className="h-[370px] w-full object-cover"
+            className="w-full object-cover"
             src={product.product_image}
           />
           {/*<h3 className="text-lg font-semibold mt-2">{product.name}</h3>*/}
