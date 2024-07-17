@@ -58,8 +58,9 @@ pipeline {
         stage('빌드') {
             steps {
                 script {
-                    dir('mannazo-nextjs-secret')
-                        sh "ls -al"                    
+                    dir('mannazo-nextjs-secret'){
+                        sh "ls -al"              
+                    }      
                     echo '빌드 시작...'
                     sh 'pnpm run build' // Next.js 빌드 실행
                 }
