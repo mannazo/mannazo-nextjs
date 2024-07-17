@@ -8,6 +8,7 @@ pipeline {
         GIT_CREDENTIAL = "${params.github_credential}"
         DISCORD_WEBHOOK = credentials("MANNAZU-DISCORD_WEBHOOK")
         CACHE_DIR = "/var/jenkins_home/npm_cache/mannazu-nextjs"
+        ENV_FILE = credentials('mannazu-env')
     }
 
     tools {
@@ -57,6 +58,8 @@ pipeline {
         stage('빌드') {
             steps {
                 script {
+                    def envContent = readFile(ENV_FILE)
+                    sh "ls -la"
                     echo '빌드 시작...'
                     sh 'pnpm run build' // Next.js 빌드 실행
                 }
