@@ -12,6 +12,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (status === 'authenticated') {
+      console.log(session)
       const isFirstUser = session.user.additionalInfo.firstTimeUser
 
       if (isFirstUser) {

@@ -5,10 +5,6 @@ export const siteConfig = {
   description: 'Travel to make Friend! 😁',
   navItems: [
     {
-      label: 'Home',
-      href: '/',
-    },
-    {
       label: 'Mobile',
       href: '/posts/mobile',
     },
@@ -27,7 +23,7 @@ export const siteConfig = {
     {
       label: 'Map',
       href: '/users/map',
-    }
+    },
   ],
   navMenuItems: [
     {

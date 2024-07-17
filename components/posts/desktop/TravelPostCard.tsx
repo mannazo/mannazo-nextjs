@@ -15,6 +15,7 @@ import Marquee from 'react-fast-marquee'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useCreateChatRoom } from '@/hooks/useCreateChatRoom'
+import useChatStore from '@/store/chatStore'
 
 interface TravelPostCardProps {
   post: {
@@ -77,7 +78,7 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
   }
 
   return (
-    <Card className="h-[800px] overflow-hidden" isPressable isFooterBlurred>
+    <Card className="h-[600px] overflow-hidden" isPressable isFooterBlurred>
       <CardHeader className="absolute top-1 z-10 flex-col items-start">
         <div className="flex w-full items-center justify-between rounded-2xl bg-background/40 p-2 backdrop-blur-md">
           {user && (
@@ -95,9 +96,10 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
             {postData.travelStatus}
           </Chip>
         </div>
-        <div className="mt-4 rounded-r-full bg-gradient-to-r from-red-500/60 to-secondary p-2 text-white">
+        <div className="mt-4 rounded-r-xl bg-gradient-to-r from-red-500/60 to-secondary/60 p-2 text-white">
           <h4 className="text-xl font-bold">
-            TO: {postData.travelCity}, REGION: {postData.travelNationality}
+            TO: {postData.travelCity}, <br />
+            REGION: {postData.travelNationality}
           </h4>
         </div>
       </CardHeader>
@@ -111,7 +113,7 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
       </CardBody>
       <CardFooter className="absolute bottom-1 z-10 ml-1 flex w-[calc(100%_-_8px)] flex-col items-center justify-center overflow-hidden rounded-large border-1 border-white/20 py-3 shadow-small before:rounded-xl before:bg-white/10">
         <div className="ute bottom-0 left-0 right-0 z-20 mb-[calc(1rem+1px)] flex items-center justify-center">
-          <p className="mx-auto max-w-[80%] cursor-context-menu rounded-2xl bg-background/40 px-4 py-2 text-center backdrop-blur-md">
+          <p className="w-full cursor-context-menu rounded-2xl bg-background/40 p-4 backdrop-blur-md">
             {postData.travelPurpose}
           </p>
         </div>
@@ -119,6 +121,19 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
           <h4 className="mb-2 text-xl font-bold">
             {postData.travelStartDate} - {postData.travelEndDate}
           </h4>
+          <div className="mb-3 flex w-full flex-col gap-2">
+            <div className="w-full overflow-hidden">
+              <Marquee gradientWidth={50} speed={30} pauseOnHover={true}>
+                <div className="flex gap-2">
+                  {user.interests.split(',').map((style, index) => (
+                    <Chip key={index} size="sm" color="default">
+                      {style.trim()}
+                    </Chip>
+                  ))}
+                </div>
+              </Marquee>
+            </div>
+          </div>
           <div className="mb-3 flex w-full flex-col gap-2">
             <div className="w-full overflow-hidden">
               <Marquee gradientWidth={50} speed={30} pauseOnHover={true}>
@@ -135,8 +150,8 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
           <div className="my-2 h-px w-full bg-white/20"></div>
           <Button
             size="md"
-            color="primary"
-            variant="solid"
+            color="default"
+            variant="shadow"
             startContent={<MessageCircle size={20} />}
             className="mt-2 w-full"
             onClick={handleClick}

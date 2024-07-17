@@ -8,7 +8,7 @@ import { Badge } from '@nextui-org/badge'
 import { Button } from '@nextui-org/react'
 import { ChatBubbleLeftRightIcon } from '@heroicons/react/16/solid'
 
-export default function HeaderProfile() {
+export default function ProfileSection() {
   const { data: session, status } = useSession()
   const isLoggedIn = status === 'authenticated'
 

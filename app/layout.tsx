@@ -6,6 +6,7 @@ import { siteConfig } from '@/config/site'
 import clsx from 'clsx'
 import { fontSans } from '@/config/fonts'
 import { Navbar } from '@/components/header/Navbar'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
@@ -37,6 +38,7 @@ export default function RootLayout({
       Next.js의 App Router에서는 일반적으로 메타데이터 API를 사용하여 <head> 내용을 관리하지만,
       이 방식으로 기존의 <head> 조작 방식과의 호환성도 유지할 수 있음.*/}
       <head />
+      <Script src="https://cdn.iamport.kr/v1/iamport.js" />
       <body
         className={clsx(
           'h-screen min-h-screen bg-background font-sans antialiased',
