@@ -45,7 +45,7 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
   const totalSteps = 4
 
   const [formData, setFormData] = useState({
-    userId: null,
+    userId: '',
     travelNationality: '',
     travelCity: '',
     travelStartDate: null,
@@ -103,6 +103,7 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
 
     const submissionData = {
       ...formData,
+      userId: session.user.additionalInfo.serverUserId,
       travelStyle: formData.travelStyle
         .split(',')
         .map((item) => item.trim())
