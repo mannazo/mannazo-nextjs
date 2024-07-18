@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -14,7 +16,6 @@ import { Input } from '@nextui-org/input'
 import { link as linkStyles } from '@nextui-org/theme'
 import NextLink from 'next/link'
 import clsx from 'clsx'
-
 import { siteConfig } from '@/config/site'
 import { ThemeSwitch } from '@/components/commons/theme-switch'
 import {
@@ -26,9 +27,14 @@ import {
   Logo,
 } from '@/components/commons/icons'
 import ProfileSection from '@/components/header/ProfileSection'
-import { ChatBubbleLeftRightIcon } from '@heroicons/react/16/solid'
+import React from 'react'
 
 export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useReducer(
+    (current) => !current,
+    false
+  )
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -79,14 +85,12 @@ export const Navbar = () => {
 
       <NavbarContent className="basis-1 pl-4" justify="end">
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-
         <ThemeSwitch />
         <ProfileSection />
         <NavbarMenuToggle />
       </NavbarContent>
 
       <NavbarMenu>
-        {searchInput}
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
@@ -100,6 +104,7 @@ export const Navbar = () => {
                       : 'foreground'
                 }
                 size="lg"
+                onPress={() => setIsMenuOpen()}
               >
                 {item.label}
               </Link>

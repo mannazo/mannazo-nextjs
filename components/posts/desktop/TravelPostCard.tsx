@@ -59,6 +59,11 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
   const router = useRouter()
   const { mutate } = useCreateChatRoom()
 
+  //DB에 예시 데이터에 user를 null로 넣은 경우 예외처리
+  if (!user) {
+    return null
+  }
+
   // 버튼 클릭에 대한 핸들러
   const handleClick = () => {
     if (session) {
@@ -125,7 +130,7 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
             <div className="w-full overflow-hidden">
               <Marquee gradientWidth={50} speed={30} pauseOnHover={true}>
                 <div className="flex gap-2">
-                  {user.interests.split(',').map((style, index) => (
+                  {user.interests?.split(',').map((style, index) => (
                     <Chip key={index} size="sm" color="default">
                       {style.trim()}
                     </Chip>
