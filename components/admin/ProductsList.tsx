@@ -69,7 +69,7 @@ export const ProductsList = () => {
   return (
     <>
       <div className={'gap-4'}>
-        <Button onClick={onOpen}>Add Product</Button>
+        <Button>Add Product</Button>
         <Table aria-label="Example table with custom cells">
           <TableHeader>
             <TableColumn>Name</TableColumn>
