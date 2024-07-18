@@ -22,6 +22,9 @@ import LoadingSpinner from '@/components/commons/LoadingSpinner'
 import { format } from 'date-fns'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useFileList } from '@/hooks/useFileList'
+import FileUploader from '@/components/commons/file/FileUploader'
+import CategoryImage from '@/components/commons/image/CategoryImage'
 
 interface TravelPlanFormProps {
   onSubmitSuccess: () => void
@@ -36,6 +39,16 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
 }) => {
   const { data: session, status } = useSession()
 
+  //이미지 업로드 관련
+  const { files, addFile } = useFileList()
+  const handleUploadComplete = (
+    fileName: string,
+    category: 'post' | 'community' | 'profile'
+  ) => {
+    addFile(fileName, category)
+  }
+
+  //전체 폼 데이터 관련
   const [formData, setFormData] = useState({
     userId: null,
     travelNationality: null,
@@ -87,15 +100,6 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
       ...prev,
       travelStyle: value,
     }))
-  }
-
-  const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files)
-    // const urls = files.map((file) => URL.createObjectURL(file))
-    // setFormData((prev) => ({
-    //   ...prev,
-    //   imageUrls: [...prev.imageUrls, ...urls],
-    // }))
   }
 
   const handleSubmit = async (e) => {
@@ -196,19 +200,11 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
                 <Radio value="상관없음">Any</Radio>
               </RadioGroup>
 
-              <input
-                type="file"
-                multiple
-                onChange={handleImageUpload}
-                className="hidden"
-                id="image-upload"
+              <FileUploader
+                label="Upload Profile Image"
+                category="post"
+                onUploadComplete={handleUploadComplete}
               />
-              <label
-                htmlFor="image-upload"
-                className="cursor-pointer rounded bg-blue-500 p-2 text-white"
-              >
-                Upload Images
-              </label>
 
               <div className="flex flex-wrap gap-2">
                 {formData.imageUrls.map((url, index) => (

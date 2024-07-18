@@ -1,19 +1,22 @@
-// 이 컴포넌트가 만들어진 이유: 여러 카테고리에서 컴포넌트 폼은 재사용하면서, 파일명 앞에 원하는 카테고리 접두어를 붙이기 위함.
-// components/FileUploader.tsx
 'use client'
 import React, { ChangeEvent } from 'react'
 import { useUpload } from '@/hooks/useUpload'
+import { Input, Progress } from '@nextui-org/react'
+import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
+
 interface FileUploaderProps {
   category: 'post' | 'community' | 'profile'
   onUploadComplete: (
     fileName: string,
     category: 'post' | 'community' | 'profile'
   ) => void
+  label?: string
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({
   category,
   onUploadComplete,
+  label = 'Upload File',
 }) => {
   const { uploadFile, isUploading, error } = useUpload()
 
@@ -31,9 +34,25 @@ const FileUploader: React.FC<FileUploaderProps> = ({
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} disabled={isUploading} />
-      {isUploading && <p>Uploading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <Input
+        type="file"
+        label={label}
+        onChange={handleFileChange}
+        disabled={isUploading}
+        className="mb-2"
+        startContent={
+          <ArrowUpTrayIcon className="pointer-events-none h-5 w-5 flex-shrink-0 text-default-400" />
+        }
+      />
+      {isUploading && (
+        <Progress
+          size="sm"
+          isIndeterminate
+          aria-label="Uploading..."
+          className="mb-2"
+        />
+      )}
+      {error && <p className="text-sm text-danger">{error}</p>}
     </div>
   )
 }
