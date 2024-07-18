@@ -12,8 +12,8 @@ import {
 } from '@nextui-org/react'
 import { EyeIcon } from './EyeIcon'
 import { DeleteIcon } from './DeleteIcon'
-import { users } from './data'
-import { deleteUser } from '@/services/api'
+import { deleteUser, findAllUsers } from '@/services/api'
+import { fetchData } from 'next-auth/client/_utils'
 
 const statusColorMap = {
   active: 'success',
@@ -22,6 +22,15 @@ const statusColorMap = {
 }
 
 export default function UserList() {
+  const [users, setUsers] = React.useState([])
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await findAllUsers()
+      setUsers(response.data)
+    }
+    fetchData()
+  })
   const handleDeleteUser = (userId) => {
     console.log(userId)
     calldeleteUser(userId)

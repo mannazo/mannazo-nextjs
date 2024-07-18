@@ -118,7 +118,7 @@ export default function Page() {
                   <TableRow key={item.product.productId}>
                     <TableCell>{item.product.productName}</TableCell>
                     <TableCell>
-                      <div className="flex max-w-[180px] items-center">
+                      <div className="flex max-w-[200px] items-center">
                         <Button
                           onPress={() =>
                             decreaseQuantity(item.product.productId)

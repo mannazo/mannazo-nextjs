@@ -11,7 +11,7 @@ import { Order } from '@/_model/order'
 export default function Page() {
   const [active, setActive] = React.useState(0)
   const [order, setOrder] = useState<Order>({
-    userId: 'f6f6b416-393f-4ce8-adb4-97ffcaa57ab',
+    userId: 'f6f6b416-393f-4ce8-adb4-97ffcaa57ab9',
     name: '', // 구매자 이름
     tel: '', // 구매자 전화번호
     email: '', // 구매자 이메일
