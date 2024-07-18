@@ -20,6 +20,10 @@ export const siteConfig = {
       label: 'Shop',
       href: '/shop',
     },
+    {
+      label: 'Map',
+      href: '/users/map',
+    },
   ],
   navMenuItems: [
     {
@@ -35,12 +39,8 @@ export const siteConfig = {
       href: '/shop',
     },
     {
-      label: 'Profile',
-      href: '/users/profile',
-    },
-    {
-      label: 'Settings',
-      href: '/users/',
+      label: 'Map',
+      href: '/users/map',
     },
     {
       label: 'Logout',

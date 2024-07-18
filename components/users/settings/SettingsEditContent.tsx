@@ -33,7 +33,7 @@ export default function SettingsEditContent() {
         try {
           const response = await axios.get(
             // `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
-            `${process.env.SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
             // `https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`,
           )
           console.log('responsedata:')
