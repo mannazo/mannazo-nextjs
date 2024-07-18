@@ -37,6 +37,12 @@ export const sendChatMessage = (
 ) => api.post('https://mannazo.diligentp.com/chat/', { senderId, roomId, msg })
 export const getChatRoomList = (userId) =>
   api.get(`/chat/room/userId/${userId}`)
+export const createFeedback = (
+  reviewerId: string,
+  revieweeId: string,
+  rating: number,
+  comment: string
+) => api.post('/review', { reviewerId, revieweeId, rating, comment })
 
 //Shop 관련
 export const createProduct = (productData) => api.post('/shop', productData)
