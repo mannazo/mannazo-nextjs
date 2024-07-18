@@ -45,9 +45,9 @@ export default function PostFeed() {
       className="h-screen snap-y snap-mandatory overflow-y-scroll"
       onScroll={handleScroll}
     >
-      {travelers.map((traveler) => (
-        <div key={traveler.post.postId} className="h-screen w-full snap-start">
-          <ShortFormMobileCard traveler={traveler} />
+      {travelers.map((data) => (
+        <div key={data.post.postId} className="h-screen w-full snap-start">
+          <ShortFormMobileCard data={data} />
         </div>
       ))}
       {isLoading && <div>더 로딩 중...</div>}
