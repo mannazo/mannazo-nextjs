@@ -30,10 +30,8 @@ import ProfileSection from '@/components/header/ProfileSection'
 import React from 'react'
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useReducer(
-    (current) => !current,
-    false
-  )
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const closeMenu = () => setIsMenuOpen(false)
 
   const searchInput = (
     <Input
@@ -82,18 +80,26 @@ export const Navbar = () => {
           ))}
         </ul>
       </NavbarContent>
-
       <NavbarContent className="basis-1 pl-4" justify="end">
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
         <ThemeSwitch />
         <ProfileSection />
         <NavbarMenuToggle />
       </NavbarContent>
-
       <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        <div
+          className="mx-4 mt-2 flex flex-col gap-2"
+          onClick={() => {
+            closeMenu()
+          }}
+        >
           {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+            <NavbarMenuItem
+              key={`${item}-${index}`}
+              onClick={() => {
+                closeMenu()
+              }}
+            >
               <Link
                 href={item.href}
                 color={
@@ -104,7 +110,6 @@ export const Navbar = () => {
                       : 'foreground'
                 }
                 size="lg"
-                onPress={() => setIsMenuOpen()}
               >
                 {item.label}
               </Link>
