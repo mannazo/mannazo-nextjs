@@ -1,11 +1,14 @@
-import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   useDisclosure,
 } from '@nextui-org/react'
 

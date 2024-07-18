@@ -1,8 +1,5 @@
 'use client'
-import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
-import VOCCard from '@/components/admin/VOCCard'
-import CardDataStats from '@/components/admin/CardDataStats'
 import { toast } from 'react-toastify'
 import UserList from '@/components/admin/UserList'
 import {
@@ -10,9 +7,7 @@ import {
   getNumberOfPosts,
   getNumberOfUsers,
 } from '@/services/api'
-import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
-import Link from 'next/link'
-import NextLink from 'next/link'
+import { Card, CardBody } from '@nextui-org/react'
 import { Community } from '@/components/admin/Community'
 import { Transactions } from '@/components/admin/Transactions'
 import { ProductsList } from '@/components/admin/ProductsList'

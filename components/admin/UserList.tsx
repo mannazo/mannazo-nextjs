@@ -1,19 +1,18 @@
 import React from 'react'
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  User,
   Chip,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
   Tooltip,
-  getKeyValue,
+  User,
 } from '@nextui-org/react'
 import { EyeIcon } from './EyeIcon'
 import { DeleteIcon } from './DeleteIcon'
-import { columns, users } from './data'
+import { users } from './data'
 import { deleteUser } from '@/services/api'
 
 const statusColorMap = {

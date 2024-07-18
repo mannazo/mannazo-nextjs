@@ -1,5 +1,5 @@
-import { Button, Link, Card } from '@nextui-org/react'
-import React, { useEffect, useState } from 'react'
+import { Button, Card, Link } from '@nextui-org/react'
+import React from 'react'
 
 export default function ReviewCheckout({ order }) {
   return (

@@ -2,20 +2,17 @@
 
 import React, { useEffect, useState } from 'react'
 import { ShoppingCart } from '@/_model/shoppingCart'
-import { Product } from '@/_model/product'
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  getKeyValue,
   Button,
-  Link,
   Input,
+  Link,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
 } from '@nextui-org/react'
-import { createCommunityPost, getNumberOfUsers } from '@/services/api'
 import { useSession } from 'next-auth/react'
 
 declare global {

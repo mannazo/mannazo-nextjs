@@ -1,10 +1,9 @@
 'use client'
 import React from 'react'
-import { createCommunityPost, createOrder } from '@/services/api'
+import { createOrder } from '@/services/api'
 import { Button, Card } from '@nextui-org/react'
 import { toast } from 'react-toastify'
 import axios from 'axios'
-import { router } from 'next/client'
 
 export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
   function onClickPayment() {

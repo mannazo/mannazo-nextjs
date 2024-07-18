@@ -1,4 +1,3 @@
-import { ShoppingCart } from '@/_model/shoppingCart'
 export interface OrderItem {
   productId: number
   quantity: number

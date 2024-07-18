@@ -6,8 +6,7 @@ import AddressCheckout from '@/components/shop/AddressCheckout'
 import PaymentCheckout from '@/components/shop/PaymentCheckout'
 import ReviewCheckout from '@/components/shop/ReviewCheckout'
 import { ShoppingCart } from '@/_model/shoppingCart'
-import { Order, OrderItem } from '@/_model/order'
-import { useSession } from 'next-auth/react'
+import { Order } from '@/_model/order'
 
 export default function Page() {
   const [value, setValue] = React.useState(0)

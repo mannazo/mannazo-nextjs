@@ -1,6 +1,5 @@
 import {
   Button,
-  Chip,
   Table,
   TableBody,
   TableCell,
@@ -11,16 +10,10 @@ import {
   useDisclosure,
   User,
 } from '@nextui-org/react'
-import { users } from '@/components/admin/data'
 import { EyeIcon } from '@/components/admin/EyeIcon'
 import { DeleteIcon } from '@/components/admin/DeleteIcon'
 import React, { useEffect, useState } from 'react'
-import {
-  deleteUser,
-  fetchProducts,
-  deleteProduct,
-  createProduct,
-} from '@/services/api'
+import { createProduct, deleteProduct, fetchProducts } from '@/services/api'
 
 interface Product {
   productId: number
