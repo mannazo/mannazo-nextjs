@@ -15,6 +15,7 @@ import {
 import { Star } from 'lucide-react'
 import axios from 'axios'
 import useChatStore from '@/store/chatStore'
+import { createFeedback } from '@/services/api'
 
 // {
 //   "reviewerId": "300e9115-f3c8-4236-8f30-bf2998746c59",
@@ -56,15 +57,21 @@ const FeedbackModal = ({ isOpen, onClose, onSubmit }) => {
         comment: comment,
       }
       console.log('review: ', review)
-      const response = await axios.post(
-        // 'http://localhost:8080/review'
-        // `https://mannazu.diligentp.com/review/reviewee/${session.user.additionalInfo.serverUserId}`
-        // `https://192.168.0.184:8080/review/reviewee/${session.user.additionalInfo.serverUserId}`
-        'http://192.168.0.184:8080/review',
-        review
+      // const response = await axios.post(
+      //   // 'http://localhost:8080/review'
+      //   // `https://mannazu.diligentp.com/review/reviewee/${session.user.additionalInfo.serverUserId}`
+      //   // `https://192.168.0.184:8080/review/reviewee/${session.user.additionalInfo.serverUserId}`
+      //   'http://192.168.0.184:8080/review',
+      //   review
+      // )
+      const response = createFeedback(
+        review.reviewerId,
+        review.revieweeId,
+        review.rating,
+        review.comment
       )
       console.log(response)
-      onClose()
+      // onClose()
     } catch (error) {
       console.error('Error submitting feedback: ', error)
     }

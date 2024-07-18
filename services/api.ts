@@ -12,6 +12,7 @@ export const getPostsByPage = (page, size) =>
   api.get(`/post/findAll?page=${page}&size=${size || null}`)
 export const updatePost = (postId) => api.put(`/post/${postId}`)
 export const deletePost = (postId) => api.delete(`/post/${postId}`)
+export const getPostsByUser = (userId) => api.get(`/post/user/${userId}`)
 
 // 커뮤니티 post 관련
 export const getCommunityPosts = () => api.get('/community/findAll')

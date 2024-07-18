@@ -72,11 +72,17 @@ export default function Overview() {
       if (status === 'authenticated') {
         try {
           const [postResponse, userResponse] = await Promise.all([
+            // axios.get(
+            //   `https://mannazu.diligentp.com/post/user/${session.user.additionalInfo.serverUserId}`
+            // ),
+            // axios.get(
+            //   `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            // ),
             axios.get(
-              `https://mannazu.diligentp.com/post/user/${session.user.additionalInfo.serverUserId}`
+              `${process.env.SERVER_URL}/post/user/${session.user.additionalInfo.serverUserId}`
             ),
             axios.get(
-              `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+              `${process.env.SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
             ),
           ])
 
