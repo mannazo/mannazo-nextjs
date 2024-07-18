@@ -9,10 +9,7 @@ import { ShoppingCart } from '@/_model/shoppingCart'
 import { Order } from '@/_model/order'
 
 export default function Page() {
-  const [value, setValue] = React.useState(0)
-  const [cart, setCart] = useState([])
   const [active, setActive] = React.useState(0)
-  const [orderStatus, setOrderStatus] = React.useState('Pending')
   const [order, setOrder] = useState<Order>({
     userId: 'f6f6b416-393f-4ce8-adb4-97ffcaa57ab',
     name: '', // 구매자 이름

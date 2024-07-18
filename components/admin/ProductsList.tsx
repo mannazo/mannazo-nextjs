@@ -27,7 +27,6 @@ interface Product {
 
 export const ProductsList = () => {
   const [products, setProducts] = useState<Product[]>([])
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetchProducts()
