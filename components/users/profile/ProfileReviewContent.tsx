@@ -71,8 +71,8 @@ const ProfileReviewContent: React.FC = () => {
           // 리뷰 데이터 가져오기
           const response = await axios.get(
             // `https://mannazu.diligentp.com/review/reviewee/${session.user.additionalInfo.serverUserId}`
-            // `https://192.168.0.184/review/reviewee/${session.user.additionalInfo.serverUserId}`
-            'http://192.168.0.184:8080/review/reviewee/84e85f43-a007-43c5-a03e-dd7974922ee1'
+            `http://192.168.0.184:8080/review/reviewee/${session.user.additionalInfo.serverUserId}`
+            // 'http://192.168.0.184:8080/review/reviewee/84e85f43-a007-43c5-a03e-dd7974922ee1'
           )
           console.log('Server Response:', response.data)
           // const fetchedReviews = response.data

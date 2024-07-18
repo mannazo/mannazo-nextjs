@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Modal,
   ModalContent,
@@ -13,6 +13,15 @@ import {
   Chip,
 } from '@nextui-org/react'
 import { Star } from 'lucide-react'
+import axios from 'axios'
+import useChatStore from '@/store/chatStore'
+
+// {
+//   "reviewerId": "300e9115-f3c8-4236-8f30-bf2998746c59",
+//   "revieweeId": "84e85f43-a007-43c5-a03e-dd7974922ee1",
+//   "rating": 2,
+//   "comment": "Hello"
+// }
 
 const StarRating = ({ rating, onRating }) => {
   return (
@@ -36,11 +45,47 @@ const FeedbackModal = ({ isOpen, onClose, onSubmit }) => {
   const [comment, setComment] = useState('')
   const [isAnonymous, setIsAnonymous] = useState(false)
   const [selectedTags, setSelectedTags] = useState([])
+  const { receiver, currentUser } = useChatStore()
 
-  const handleSubmit = () => {
-    onSubmit({ rating, comment, isAnonymous, selectedTags })
-    onClose()
+  const handleSubmit = async () => {
+    try {
+      const review = {
+        reviewerId: currentUser.userId,
+        revieweeId: receiver.userId,
+        rating: rating,
+        comment: comment,
+      }
+      console.log('review: ', review)
+      const response = await axios.post(
+        // 'http://localhost:8080/review'
+        // `https://mannazu.diligentp.com/review/reviewee/${session.user.additionalInfo.serverUserId}`
+        // `https://192.168.0.184:8080/review/reviewee/${session.user.additionalInfo.serverUserId}`
+        'http://192.168.0.184:8080/review',
+        review
+      )
+      console.log(response)
+      onClose()
+    } catch (error) {
+      console.error('Error submitting feedback: ', error)
+    }
   }
+
+  // const handleSubmit = () => {
+  //   useEffect(() => {
+  //     const fetchReview = async () => {
+  //       try {
+  //         await axios.post('http://localhost:8080/review', {
+  //           rating,
+  //           comment,
+  //         })
+  //         // onSubmit({ rating, comment, isAnonymous, selectedTags })
+  //         onClose()
+  //       } catch (error) {
+  //         console.error('Error submitting feedback: ', error)
+  //       }
+  //     }
+  //   }, [])
+  // }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="2xl">
