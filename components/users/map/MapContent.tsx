@@ -1,154 +1,92 @@
+'use client'
 
-
-import { GoogleMap, Autocomplete, LoadScript } from '@react-google-maps/api'
+import { GoogleMap, Autocomplete, useJsApiLoader } from '@react-google-maps/api'
 import { useCallback, useRef, useState } from 'react'
-import { Library } from '@googlemaps/js-api-loader'
+import { Input, Card } from '@nextui-org/react'
 
-const containerStyle : any = {
-  position: 'absolute',
-  width: '70%',
-  height: '60%',
-  left: '15%'
-};
+const containerStyle = {
+  width: '100%',
+  height: '60vh',
+} as const
 
 const center = {
   lat: -3.745,
   lng: -38.523,
-};
+}
 
-const libraries : ('places')[] = ["places"];
+const libraries: 'places'[] = ['places']
 
-const MapContent:React.FC = () => {
+const MapContent: React.FC = () => {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyBHaPCHtCW4P7oYFQBSizE2rSc1Q7AMtsM', // API 키
+    libraries: libraries,
+  })
 
-//지도
-  const autocompleteRef = useRef(null);
-  const markerRef = useRef(null);
+  const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null)
+  const markerRef = useRef<google.maps.Marker | null>(null)
 
-  const [map,setMap] = useState<google.maps.Map | null>(null)
+  const [map, setMap] = useState<google.maps.Map | null>(null)
 
-  const onLoad = useCallback((autocomplete) => {
-
-    autocompleteRef.current = autocomplete;
-  }, []);
-
-
+  const onLoad = useCallback(
+    (autocomplete: google.maps.places.Autocomplete) => {
+      autocompleteRef.current = autocomplete
+    },
+    []
+  )
 
   const onPlaceChanged = useCallback(() => {
-    const autocomplete = autocompleteRef.current;
+    const autocomplete = autocompleteRef.current
 
     if (autocomplete !== null) {
-      const placeResult = autocomplete.getPlace();
+      const placeResult = autocomplete.getPlace()
 
-      if (map && placeResult.geometry) {
-        // 이전 마커를 제거
+      if (map && placeResult.geometry && placeResult.geometry.location) {
         if (markerRef.current) {
-          markerRef.current.setMap(null);
+          markerRef.current.setMap(null)
         }
 
-        // 새로운 마커 생성
-        const newMarker = new window.google.maps.Marker({
+        const newMarker = new google.maps.Marker({
           position: placeResult.geometry.location,
           map: map,
           title: placeResult.name,
-        });
+        })
 
-        // 새로운 마커로 참조 업데이트
-        markerRef.current = newMarker;
+        markerRef.current = newMarker
 
-        // 지도를 검색 위치로 이동
-        map.panTo(placeResult.geometry.location);
+        map.panTo(placeResult.geometry.location)
       }
     } else {
-      console.log(console.error());
+      console.error('Autocomplete is not loaded yet!')
     }
-  }, [map]);
+  }, [map])
+
+  if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <>
-      <LoadScript
-        googleMapsApiKey="AIzaSyBHaPCHtCW4P7oYFQBSizE2rSc1Q7AMtsM"//api 키s
-        // googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}
-        libraries={libraries}
-      />
-      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
-        <input
-          type="text"
-          id="autocomplete"
-          placeholder="장소를 검색해주세요"
+    <div className="mx-auto max-w-4xl px-4">
+      <Card className="my-4 p-4">
+        <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+          <Input
+            type="text"
+            placeholder="장소를 검색해주세요"
+            size="lg"
+            className="w-full"
+          />
+        </Autocomplete>
+      </Card>
+
+      <Card>
+        <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={16}
+          options={{ disableDefaultUI: true }}
+          onLoad={(map) => setMap(map)}
         />
-      </Autocomplete>
-
-
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={16}
-        options={{disableDefaultUI: true}}
-        onLoad={(map) => setMap(map)}
-      />
-
-    </>
-
+      </Card>
+    </div>
   )
 }
+
 export default MapContent
-
-
-
-// import {useEffect, useRef, useState} from 'react'
-//
-// function GoogleMapAPI(){
-//
-//   const ref = useRef<HTMLDivElement>(null);
-//   const [googleMap, setGoogleMap] = useState<google.maps.Map>();
-//
-//   useEffect(() => {
-//     if (ref.current) {
-//       const initialMap = new window.google.maps.Map(ref.current, {
-//         center: {
-//           lat: 37.5,
-//           lng: 127.0,
-//         },
-//         zoom: 16,
-//       })
-//
-//       setGoogleMap(initialMap);
-//     }
-//   }, []);
-//
-//   return <div ref={ref} id='map' style={{ minHeight: '100vh'}} />
-// }
-//
-// export default GoogleMapAPI;
-
-
-
-
-// import React, { useEffect, useRef } from 'react';
-// import { Loader } from '@googlemaps/js-api-loader';
-//
-// const MapContent: React.FC = () => {
-//   const mapRef = useRef<HTMLDivElement>(null);
-//
-//   useEffect(() => {
-//     const loader = new Loader({
-//       apiKey: process.env.GOOGLE_MAPS_API_KEY,
-//       version: 'weekly',
-//     });
-//
-//     let map: google.maps.Map;
-//
-//     loader.load().then(() => {
-//       if (mapRef.current) {
-//         map = new google.maps.Map(mapRef.current, {
-//           center: { lat: -34.397, lng: 150.644 },
-//           zoom: 8,
-//         });
-//       }
-//     });
-//   }, []);
-//
-//   return <div id="map" ref={mapRef} style={{ height: '100vh', width: '100%' }} />;
-// };
-//
-// export default MapContent;
