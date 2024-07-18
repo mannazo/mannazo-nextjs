@@ -15,6 +15,8 @@ import {
   Link,
   Input,
 } from '@nextui-org/react'
+import { createCommunityPost, getNumberOfUsers } from '@/services/api'
+import { useSession } from 'next-auth/react'
 
 declare global {
   interface Window {
@@ -25,7 +27,15 @@ declare global {
 export default function Page() {
   const [cart, setCart] = useState<ShoppingCart>({ items: [] })
   const [loading, setLoading] = useState<boolean>(true)
+  const { data: session, status } = useSession()
 
+  // if (status === 'unauthenticated') {
+  //   return (
+  //     <>
+  //       <h1>Login before use. </h1>
+  //     </>
+  //   )
+  // }
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart'))
     setCart(storedCart)
@@ -36,7 +46,7 @@ export default function Page() {
   function removeFromCart(product_id: number) {
     setCart((prevState) => {
       const updatedItems = prevState.items.filter(
-        (item) => item.product.shop_id !== product_id
+        (item) => item.product.productId !== product_id
       )
       const updatedCart = { ...prevState, items: updatedItems }
       localStorage.setItem('cart', JSON.stringify(updatedCart))
@@ -46,14 +56,14 @@ export default function Page() {
   function decreaseQuantity(product_id: number) {
     setCart((prevCart) => {
       const existingItem = prevCart.items.find(
-        (item) => item.product.shop_id === product_id
+        (item) => item.product.productId === product_id
       )
 
       if (existingItem) {
         if (existingItem.quantity === 1) {
           // Remove item if quantity is 1
           const updatedItems = prevCart.items.filter(
-            (item) => item.product.shop_id !== product_id
+            (item) => item.product.productId !== product_id
           )
           const updatedCart = { ...prevCart, items: updatedItems }
           localStorage.setItem('cart', JSON.stringify(updatedCart))
@@ -61,7 +71,7 @@ export default function Page() {
         } else {
           // Decrease quantity
           const updatedItems = prevCart.items.map((item) =>
-            item.product.shop_id === product_id
+            item.product.productId === product_id
               ? { ...item, quantity: item.quantity - 1 }
               : item
           )
@@ -79,7 +89,7 @@ export default function Page() {
   function increaseQuantity(product_id: number) {
     setCart((prevCart) => {
       const updatedItems = prevCart.items.map((item) =>
-        item.product.shop_id === product_id
+        item.product.productId === product_id
           ? { ...item, quantity: item.quantity + 1 }
           : item
       )
@@ -100,41 +110,49 @@ export default function Page() {
           <Table aria-label="Shopping cart">
             <TableHeader>
               <TableColumn>Product</TableColumn>
-              <TableColumn>Price</TableColumn>
               <TableColumn>Quantity</TableColumn>
+              <TableColumn>Price</TableColumn>
+
               <TableColumn>Action</TableColumn>
             </TableHeader>
             {cart.items.length > 0 ? (
               <TableBody>
                 {cart.items.map((item) => (
-                  <TableRow key={item.product.shop_id}>
-                    <TableCell>{item.product.product_name}</TableCell>
-                    <TableCell>{item.product.price}</TableCell>
+                  <TableRow key={item.product.productId}>
+                    <TableCell>{item.product.productName}</TableCell>
                     <TableCell>
-                      <div className="flex items-center">
+                      <div className="flex max-w-[180px] items-center">
                         <Button
-                          onPress={() => decreaseQuantity(item.product.shop_id)}
+                          onPress={() =>
+                            decreaseQuantity(item.product.productId)
+                          }
                         >
                           -
                         </Button>
                         <Input
                           value={item.quantity.toString()}
                           readOnly
-                          width="50px"
+                          // width="10px"
                           className="text-center"
                         />
                         <Button
-                          onPress={() => increaseQuantity(item.product.shop_id)}
+                          onPress={() =>
+                            increaseQuantity(item.product.productId)
+                          }
                         >
                           +
                         </Button>
                       </div>
                     </TableCell>
+                    <TableCell>{item.product.price}</TableCell>
+
                     <TableCell>
                       {/*<Button onPress={()=> removeFromCart(item.product.product_id)}>Remove</Button>*/}
 
                       <Button
-                        onPress={() => removeFromCart(item.product.shop_id)}
+                        color="danger"
+                        variant="bordered"
+                        onPress={() => removeFromCart(item.product.productId)}
                       >
                         Remove
                       </Button>
@@ -146,10 +164,21 @@ export default function Page() {
               <TableBody emptyContent={'Your cart is empty'}>{[]}</TableBody>
             )}
           </Table>
-          <h3>Total: {total}</h3>
-          <Link href="/shop/cart/checkout">
-            <Button>Checkout</Button>
-          </Link>
+          <div className="mt-8 flex items-center justify-between">
+            <h3 className="text-2xl font-bold">Total: ${total.toFixed(2)}</h3>
+            {status === 'unauthenticated' ? (
+              <div>
+                <p>Login to Checkout</p>
+                <Button color="primary" isDisabled>
+                  Checkout
+                </Button>
+              </div>
+            ) : (
+              <Link href="/shop/cart/checkout">
+                <Button color="primary">Checkout</Button>
+              </Link>
+            )}
+          </div>
         </>
       ) : (
         <p></p>
