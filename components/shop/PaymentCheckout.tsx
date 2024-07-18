@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 
 export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
+  const merchatUid = `mid_${new Date().getTime()}`
   function onClickPayment() {
     const { IMP } = window
     IMP.init('imp10772502')
@@ -14,7 +15,7 @@ export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
     const data = {
       pg: 'kakaopay', // PG사
       pay_method: 'card', // 결제수단
-      merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+      merchant_uid: merchatUid, // 주문번호
       amount: parseFloat(order.totalPrice), // 결제금액
       name: '아임포트 결제 데이터 분석', // 주문명
 
@@ -63,23 +64,17 @@ export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
       }
     }
   }
-  // function postOrder(updatedOrder) {
-  //   console.log(updatedOrder)
-  //   const response = await createOrder(updatedOrder)
-  //   // .then((response) => {
-  //   //   alert('Order saved successfully!')
-  //   // })
-  //   // .catch(() => {
-  //   //   alert('Failed to save order.')
-  //   // })
-  // }
 
   /* 3. 콜백 함수 정의하기 */
   function callback(response) {
     const { success, error_msg } = response
 
     if (success) {
-      const updatedOrder = { ...order, orderStatus: 'Success' }
+      const updatedOrder = {
+        ...order,
+        merchantUid: merchatUid,
+        orderStatus: 'Success',
+      }
       setOrder(updatedOrder) // Update the state with the updated order
       alert('결제 성공')
       postOrder(updatedOrder) // Post the updated order

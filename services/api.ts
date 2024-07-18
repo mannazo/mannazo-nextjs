@@ -38,21 +38,15 @@ export const sendChatMessage = (
 
 //Shop 관련
 export const createProduct = (productData) => api.post('/shop', productData)
-export const fetchProducts = () =>
-  axios.get(`http://192.168.0.184:8080/shop/findAll`)
+export const fetchProducts = () => api.get(`/shop/findAll`)
 
 //Order 관현
-export const createOrder = (orderData) =>
-  api.post('http://192.168.0.184:8080/shop/order', orderData)
-// export const getRecentOrders = () => api.get('/shop/order/recent')
-export const getRecentOrders = () =>
-  axios.get('http://192.168.0.184:8080/shop/order/recent')
+export const createOrder = (orderData) => api.post('/shop/order', orderData)
+export const getRecentOrders = () => api.get('/shop/order/recent')
 
 //Admin 관현
 export const getNumberOfUsers = () => api.get('/admin/count/allUsers')
 export const getNumberOfPosts = () => api.get(`/admin/count/posts`)
 // export const getNumberOfOrders = () => api.get(`/shop/order/count`)
-export const getNumberOfOrders = () =>
-  axios.get(`http://192.168.0.184:8080/shop/order/count`)
-export const deleteProduct = (id) =>
-  axios.delete(`http://192.168.0.184:8080/shop/${id}`)
+export const getNumberOfOrders = () => api.get(`/shop/order/count`)
+export const deleteProduct = (id) => api.delete(`/shop/${id}`)
