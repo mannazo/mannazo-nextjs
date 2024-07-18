@@ -1,3 +1,4 @@
+// 미사용 코드인데, 필요시 api 라우트에서 분리시킬 수 있음
 // utils/s3.ts
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { v4 as uuidv4 } from 'uuid'

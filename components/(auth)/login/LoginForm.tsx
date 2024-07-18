@@ -1,6 +1,5 @@
 'use client'
 
-import { signIn } from 'next-auth/react'
 import SocialLoginButton from '@/components/users/sign-up/SocialLoginButton'
 
 export default function LoginForm() {
