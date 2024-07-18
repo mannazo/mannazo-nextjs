@@ -182,9 +182,9 @@ const TravelPlanForm: React.FC<TravelPlanFormProps> = ({
               onValueChange={(val) => handleInputChange('preferredGender', val)}
               className="mb-4"
             >
-              <Radio value="남자">Male</Radio>
-              <Radio value="여자">Female</Radio>
-              <Radio value="상관없음">Any</Radio>
+              <Radio value="Male">Male</Radio>
+              <Radio value="Female">Female</Radio>
+              <Radio value="Any">Any</Radio>
             </RadioGroup>
             <FileUploader
               label="Upload Profile Image"

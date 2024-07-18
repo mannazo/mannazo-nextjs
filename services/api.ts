@@ -35,7 +35,7 @@ export const sendChatMessage = (
   senderId: string,
   roomId: string,
   msg: string
-) => api.post('https://mannazo.diligentp.com/chat/', { senderId, roomId, msg })
+) => api.post('/chat', { senderId, roomId, msg })
 export const getChatRoomList = (userId) =>
   api.get(`/chat/room/userId/${userId}`)
 export const createFeedback = (

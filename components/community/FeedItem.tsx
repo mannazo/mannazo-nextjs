@@ -70,12 +70,14 @@ const FeedItem = ({ post }) => {
         <h3 className="text-lg font-semibold">{community.title}</h3>
         <p className="text-small text-default-400">{community.description}</p>
         {community.images && community.images.length > 0 && (
-          <Image
-            alt="Post image"
-            className="mt-3 rounded-xl object-cover"
-            src={community.images[0].filePath}
-            height={300}
-          />
+          <div className="flex items-center justify-center">
+            <Image
+              alt="Post image"
+              className="mt-3 content-center rounded-xl"
+              src={community.images[0].filePath}
+              height={300}
+            />
+          </div>
         )}
       </CardBody>
       {/*  <CardFooter className="gap-3">*/}
