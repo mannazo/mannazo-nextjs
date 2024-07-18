@@ -1,5 +1,16 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# version-lock
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+#jetBrains
+workspace.xml
+usage.statistics.xml
+*.iml
+.idea/
+
 # dependencies
 /node_modules
 /.pnp
@@ -25,8 +36,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
+# env files
+/.env*
+# submodules are allowed to commit & push
+!mannazo-nextjs-secret/.env*
 
 # vercel
 .vercel

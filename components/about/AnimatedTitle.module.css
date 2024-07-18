@@ -1,0 +1,29 @@
+/*메인 캐치프레이즈에 시각적 효과를 넣기 위한 모듈*/
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animatedTitle {
+  background: linear-gradient(to right, #60a5fa, #7b27ff, #dd4040);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradientFlow 5s ease infinite;
+  font-size: 4rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 3rem;
+  text-shadow:
+    2px 2px 4px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(255, 255, 255, 0.1);
+}
