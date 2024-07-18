@@ -37,9 +37,9 @@ const ChatListItem = ({ room, currentUserId }) => {
           <h3 className="text-lg font-semibold">{receiver.nickname}</h3>
           <p>{receiver.nationality}</p>
           <p>{receiver.city}</p>
-          <p className="text-sm text-gray-600">
-            {room.lastMessage || 'No messages yet'}
-          </p>
+          {/*<p className="text-sm text-gray-600">*/}
+          {/*  {room.lastMessage || 'No messages yet'}*/}
+          {/*</p>*/}
         </div>
         <div className="text-xs text-gray-500">
           <p>

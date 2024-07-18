@@ -11,7 +11,7 @@ const ChatRoomList = () => {
   return (
     <div
       ref={containerRef}
-      className="mx-auto flex h-full max-w-4xl flex-col rounded-lg bg-gray-100 p-4 shadow-md"
+      className="mx-auto flex h-full max-w-4xl flex-col rounded-lg bg-gray-100 p-4 shadow-md dark:bg-gray-700"
       style={{ height: `${viewportHeight}px` }}
     >
       <SearchBar className="flex-shrink-0" />
