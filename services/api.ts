@@ -41,7 +41,7 @@ export const createProduct = (productData) => api.post('/shop', productData)
 export const fetchProducts = () => api.get(`/shop/findAll`)
 
 //Order 관현
-export const createOrder = (orderData) => api.post('/shop/order', orderData)
+export const createOrder = (orderData) => api.post('/shop/order/od', orderData)
 export const getRecentOrders = () => api.get('/shop/order/recent')
 
 //Admin 관현
