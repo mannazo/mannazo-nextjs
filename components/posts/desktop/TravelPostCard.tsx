@@ -82,6 +82,7 @@ const TravelPostCard: React.FC<TravelPostCardProps> = ({ post }) => {
     }
   }
 
+  console.log(post)
   return (
     <Card className="h-[600px] overflow-hidden" isPressable isFooterBlurred>
       <CardHeader className="absolute top-1 z-10 flex-col items-start">

@@ -29,12 +29,13 @@ export default function ProfileHeader() {
   useEffect(() => {
     const fetchUserData = async () => {
       if (status === 'authenticated') {
-        const isFirstUser = session.user.additionalInfo.firstTimeUser
-
-        if (isFirstUser) {
-          router.push('/users/sign-up')
-          return
-        }
+        // const isFirstUser = session.user.additionalInfo.firstTimeUser
+        //
+        // if (isFirstUser) {
+        //   router.push('/users/sign-up')
+        //   console.log(session)
+        //   return
+        // }
 
         try {
           const response = await axios.get(
