@@ -1,7 +1,7 @@
 'use client'
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useRef } from 'react'
 import { useUpload } from '@/hooks/useUpload'
-import { Input, Progress } from '@nextui-org/react'
+import { Button, Progress } from '@nextui-org/react'
 import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
 
 interface FileUploaderProps {
@@ -19,6 +19,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({
   label = 'Upload File',
 }) => {
   const { uploadFile, isUploading, error } = useUpload()
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -32,27 +33,34 @@ const FileUploader: React.FC<FileUploaderProps> = ({
     }
   }
 
+  const handleButtonClick = () => {
+    fileInputRef.current?.click()
+  }
+
   return (
     <div>
-      <Input
+      <input
         type="file"
-        label={label}
+        ref={fileInputRef}
         onChange={handleFileChange}
-        disabled={isUploading}
-        className="mb-2"
-        startContent={
-          <ArrowUpTrayIcon className="pointer-events-none h-5 w-5 flex-shrink-0 text-default-400" />
-        }
+        style={{ display: 'none' }}
       />
+      <Button
+        onClick={handleButtonClick}
+        disabled={isUploading}
+        startContent={<ArrowUpTrayIcon className="h-5 w-5" />}
+      >
+        {label}
+      </Button>
       {isUploading && (
         <Progress
           size="sm"
           isIndeterminate
           aria-label="Uploading..."
-          className="mb-2"
+          className="mt-2"
         />
       )}
-      {error && <p className="text-sm text-danger">{error}</p>}
+      {error && <p className="mt-2 text-sm text-danger">{error}</p>}
     </div>
   )
 }
