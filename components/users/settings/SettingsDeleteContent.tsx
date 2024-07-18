@@ -31,7 +31,7 @@ export default function SettingsDeleteContent() {
         // await axios.delete(`https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`); // 적절한 API 엔드포인트로 수정
         // await axios.delete(`https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`);
         await axios.delete(
-          `${process.env.SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
         )
         console.log('사용자가 탈퇴하였습니다.')
 

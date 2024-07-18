@@ -40,7 +40,7 @@ export default function ProfileHeader() {
         try {
           const response = await axios.get(
             // `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
-            `${process.env.SERVER_URL}}/user/${session.user.additionalInfo.serverUserId}`
+            `${process.env.NEXT_PUBLIC_}/user/${session.user.additionalInfo.serverUserId}`
           )
           setUserData(response.data)
           console.log(response.data)

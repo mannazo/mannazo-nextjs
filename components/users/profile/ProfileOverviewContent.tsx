@@ -79,10 +79,10 @@ export default function Overview() {
             //   `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
             // ),
             axios.get(
-              `${process.env.SERVER_URL}/post/user/${session.user.additionalInfo.serverUserId}`
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/post/user/${session.user.additionalInfo.serverUserId}`
             ),
             axios.get(
-              `${process.env.SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
             ),
           ])
 
