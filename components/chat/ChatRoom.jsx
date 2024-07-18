@@ -44,7 +44,7 @@ const ChatRoom = ({ chatRoomId }) => {
   return (
     <div
       ref={containerRef}
-      className="mx-auto flex max-w-4xl flex-col rounded-lg bg-gray-100 p-4 shadow-md"
+      className="mx-auto flex max-w-4xl flex-col rounded-lg bg-gray-100 p-4 shadow-md dark:bg-gray-700"
       style={{ height: `${viewportHeight}px` }}
     >
       {/*chatHeader에 prop으로 대화 상대방 정보를 줘야 하나?*/}

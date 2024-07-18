@@ -49,7 +49,7 @@ const ChatList = () => {
   }
 
   return (
-    <div className="mb-4 h-full overflow-y-auto rounded-lg bg-white p-4 shadow-inner scrollbar-hide">
+    <div className="mb-4 h-full overflow-y-auto rounded-lg p-4 shadow-inner scrollbar-hide">
       {rooms && rooms && rooms.length > 0 ? (
         rooms.map((room) => (
           <ChatListItem
