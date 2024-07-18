@@ -1,21 +1,25 @@
-// 이 컴포넌트가 만들어진 이유: 여러 카테고리에서 컴포넌트 폼은 재사용하면서, 파일명 앞에 원하는 카테고리 접두어를 붙이기 위함.
-// components/FileUploader.tsx
 'use client'
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useRef } from 'react'
 import { useUpload } from '@/hooks/useUpload'
+import { Button, Progress } from '@nextui-org/react'
+import { ArrowUpTrayIcon } from '@heroicons/react/24/outline'
+
 interface FileUploaderProps {
   category: 'post' | 'community' | 'profile'
   onUploadComplete: (
     fileName: string,
     category: 'post' | 'community' | 'profile'
   ) => void
+  label?: string
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({
   category,
   onUploadComplete,
+  label = 'Upload File',
 }) => {
   const { uploadFile, isUploading, error } = useUpload()
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -29,11 +33,34 @@ const FileUploader: React.FC<FileUploaderProps> = ({
     }
   }
 
+  const handleButtonClick = () => {
+    fileInputRef.current?.click()
+  }
+
   return (
     <div>
-      <input type="file" onChange={handleFileChange} disabled={isUploading} />
-      {isUploading && <p>Uploading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        style={{ display: 'none' }}
+      />
+      <Button
+        onClick={handleButtonClick}
+        disabled={isUploading}
+        startContent={<ArrowUpTrayIcon className="h-5 w-5" />}
+      >
+        {label}
+      </Button>
+      {isUploading && (
+        <Progress
+          size="sm"
+          isIndeterminate
+          aria-label="Uploading..."
+          className="mt-2"
+        />
+      )}
+      {error && <p className="mt-2 text-sm text-danger">{error}</p>}
     </div>
   )
 }

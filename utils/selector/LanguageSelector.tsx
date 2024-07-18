@@ -96,6 +96,15 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     onChange({ target: { name, value: newSelectedLanguages.join(',') } })
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault() // 폼 제출 방지
+      if (searchResults.length > 0) {
+        handleLanguageSelect(searchResults[0].name)
+      }
+    }
+  }
+
   return (
     <div className="space-y-4">
       <div className="flex space-x-2">
@@ -103,6 +112,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
           placeholder="언어 검색..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
         <Dropdown>
           <DropdownTrigger>
@@ -122,7 +132,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       </div>
 
       {searchQuery && (
-        <div className="rounded bg-gray-100 p-2">
+        <div className="rounded p-2">
           {searchResults.map((lang) => (
             <div
               key={lang.name}
@@ -137,13 +147,13 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 
       <div className="flex flex-wrap gap-2">
         {selectedLanguages.map((lang) => (
-          <div key={lang} className="flex items-center rounded bg-blue-100 p-2">
+          <div key={lang} className="flex items-center rounded border p-2">
             {lang}
             <button
               onClick={() => handleLanguageRemove(lang)}
               className="ml-2 text-red-500"
             >
-              X
+              ❌
             </button>
           </div>
         ))}

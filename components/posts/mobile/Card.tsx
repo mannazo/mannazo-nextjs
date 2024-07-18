@@ -2,25 +2,59 @@
 
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Avatar } from '@nextui-org/react'
+import { Avatar, Button, Chip } from '@nextui-org/react'
 import {
   FaCalendarAlt,
   FaMapMarkerAlt,
   FaUserFriends,
   FaUtensils,
 } from 'react-icons/fa'
+import { MessageCircle } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { useCreateChatRoom } from '@/hooks/useCreateChatRoom'
 
 interface ShortFormMobileCardProps {
-  traveler: {
-    post: any
-    user: any
+  data: {
+    post: {
+      postId: string
+      userId: string
+      travelNationality: string
+      travelCity: string
+      travelStartDate: string
+      travelEndDate: string
+      travelStatus: string
+      preferredGender: string
+      travelStyle: string
+      travelPurpose: string
+      createdAt: string
+      imageUrls: string[]
+    }
+    user: {
+      userId: string
+      email: string
+      name: string
+      nickname: string
+      nationality: string
+      language: string
+      profileImage: string
+      introduction: string
+      city: string
+      authority: string
+      gender: string
+      mbti: string
+      interests: string
+      birthday: string
+      lastLoginAt: string
+    } | null
   }
 }
 
-const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
-  traveler,
-}) => {
+const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({ data }) => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const { data: session } = useSession()
+  const router = useRouter()
+  const { mutate } = useCreateChatRoom()
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded)
@@ -31,19 +65,26 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   }
 
-  const getRandomImage = () => {
-    const randomId = Math.floor(Math.random() * 1000)
-    return `https://picsum.photos/seed/${randomId}/800/600`
+  const handleChatClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (session) {
+      const senderId = session.user.additionalInfo.serverUserId
+      const postUserId = data.user.userId
+
+      mutate({ senderId, postUserId })
+    } else {
+      router.push('/login')
+    }
   }
 
   const backgroundImageUrl =
-    traveler.post.imageUrls && traveler.post.imageUrls.length > 0
-      ? traveler.post.imageUrls[0]
-      : getRandomImage()
+    data.post.imageUrls && data.post.imageUrls.length > 0
+      ? data.post.imageUrls[0]
+      : '/test.jpg'
 
   return (
     <motion.div
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-full w-full overflow-hidden"
       onClick={toggleExpand}
     >
       <motion.div
@@ -81,17 +122,17 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-white dark:text-white">
-              {traveler.post.travelCity}
+              {data.post.travelNationality}
             </h2>
             <p className="text-sm text-gray-200 dark:text-gray-300">
-              {traveler.post.travelNationality}
+              {data.post.travelCity}
             </p>
           </div>
           <div className="flex items-center rounded-full bg-white/60 px-3 py-1 dark:bg-gray-800/60">
             <FaCalendarAlt className="mr-1 text-yellow-400" />
             <span className="font-bold text-gray-800 dark:text-white">
-              {formatDate(traveler.post.travelStartDate)} -{' '}
-              {formatDate(traveler.post.travelEndDate)}
+              {formatDate(data.post.travelStartDate)} -{' '}
+              {formatDate(data.post.travelEndDate)}
             </span>
           </div>
         </div>
@@ -106,22 +147,25 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
           >
-            <div className="mb-4 flex items-center">
-              <Avatar
-                src={
-                  traveler.user?.profileImage ||
-                  'https://cdn3.iconfinder.com/data/icons/random-icon-set/512/user-512.png'
-                }
-                size="lg"
-              />
-              <div className="ml-3">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-white">
-                  {traveler.user?.nickname || 'Anonymous'}
-                </h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {traveler.user?.nationality || 'Unknown'}
-                </p>
+            <div className="mb-4 flex items-center justify-between">
+              <div className="flex items-center">
+                <Avatar
+                  src={data.user?.profileImage || undefined}
+                  name={data.user?.nickname}
+                  size="lg"
+                />
+                <div className="ml-3">
+                  <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+                    {data.user?.nickname || 'Anonymous'}
+                  </h2>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {data.user?.nationality || 'Unknown'}
+                  </p>
+                </div>
               </div>
+              <Chip size="sm" color="primary">
+                {data.post.travelStatus}
+              </Chip>
             </div>
 
             <div className="mb-4">
@@ -129,7 +173,7 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
                 <FaMapMarkerAlt className="mr-2" /> Destination
               </h4>
               <p className="text-gray-600 dark:text-gray-300">
-                {traveler.post.travelNationality} - {traveler.post.travelCity}
+                {data.post.travelNationality} - {data.post.travelCity}
               </p>
             </div>
 
@@ -138,8 +182,8 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
                 <FaCalendarAlt className="mr-2" /> Travel Dates
               </h4>
               <p className="text-gray-600 dark:text-gray-300">
-                {formatDate(traveler.post.travelStartDate)} -{' '}
-                {formatDate(traveler.post.travelEndDate)}
+                {formatDate(data.post.travelStartDate)} -{' '}
+                {formatDate(data.post.travelEndDate)}
               </p>
             </div>
 
@@ -148,9 +192,11 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
                 <FaUserFriends className="mr-2" /> Travel Style
               </h4>
               <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800 dark:bg-blue-900 dark:text-blue-100">
-                  {traveler.post.travelStyle}
-                </span>
+                {data.post.travelStyle.split(',').map((style, index) => (
+                  <Chip key={index} size="sm" color="secondary">
+                    {style.trim()}
+                  </Chip>
+                ))}
               </div>
             </div>
 
@@ -158,11 +204,9 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
               <h4 className="mb-2 flex items-center font-semibold text-gray-800 dark:text-white">
                 <FaUtensils className="mr-2" /> Travel Purpose
               </h4>
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-800 dark:bg-green-900 dark:text-green-100">
-                  {traveler.post.travelPurpose}
-                </span>
-              </div>
+              <p className="text-gray-600 dark:text-gray-300">
+                {data.post.travelPurpose}
+              </p>
             </div>
 
             <div className="mb-4">
@@ -170,18 +214,20 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({
                 Preferred Gender
               </h4>
               <p className="text-gray-600 dark:text-gray-300">
-                {traveler.post.preferredGender}
+                {data.post.preferredGender}
               </p>
             </div>
 
-            <div className="mb-4">
-              <h4 className="mb-2 font-semibold text-gray-800 dark:text-white">
-                Travel Status
-              </h4>
-              <p className="text-gray-600 dark:text-gray-300">
-                {traveler.post.travelStatus}
-              </p>
-            </div>
+            <Button
+              size="lg"
+              color="primary"
+              variant="shadow"
+              startContent={<MessageCircle size={20} />}
+              className="mt-4 w-full"
+              onClick={handleChatClick}
+            >
+              Chat
+            </Button>
           </motion.div>
         )}
       </AnimatePresence>

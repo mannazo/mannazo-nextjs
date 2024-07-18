@@ -1,12 +1,10 @@
 'use client'
 
-import Link from 'next/link'
-import * as PATHS from '@/constants/paths'
 import TripButton from '@/components/about/TripButton'
 import AnimatedTitle from '@/components/about/AnimatedTitle'
 
 const ReasonCard = ({ icon, title, description }) => (
-  <div className="transform rounded-2xl bg-gradient-to-br from-pink-500 to-orange-400 p-6 text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+  <div className="transform rounded-2xl bg-gradient-to-br from-pink-500 to-orange-400 p-6 text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl dark:text-white">
     <div className="mb-4 text-5xl">{icon}</div>
     <h3 className="mb-3 text-2xl font-bold">{title}</h3>
     <p className="text-lg">{description}</p>
@@ -54,7 +52,7 @@ export default function WhyMannazuPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-16">
         <AnimatedTitle titleText="WHY MANNAZU?" />
 

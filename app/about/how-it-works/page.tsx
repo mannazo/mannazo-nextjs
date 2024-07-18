@@ -4,12 +4,14 @@ import TripButton from '@/components/about/TripButton'
 import AnimatedTitle from '@/components/about/AnimatedTitle'
 
 const StepCard = ({ number, title, description }) => (
-  <div className="transform rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 text-white shadow-2xl transition-all duration-300 hover:scale-105">
-    <div className="absolute -left-4 -top-4 text-5xl font-bold opacity-20">
+  <div className="transform rounded-3xl bg-gradient-to-br from-purple-600 to-indigo-700 p-8 shadow-2xl transition-all duration-300 hover:scale-105 dark:text-white">
+    <div className="absolute -left-4 -top-4 text-5xl font-bold opacity-20 dark:text-white">
       {number}
     </div>
-    <h3 className="relative z-10 mb-4 text-4xl font-extrabold">{title}</h3>
-    <p className="text-xl leading-relaxed">{description}</p>
+    <h3 className="relative z-10 mb-4 text-4xl font-extrabold text-white">
+      {title}
+    </h3>
+    <p className="text-xl leading-relaxed text-white">{description}</p>
   </div>
 )
 
@@ -66,7 +68,7 @@ export default function HowItWorksPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white">
       <div className="container mx-auto px-4 py-20">
         <AnimatedTitle titleText="HOW IT WORKS?" />
 
@@ -86,7 +88,6 @@ export default function HowItWorksPage() {
             언어 실력 향상, 그리고 평생 간직할 추억을 만들어보세요.
           </p>
           <Link href={PATHS.TRIP}>
-            {/*<button className='transform rounded-full bg-gradient-to-r from-pink-500 to-yellow-500 px-10 py-4 text-2xl font-bold text-white transition-all duration-300 hover:scale-105 hover:from-pink-600 hover:to-yellow-600'>*/}
             <TripButton buttonText="추억을 만들 기회 찾아보기" />
           </Link>
         </div>

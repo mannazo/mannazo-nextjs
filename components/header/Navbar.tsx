@@ -1,5 +1,6 @@
 'use client'
 
+import { useRef, useEffect } from 'react'
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -9,7 +10,6 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from '@nextui-org/navbar'
-import { Button } from '@nextui-org/button'
 import { Kbd } from '@nextui-org/kbd'
 import { Link } from '@nextui-org/link'
 import { Input } from '@nextui-org/input'
@@ -30,10 +30,26 @@ import ProfileSection from '@/components/header/ProfileSection'
 import React from 'react'
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useReducer(
-    (current) => !current,
-    false
-  )
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const closeMenu = () => setIsMenuOpen(false)
+  const navbarRef = useRef(null)
+
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (navbarRef.current) {
+        const height = navbarRef.current.offsetHeight
+        document.documentElement.style.setProperty(
+          '--header-height',
+          `${height}px`
+        )
+      }
+    }
+
+    updateHeaderHeight()
+    window.addEventListener('resize', updateHeaderHeight)
+
+    return () => window.removeEventListener('resize', updateHeaderHeight)
+  }, [])
 
   const searchInput = (
     <Input
@@ -57,7 +73,7 @@ export const Navbar = () => {
   )
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar maxWidth="xl" position="sticky" ref={navbarRef}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="max-w-fit gap-3">
           <NextLink className="flex items-center justify-start gap-1" href="/">
@@ -82,18 +98,26 @@ export const Navbar = () => {
           ))}
         </ul>
       </NavbarContent>
-
       <NavbarContent className="basis-1 pl-4" justify="end">
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
         <ThemeSwitch />
         <ProfileSection />
         <NavbarMenuToggle />
       </NavbarContent>
-
       <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        <div
+          className="mx-4 mt-2 flex flex-col gap-2"
+          onClick={() => {
+            closeMenu()
+          }}
+        >
           {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+            <NavbarMenuItem
+              key={`${item}-${index}`}
+              onClick={() => {
+                closeMenu()
+              }}
+            >
               <Link
                 href={item.href}
                 color={
@@ -104,7 +128,6 @@ export const Navbar = () => {
                       : 'foreground'
                 }
                 size="lg"
-                onPress={() => setIsMenuOpen()}
               >
                 {item.label}
               </Link>
