@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Modal,
   ModalContent,
@@ -10,15 +10,20 @@ import {
 } from '@nextui-org/modal'
 import { Button } from '@nextui-org/button'
 import { Input, Textarea } from '@nextui-org/input'
-import { Image } from '@nextui-org/image'
 import { createCommunityPost } from '@/services/api'
 import { useSession } from 'next-auth/react'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import FileUploader from '@/components/commons/file/FileUploader'
+import CategoryImage from '@/components/commons/image/CategoryImage'
+import { useFileList } from '@/hooks/useFileList'
+import { getImageUrl } from '@/utils/aws/imageUtils'
 
 export default function CreatePostModal({ isOpen, onClose }) {
   const router = useRouter()
+
+  const { files, addFile } = useFileList()
   const [postData, setPostData] = useState({
     title: '',
     content: '',
@@ -27,6 +32,18 @@ export default function CreatePostModal({ isOpen, onClose }) {
   })
   const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(true)
+
+  const handleUploadComplete = (
+    fileName: string,
+    category: 'post' | 'community' | 'profile'
+  ) => {
+    addFile(fileName, category)
+    const imageUrl = getImageUrl(fileName, category)
+    setPostData((prev) => ({
+      ...prev,
+      imageUrls: [...prev.images, imageUrl],
+    }))
+  }
 
   useEffect(() => {
     if (session?.user?.additionalInfo.serverUserId) {
@@ -110,40 +127,30 @@ export default function CreatePostModal({ isOpen, onClose }) {
                 value={postData.content}
                 onChange={handleInputChange}
               />
-              <div>
-                <input
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                  id="image-upload"
-                />
-                <label htmlFor="image-upload" className="cursor-pointer">
-                  <Button as="span">Upload Images</Button>
-                </label>
-              </div>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {postData.images.map((image, index) => (
-                  <div key={index} className="relative">
-                    <Image
-                      src={image.preview}
-                      alt={`Preview ${index}`}
-                      width={100}
-                      height={100}
-                      className="rounded object-cover"
-                    />
-                    <Button
-                      isIconOnly
-                      color="danger"
-                      size="sm"
-                      className="absolute -right-2 -top-2 z-10 opacity-30 shadow-md transition-transform hover:scale-110"
-                      onClick={() => removeImage(index)}
-                    >
-                      ×
-                    </Button>
-                  </div>
-                ))}
+              <FileUploader
+                label="Upload Profile Image"
+                category="community"
+                onUploadComplete={handleUploadComplete}
+              />
+              <div className="mt-4">
+                <h2 className="mb-2 text-xl font-semibold">Uploaded Files</h2>
+                {files.length === 0 ? (
+                  <p>No files uploaded yet.</p>
+                ) : (
+                  <ul className="space-y-4">
+                    {files.map((file, index) => (
+                      <li key={index} className="rounded-lg border p-4">
+                        <CategoryImage
+                          fileName={file.fileName}
+                          category={file.category}
+                          width={200}
+                          height={200}
+                          objectFit="cover"
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </ModalBody>
             <ModalFooter>

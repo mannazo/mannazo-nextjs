@@ -14,7 +14,7 @@ export default function InterestsSelection({ onChange }) {
   }
 
   return (
-    <div className="mx-auto max-w-md rounded-xl bg-white p-6 shadow-md">
+    <div className="mx-auto max-w-md rounded-xl p-6 shadow-md">
       <h2 className="mb-4 text-2xl font-bold">Select Your Interests</h2>
       <div className="flex flex-wrap gap-2">
         {INTERESTS.map((interest) => (
