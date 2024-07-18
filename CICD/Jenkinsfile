@@ -56,7 +56,7 @@ pipeline {
 
         stage('빌드') {
             steps {
-                script {
+                script {  
                     echo '빌드 시작...'
                     sh 'pnpm run build' // Next.js 빌드 실행
                 }
