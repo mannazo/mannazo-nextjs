@@ -84,7 +84,7 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({ data }) => {
 
   return (
     <motion.div
-      className="relative h-screen w-full overflow-hidden"
+      className="relative h-full w-full overflow-hidden"
       onClick={toggleExpand}
     >
       <motion.div
@@ -122,10 +122,10 @@ const ShortFormMobileCard: React.FC<ShortFormMobileCardProps> = ({ data }) => {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-white dark:text-white">
-              {data.post.travelCity}
+              {data.post.travelNationality}
             </h2>
             <p className="text-sm text-gray-200 dark:text-gray-300">
-              {data.post.travelNationality}
+              {data.post.travelCity}
             </p>
           </div>
           <div className="flex items-center rounded-full bg-white/60 px-3 py-1 dark:bg-gray-800/60">

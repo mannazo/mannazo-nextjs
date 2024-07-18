@@ -124,13 +124,15 @@ export default function SignUpForm({
         birthday: userInfo.birthday,
       }
       console.log(loginRequestDTO, userRequestDTO)
+      //이미지를 업로드하지 않는 유저는 OAuth에서 받아온 이미지를 넣어주자.
       if (
         userRequestDTO.profileImage === '' ||
         userRequestDTO.profileImage === undefined ||
-        userRequestDTO.profileImage === null ||
-        session.user.image != null
+        userRequestDTO.profileImage === null
       ) {
-        userRequestDTO.profileImage = session.user.image
+        if (session.user.image != null) {
+          userRequestDTO.profileImage = session.user.image
+        }
       }
       let payload = {
         loginRequestDTO: loginRequestDTO,

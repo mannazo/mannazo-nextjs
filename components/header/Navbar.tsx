@@ -1,5 +1,6 @@
 'use client'
 
+import { useRef, useEffect } from 'react'
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -9,7 +10,6 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from '@nextui-org/navbar'
-import { Button } from '@nextui-org/button'
 import { Kbd } from '@nextui-org/kbd'
 import { Link } from '@nextui-org/link'
 import { Input } from '@nextui-org/input'
@@ -32,6 +32,24 @@ import React from 'react'
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
   const closeMenu = () => setIsMenuOpen(false)
+  const navbarRef = useRef(null)
+
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      if (navbarRef.current) {
+        const height = navbarRef.current.offsetHeight
+        document.documentElement.style.setProperty(
+          '--header-height',
+          `${height}px`
+        )
+      }
+    }
+
+    updateHeaderHeight()
+    window.addEventListener('resize', updateHeaderHeight)
+
+    return () => window.removeEventListener('resize', updateHeaderHeight)
+  }, [])
 
   const searchInput = (
     <Input
@@ -55,7 +73,7 @@ export const Navbar = () => {
   )
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar maxWidth="xl" position="sticky" ref={navbarRef}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="max-w-fit gap-3">
           <NextLink className="flex items-center justify-start gap-1" href="/">
