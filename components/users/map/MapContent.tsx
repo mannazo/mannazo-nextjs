@@ -69,7 +69,7 @@ const MapContent: React.FC = () => {
         <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
           <Input
             type="text"
-            placeholder="장소를 검색해주세요"
+            placeholder="Let's search some places!"
             size="lg"
             className="w-full"
           />
