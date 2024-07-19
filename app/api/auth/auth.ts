@@ -1,11 +1,12 @@
 import type { NextAuthOptions } from 'next-auth'
-
 import KakaoProvider from 'next-auth/providers/kakao'
 import NaverProvider from 'next-auth/providers/naver'
 import GoogleProvider from 'next-auth/providers/google'
 import axios from 'axios'
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
+
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
@@ -52,8 +53,6 @@ export const authOptions: NextAuthOptions = {
             }
           )
 
-          console.log(response)
-
           user.additionalInfo = {
             firstTimeUser: response.data.firstTimeUser,
             serverUserId: response.data.userId,
@@ -70,6 +69,10 @@ export const authOptions: NextAuthOptions = {
       }
       return true
     },
+    // 명시적으로 redirect 하지 않아도 된다! NEXTAUTH_URL 로 보내준다.
+    // async redirect({ url, baseUrl }) {
+    //   return process.env.NEXTAUTH_URL || baseUrl
+    // },
     async jwt({ token, user, account, profile }) {
       if (user) {
         token.userId = user.id

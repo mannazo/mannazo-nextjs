@@ -29,16 +29,18 @@ export default function ProfileHeader() {
   useEffect(() => {
     const fetchUserData = async () => {
       if (status === 'authenticated') {
-        const isFirstUser = session.user.additionalInfo.firstTimeUser
-
-        if (isFirstUser) {
-          router.push('/users/sign-up')
-          return
-        }
+        // const isFirstUser = session.user.additionalInfo.firstTimeUser
+        //
+        // if (isFirstUser) {
+        //   router.push('/users/sign-up')
+        //   console.log(session)
+        //   return
+        // }
 
         try {
           const response = await axios.get(
-            `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            // `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
           )
           setUserData(response.data)
           console.log(response.data)

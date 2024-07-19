@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useRef, useState } from 'react'
 import ChatMessage from '@/components/chat/ChatMessage'
 
@@ -34,7 +35,7 @@ const ChatBody = ({ messages, currentUserId }) => {
   return (
     <div
       ref={containerRef}
-      className="mb-4 h-full overflow-y-auto rounded-lg bg-white p-4 shadow-inner scrollbar-hide"
+      className="mb-4 h-full overflow-y-auto rounded-lg p-4 shadow-inner scrollbar-hide"
     >
       {messages.map((message) => (
         <ChatMessage

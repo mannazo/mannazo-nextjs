@@ -14,4 +14,5 @@ export interface Order {
   // amount: number
   totalPrice: number
   orderStatus: 'Pending' | 'Success' | 'Failure'
+
 }

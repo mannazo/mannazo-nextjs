@@ -32,11 +32,11 @@ export default function SettingsEditContent() {
       if (status === 'authenticated') {
         try {
           const response = await axios.get(
-            `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            // `https://mannazu.diligentp.com/user/${session.user.additionalInfo.serverUserId}`
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/user/${session.user.additionalInfo.serverUserId}`
             // `https://192.168.0.184/user/${session.user.additionalInfo.serverUserId}`,
-
           )
-          console.log("responsedata:")
+          console.log('responsedata:')
           console.log(response.data)
           // setUserData(response.data)
           setUserData({
@@ -95,7 +95,7 @@ export default function SettingsEditContent() {
       ...prevUserData,
       interests: selectedInterests.join(','),
     }))
-    console.log('interest',userData)
+    console.log('interest', userData)
   }
 
   const handleSubmit = async (e) => {
@@ -110,24 +110,24 @@ export default function SettingsEditContent() {
       return field
     }
 
-     // const userRequestDTO = {
-     //   email: userData.email, // 이메일 입력 필드 추가 필요
-     //   name: userData.name,
-     //   nickname: userData.nickname, // 닉네임 입력 필드 추가 필요
-     //   nationality: userData.nationality,
-     //   // language: processField(userData.language),
-     //   language: userData.language.join(','), // 배열을 문자열로 변환
-     //   profileImage: userData.image,
-     //   introduction: userData.introduction,
-     //   city: userData.city, // 도시 입력 필드 추가 필요
-     //   gender: userData.gender, // 성별 입력 필드 추가 필요
-     //   mbti: userData.mbti,
-     //   // interests: processField(userData.interests),
-     //   interests: userData.interests,
-     //   // interests: userData.interests.join(','), // 배열을 문자열로 변환
-     //   birthday: userData.birthday
-     //
-     // }
+    // const userRequestDTO = {
+    //   email: userData.email, // 이메일 입력 필드 추가 필요
+    //   name: userData.name,
+    //   nickname: userData.nickname, // 닉네임 입력 필드 추가 필요
+    //   nationality: userData.nationality,
+    //   // language: processField(userData.language),
+    //   language: userData.language.join(','), // 배열을 문자열로 변환
+    //   profileImage: userData.image,
+    //   introduction: userData.introduction,
+    //   city: userData.city, // 도시 입력 필드 추가 필요
+    //   gender: userData.gender, // 성별 입력 필드 추가 필요
+    //   mbti: userData.mbti,
+    //   // interests: processField(userData.interests),
+    //   interests: userData.interests,
+    //   // interests: userData.interests.join(','), // 배열을 문자열로 변환
+    //   birthday: userData.birthday
+    //
+    // }
 
     // "email": "string",
     // "name": "string",
@@ -160,13 +160,12 @@ export default function SettingsEditContent() {
       // interests: processField(userData.interests),
       interests: userData.interests,
       // interests: userData.interests.join(','), // 배열을 문자열로 변환
-      birthday: userData.birthday
-
+      birthday: userData.birthday,
     }
     console.log('submit3', userData)
     try {
-      console.log("서버로 보낼 데이터");
-      console.log(userRequestDTO);
+      console.log('서버로 보낼 데이터')
+      console.log(userRequestDTO)
       // await axios.put(
       //   `https://mannazu.diligenp.com/user/${session.user.additionalInfo.serverUserId}`,
       //   { ...userData, userId: session.user.additionalInfo.serverUserId }
@@ -199,7 +198,9 @@ export default function SettingsEditContent() {
   // const languageValue =
   //   userData && userData.language ? userData.language.join(',') : ''
   const languageValue =
-    userData && Array.isArray(userData.language) ? userData.language.join(',') : ''
+    userData && Array.isArray(userData.language)
+      ? userData.language.join(',')
+      : ''
 
   return (
     <form onSubmit={handleSubmit}>
@@ -321,8 +322,9 @@ export default function SettingsEditContent() {
             <InterestsSelection
               onChange={handleInterestsChange}
               initialSelectedInterests={
-                userData && userData.interests && typeof
-                userData.interests === 'string'
+                userData &&
+                userData.interests &&
+                typeof userData.interests === 'string'
                   ? userData.interests.split(',')
                   : []
               } // 기존 interests를 전달

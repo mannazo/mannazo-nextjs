@@ -22,6 +22,7 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
   const placeholderImage =
     'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
+
   return (
     <>
       <Card shadow="sm" isPressable onPress={onOpen}>
@@ -43,12 +44,14 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
               src={placeholderImage}
             />
           )}
+
           {/*<h3 className="text-lg font-semibold mt-2">{product.name}</h3>*/}
           {/*<p className="text-gray-500 mt-1">{product.description}</p>*/}
           {/*<p className="text-blue-600 font-bold mt-2">${product.price}</p>*/}
         </CardBody>
         <CardFooter className="justify-between text-small">
           <b>{product.productName}</b>
+
           <p className="text-default-500">{product.price}</p>
         </CardFooter>
       </Card>
@@ -78,6 +81,7 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
                     src={placeholderImage}
                   />
                 )}
+
                 <p className="mt-2 text-gray-500">{product.description}</p>
                 <p className="mt-2 font-bold text-blue-600">${product.price}</p>
               </ModalBody>

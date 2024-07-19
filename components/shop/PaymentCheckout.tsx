@@ -18,7 +18,6 @@ export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
       merchant_uid: merchatUid, // 주문번호
       amount: parseFloat(order.totalPrice), // 결제금액
       name: '아임포트 결제 데이터 분석', // 주문명
-
       buyer_name: order.name, // 구매자 이름
       buyer_tel: order.tel, // 구매자 전화번호
       buyer_email: order.email, // 구매자 이메일
@@ -26,17 +25,12 @@ export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
       buyer_postcode: order.postcode, // 구매자 우편번호
     }
     console.log(order)
-    // setOrder((prevOrder) => ({
-    //   ...prevOrder,
-    //   merchant_uid: data.merchant_uid,
-    // }))
     const updatedOrder = {
       ...order,
       merchantUid: data.merchant_uid,
     }
     setOrder(updatedOrder)
-    // postOrder(JSON.stringify(updatedOrder))
-    // postOrder(updatedOrder)
+
     /* 4. 결제 창 호출하기 */
     IMP.request_pay(data, callback)
   }
@@ -63,9 +57,9 @@ export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
         toast.error('An unexpected error occurred. Please try again.')
       }
     }
+
   }
 
-  /* 3. 콜백 함수 정의하기 */
   function callback(response) {
     const { success, error_msg } = response
 
@@ -109,6 +103,7 @@ export default function PaymentCheckout({ order, setOrder, onPaymentSuccess }) {
             <div className="mt-4 flex justify-between font-bold">
               <span>Total</span>
               <span>₩{order.totalPrice}</span>
+
             </div>
           </div>
           <Button

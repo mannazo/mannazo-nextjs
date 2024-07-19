@@ -2,54 +2,52 @@
 
 import { useState, useEffect } from 'react'
 import ChatHeader from './ChatHeader'
-import ChatBody from './ChatBody.jsx'
-import InputArea from './InputArea.jsx'
+import ChatBody from './ChatBody'
+import InputArea from './InputArea'
 import useViewportHeight from '@/hooks/useViewportHeight'
-import useChatMessages from '@/hooks/useChatMessages'
 import useChatSSE from '@/hooks/useChatSSE'
-import { useChatStore } from '@/store/chatStore'
+import { useSession } from 'next-auth/react'
+import { sendChatMessage } from '@/services/api'
 
 const ChatRoom = ({ chatRoomId }) => {
+  const { data: session, status } = useSession()
   const { viewportHeight, containerRef } = useViewportHeight()
-  const { messages, sendMessage } = useChatMessages()
   const sseMessages = useChatSSE(chatRoomId)
-  const [allMessages, setAllMessages] = useState([])
-  const currentChatUsers = useChatStore((state) => state.currentChatUsers) // 추가
+  const [senderId, setSenderId] = useState(null)
 
   useEffect(() => {
-    setAllMessages([...messages, ...sseMessages])
-  }, [messages, sseMessages])
+    if (session?.user?.additionalInfo?.serverUserId) {
+      setSenderId(session.user.additionalInfo.serverUserId)
+    }
+  }, [session])
+
+  if (status === 'unauthenticated') {
+    return <div>unauthenticated user!</div>
+  } else if (status === 'loading' || !session) {
+    return <div>loading...</div>
+  }
 
   const handleSendMessage = async (message) => {
     try {
-      // currentChatUsers가 null이 아니라고 가정
-      const [senderId, receiverId] = currentChatUsers || ['', '']
-      await sendMessage(senderId, chatRoomId, message)
+      await sendChatMessage(senderId, chatRoomId, message)
     } catch (error) {
       console.error('Error sending message:', error)
     }
   }
 
-  // currentChatUsers가 null인 경우 처리...
-  if (!currentChatUsers) {
-    return <div>Loading...</div>
-  }
-
-  const [currentUserId, otherUserId] = currentChatUsers
-
   return (
     <div
       ref={containerRef}
-      className="mx-auto flex max-w-4xl flex-col rounded-lg bg-gray-100 p-4 shadow-md"
+      className="mx-auto flex max-w-4xl flex-col rounded-lg bg-gray-100 p-4 shadow-md dark:bg-gray-700"
       style={{ height: `${viewportHeight}px` }}
     >
-      <ChatHeader className="flex-shrink-0" otherUserId={otherUserId} />
+      <ChatHeader className="flex-shrink-0" />
       <div className="flex-grow overflow-y-auto scrollbar-hide">
         <div>
           <ChatBody
             chatRoomId={chatRoomId}
-            messages={allMessages}
-            currentUserId={currentUserId}
+            messages={sseMessages}
+            currentUserId={senderId}
           />
         </div>
       </div>

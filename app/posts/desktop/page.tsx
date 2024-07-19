@@ -65,7 +65,7 @@ const TravelPostsPage = () => {
     setIsLoading(true)
     try {
       const response = await axios.get<PageResponse>(
-        `https://mannazu.diligentp.com/post/findAll?page=${page - 1}&size=9`
+        `https://mannazu.diligentp.com/post/findAll?page=${page - 1}&size=6`
       )
       setPosts(response.data.content)
       setTotalPages(response.data.totalPages)

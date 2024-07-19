@@ -15,6 +15,7 @@ import {
 } from '@nextui-org/react'
 import { useSession } from 'next-auth/react'
 
+
 declare global {
   interface Window {
     IMP: any // Replace 'any' with the specific type if known
@@ -24,15 +25,6 @@ declare global {
 export default function Page() {
   const [cart, setCart] = useState<ShoppingCart>({ items: [] })
   const [loading, setLoading] = useState<boolean>(true)
-  const { data: session, status } = useSession()
-
-  // if (status === 'unauthenticated') {
-  //   return (
-  //     <>
-  //       <h1>Login before use. </h1>
-  //     </>
-  //   )
-  // }
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem('cart'))
     setCart(storedCart)
@@ -44,6 +36,7 @@ export default function Page() {
     setCart((prevState) => {
       const updatedItems = prevState.items.filter(
         (item) => item.product.productId !== product_id
+
       )
       const updatedCart = { ...prevState, items: updatedItems }
       localStorage.setItem('cart', JSON.stringify(updatedCart))
@@ -54,6 +47,7 @@ export default function Page() {
     setCart((prevCart) => {
       const existingItem = prevCart.items.find(
         (item) => item.product.productId === product_id
+
       )
 
       if (existingItem) {
@@ -69,6 +63,7 @@ export default function Page() {
           // Decrease quantity
           const updatedItems = prevCart.items.map((item) =>
             item.product.productId === product_id
+
               ? { ...item, quantity: item.quantity - 1 }
               : item
           )
@@ -109,7 +104,6 @@ export default function Page() {
               <TableColumn>Product</TableColumn>
               <TableColumn>Quantity</TableColumn>
               <TableColumn>Price</TableColumn>
-
               <TableColumn>Action</TableColumn>
             </TableHeader>
             {cart.items.length > 0 ? (
@@ -142,7 +136,6 @@ export default function Page() {
                       </div>
                     </TableCell>
                     <TableCell>{item.product.price}</TableCell>
-
                     <TableCell>
                       {/*<Button onPress={()=> removeFromCart(item.product.product_id)}>Remove</Button>*/}
 

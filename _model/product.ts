@@ -6,4 +6,5 @@ export interface Product {
   stock: number
   images: string
   category: string
+
 }

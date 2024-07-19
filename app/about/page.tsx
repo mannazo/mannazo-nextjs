@@ -1,12 +1,16 @@
+import { Card, Button, Image } from '@nextui-org/react'
 import TripButton from '@/components/about/TripButton'
 import AnimatedTitle from '@/components/about/AnimatedTitle'
 
 const FeatureCard = ({ icon, title, description }) => (
-  <div className="transform rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+  <Card
+    className="transform bg-gradient-to-br from-indigo-500 to-purple-600 p-6 text-white transition-all duration-300 hover:scale-105 dark:from-indigo-600 dark:to-purple-700"
+    shadow="lg"
+  >
     <div className="mb-4 text-5xl">{icon}</div>
     <h3 className="mb-3 text-2xl font-bold">{title}</h3>
     <p className="text-lg">{description}</p>
-  </div>
+  </Card>
 )
 
 export default function AboutPage() {
@@ -38,10 +42,19 @@ export default function AboutPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-16">
-        <AnimatedTitle titleText="FIND MY LOCAL FRIEND!" />
+    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
+      <div className="relative w-full overflow-hidden">
+        <Image
+          src="/stock/image3.jpg"
+          alt="Main banner"
+          className="min-h-full min-w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black bg-opacity-20">
+          <AnimatedTitle titleText="FIND YOUR LOCAL FRIEND!" />
+        </div>
+      </div>
 
+      <div className="mx-auto max-w-7xl px-4 py-16">
         <div className="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />

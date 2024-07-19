@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from './productCard'
 import { Product } from '@/_model/product'
-// import { ShoppingCart } from '@/_model/shoppingCart'
 import ShoppingCartIcon from './shoppingCartIcon'
 import Link from 'next/link'
 import { fetchProducts } from '@/services/api'
@@ -11,6 +10,7 @@ import { fetchProducts } from '@/services/api'
 interface ShoppingCart {
   items: Array<{ product: Product; quantity: number }>
 }
+
 const ProductCards: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [cart, setCart] = useState<ShoppingCart>({ items: [] })
@@ -26,12 +26,7 @@ const ProductCards: React.FC = () => {
         })
     }
     fetchData()
-    // fetch('/product.json')
-    //   .then((response) => response.json())
-    //   .then((data: Product[]) => {
-    //     setProducts(data)
-    //     console.log(products.toString())
-    //   })
+
   }, [])
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
@@ -53,6 +48,7 @@ const ProductCards: React.FC = () => {
           items: [
             ...prevCart.items.map((item) =>
               item.product.productId === product.productId
+
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
             ),
@@ -80,6 +76,7 @@ const ProductCards: React.FC = () => {
         {products.map((product) => (
           <div
             key={product.productId}
+
             className="w-full p-2 sm:w-1/2 md:w-1/3 lg:w-1/3"
           >
             <ProductCard product={product} addtocart={addToCart} />
