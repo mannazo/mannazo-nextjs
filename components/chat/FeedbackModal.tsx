@@ -71,7 +71,7 @@ const FeedbackModal = ({ isOpen, onClose, onSubmit }) => {
         review.comment
       )
       console.log(response)
-      // onClose()
+      onClose()
     } catch (error) {
       console.error('Error submitting feedback: ', error)
     }
