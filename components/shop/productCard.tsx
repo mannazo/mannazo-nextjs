@@ -1,11 +1,14 @@
-import { Card, CardBody, CardFooter, Image } from '@nextui-org/react'
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   useDisclosure,
 } from '@nextui-org/react'
 
@@ -17,24 +20,38 @@ interface ProductList {
 }
 const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const placeholderImage =
+    'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
 
   return (
     <>
       <Card shadow="sm" isPressable onPress={onOpen}>
         <CardBody className="overflow-visible p-0">
-          <Image
-            shadow="sm"
-            radius="lg"
-            width="100%"
-            className="w-full object-cover"
-            src={product.product_image}
-          />
+          {product.images && product.images.length > 0 ? (
+            <Image
+              shadow="sm"
+              radius="lg"
+              width="100%"
+              className="w-full object-cover"
+              src={product.images[0]}
+            />
+          ) : (
+            <Image
+              shadow="sm"
+              radius="lg"
+              width="100%"
+              className="w-full object-cover"
+              src={placeholderImage}
+            />
+          )}
+
           {/*<h3 className="text-lg font-semibold mt-2">{product.name}</h3>*/}
           {/*<p className="text-gray-500 mt-1">{product.description}</p>*/}
           {/*<p className="text-blue-600 font-bold mt-2">${product.price}</p>*/}
         </CardBody>
         <CardFooter className="justify-between text-small">
-          <b>{product.product_name}</b>
+          <b>{product.productName}</b>
+
           <p className="text-default-500">{product.price}</p>
         </CardFooter>
       </Card>
@@ -44,16 +61,27 @@ const ProductCard: React.FC<ProductList> = ({ product, addtocart }) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {product.product_name}
+                {product.productName}
               </ModalHeader>
               <ModalBody>
-                <Image
-                  shadow="sm"
-                  radius="lg"
-                  width="100%"
-                  className="w-full object-cover"
-                  src={product.product_image}
-                />
+                {product.images && product.images.length > 0 ? (
+                  <Image
+                    shadow="sm"
+                    radius="lg"
+                    width="100%"
+                    className="w-full object-cover"
+                    src={product.images[0]}
+                  />
+                ) : (
+                  <Image
+                    shadow="sm"
+                    radius="lg"
+                    width="100%"
+                    className="w-full object-cover"
+                    src={placeholderImage}
+                  />
+                )}
+
                 <p className="mt-2 text-gray-500">{product.description}</p>
                 <p className="mt-2 font-bold text-blue-600">${product.price}</p>
               </ModalBody>

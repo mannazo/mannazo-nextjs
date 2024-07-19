@@ -3,29 +3,30 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from './productCard'
 import { Product } from '@/_model/product'
-import { ShoppingCart } from '@/_model/shoppingCart'
 import ShoppingCartIcon from './shoppingCartIcon'
 import Link from 'next/link'
 import { fetchProducts } from '@/services/api'
+
+interface ShoppingCart {
+  items: Array<{ product: Product; quantity: number }>
+}
 
 const ProductCards: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [cart, setCart] = useState<ShoppingCart>({ items: [] })
   useEffect(() => {
-    // fetchProducts()
-    //   .then((data) => {
-    //     setProducts(data)
-    //     console.log('Fetched products:', data)
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error fetching products:', error)
-    //   })
-    fetch('/product.json')
-      .then((response) => response.json())
-      .then((data: Product[]) => {
-        setProducts(data)
-        console.log(products.toString())
-      })
+    const fetchData = async () => {
+      const response = await fetchProducts()
+        .then((response) => {
+          setProducts(response.data)
+          console.log('Fetched products:', response)
+        })
+        .catch((error) => {
+          console.error('Error fetching products:', error)
+        })
+    }
+    fetchData()
+
   }, [])
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
@@ -37,7 +38,7 @@ const ProductCards: React.FC = () => {
     console.log(cart)
     setCart((prevCart) => {
       const existingItem = prevCart.items.find(
-        (item) => item.product.shop_id === product.shop_id
+        (item) => item.product.productId === product.productId
       )
       // Existing item: Find in prevcart ( an item of which=> item's product's product id === product's product id)
       if (existingItem) {
@@ -46,7 +47,8 @@ const ProductCards: React.FC = () => {
           ...prevCart,
           items: [
             ...prevCart.items.map((item) =>
-              item.product.shop_id === product.shop_id
+              item.product.productId === product.productId
+
                 ? { ...item, quantity: item.quantity + 1 }
                 : item
             ),
@@ -73,7 +75,8 @@ const ProductCards: React.FC = () => {
       <div className="flex flex-wrap justify-between">
         {products.map((product) => (
           <div
-            key={product.shop_id}
+            key={product.productId}
+
             className="w-full p-2 sm:w-1/2 md:w-1/3 lg:w-1/3"
           >
             <ProductCard product={product} addtocart={addToCart} />

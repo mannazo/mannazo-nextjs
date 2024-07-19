@@ -1,6 +1,6 @@
 // components/ShoppingCartIcon.tsx
 import React from 'react'
-import { Badge, Button } from '@nextui-org/react'
+import { Badge } from '@nextui-org/react'
 import { ShoppingCart } from '../../_model/shoppingCart'
 import { FaShoppingCart } from 'react-icons/fa'
 

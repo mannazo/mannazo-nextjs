@@ -9,21 +9,20 @@ import { ShoppingCart } from '@/_model/shoppingCart'
 import { Order } from '@/_model/order'
 
 export default function Page() {
-  const [value, setValue] = React.useState(0)
-  const [cart, setCart] = useState([])
   const [active, setActive] = React.useState(0)
-  const [orderStatus, setOrderStatus] = React.useState('Pending')
   const [order, setOrder] = useState<Order>({
-    uuid: '',
+    userId: 'f6f6b416-393f-4ce8-adb4-97ffcaa57ab9',
+
     name: '', // 구매자 이름
     tel: '', // 구매자 전화번호
     email: '', // 구매자 이메일
     addr: '', // 구매자 주소
     postcode: '',
-    merchant_uid: ``, // 주문번호
-    cartItems: { items: [] },
-    amount: 1000,
-    order_status: 'Pending',
+    merchantUid: ``, // 주문번호
+    orderItems: [],
+    totalPrice: 0,
+    orderStatus: 'Pending',
+
   })
 
   useEffect(() => {
@@ -36,11 +35,17 @@ export default function Page() {
         return acc + item.product.price * item.quantity
       }, 0)
 
+      const orderItems = cartData.items.map((item) => ({
+        // userId: userId,
+        productId: item.product.productId, // Assuming shop_id is the product ID
+        quantity: item.quantity,
+      }))
+
       // Update order state
       setOrder((prevOrder) => ({
         ...prevOrder,
-        cartItems: cartData,
-        amount: totalAmount, // Set total amount
+        orderItems: orderItems,
+        totalPrice: totalAmount, // Set total amount
       }))
     } else {
       alert('Cart is empty')
