@@ -50,7 +50,7 @@ export default function AboutPage() {
           className="min-h-full min-w-full object-cover object-center"
         />
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-black bg-opacity-20">
-          <AnimatedTitle titleText="FIND YOUR LOCAL FRIEND!" />
+          <AnimatedTitle titleText="#CANARY# FIND YOUR LOCAL FRIEND!" />
         </div>
       </div>
 
